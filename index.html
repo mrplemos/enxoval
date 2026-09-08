@@ -1,0 +1,22 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+  <meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="Seu enxoval minimalista: acompanhe o que já tem e planeje o que falta.">
+  <meta name="theme-color" content="#243b70">
+  <title>Enxoval · Nosso pequeno começo</title>
+  <link rel="icon" href="./favicon.svg" type="image/svg+xml">
+  <link rel="stylesheet" href="./src/styles.css">
+</head>
+<body>
+  <a class="skip" href="#content">Pular para conteúdo</a>
+  <header><a class="brand" href="#dashboard"><span class="mark">e</span> enxoval<span class="brand-note">nosso pequeno começo</span></a><span class="local">Salvo neste navegador</span></header>
+  <nav aria-label="Principal"><a href="#dashboard">Dashboard</a><a href="#compras">Compras</a><a href="#base">Base</a></nav>
+  <main id="content" tabindex="-1"><p>Carregando seu enxoval…</p></main>
+  <footer><span>Seus dados ficam neste navegador. Exporte um backup para guardar ou usar em outro aparelho.</span><div><button id="export">Exportar backup</button><button id="import">Restaurar backup</button><input type="file" id="backup-file" accept="application/json,.json" hidden></div></footer>
+  <dialog id="editor" aria-labelledby="editor-title"></dialog>
+  <dialog id="confirm" aria-labelledby="confirm-title"></dialog>
+  <p id="notice" role="status" aria-live="polite"></p>
+  <script type="module" src="./src/app.js"></script>
+</body>
+</html>
