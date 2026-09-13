@@ -1,0 +1,19 @@
+{
+  "name": "Enxoval da Alice",
+  "short_name": "Enxoval",
+  "description": "Controle local do enxoval minimalista",
+  "lang": "pt-BR",
+  "start_url": "./#dashboard",
+  "scope": "./",
+  "display": "standalone",
+  "background_color": "#f5f7fb",
+  "theme_color": "#243b70",
+  "icons": [
+    {
+      "src": "./favicon.svg",
+      "sizes": "any",
+      "type": "image/svg+xml",
+      "purpose": "any maskable"
+    }
+  ]
+}

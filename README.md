@@ -1,6 +1,6 @@
 # Enxoval
 
-Primeira versão funcional do controle de enxoval minimalista, em português, com Dashboard, Compras e Base. Frontend responsivo em HTML, CSS e módulos JavaScript nativos, sem dependências de execução ou serviços externos.
+Primeira versão funcional do controle de enxoval minimalista, em português, com Dashboard, Compras e Base. Frontend responsivo e instalável como PWA, em HTML, CSS e módulos JavaScript nativos, sem dependências de execução ou serviços externos.
 
 ## Dados iniciais
 
@@ -19,7 +19,7 @@ Primeira versão funcional do controle de enxoval minimalista, em português, co
 - Cálculos em `src/domain.js`: somente `Possuído` entra em “Temos”; categoria + tipo + fase devem coincidir. “Descrição N3” exige descrição exata; “Tipo N2” soma todas as descrições daquele tipo na fase. Isso reproduz as regras SUMIFS da planilha. Não há conversão automática entre pacotes, peças e unidades: cadastre quantidades na unidade da meta.
 - Falta = máximo(meta − temos, 0). Status: Completo, Parcial ou Falta. Itens sem benchmark aparecem como **Sem meta**, sem criar compras artificiais. Excesso de uma fase não compensa outra. O percentual é a proporção de metas completas, não uma soma de unidades heterogêneas.
 - IndexedDB guarda inventário e benchmark neste navegador/origem. Não há sincronização entre aparelhos, login ou banco remoto nesta versão. A semente só é aplicada quando não existe uma base; uma base vazia após exclusões/restauração não é repopulada. Cada mutação é uma transação atômica e lê o estado mais recente; outras abas recebem atualização.
-- Backup JSON completo, versionado, inclui inventário e benchmark. Importação valida versão, campos, IDs únicos e quantidades antes de pedir confirmação e substituir a base em uma única transação. Exporte antes de limpar dados do navegador ou mudar de endereço/aparelho.
+- Backup JSON completo, versionado, inclui inventário e benchmark. No iPhone, a exportação usa a folha de compartilhamento para salvar em Arquivos ou iCloud Drive. A importação valida tudo antes de substituir a base e guarda atomicamente a base anterior, permitindo desfazer a restauração.
 
 ## Executar e verificar
 
@@ -53,3 +53,11 @@ O repositório deve continuar **privado**. Esta entrega não ativa publicação 
 **Atenção à diferença entre repositório e site:** Pages a partir de repositório privado de conta pessoal requer GitHub Pro. O site Pages normalmente é público, mesmo com o repositório privado; quem acessar o site poderá baixar os JSON iniciais, incluindo atributos como “Presente de”. Se esses dados também precisam ficar privados, não ative Pages público; será necessário hospedar com controle de acesso. Os dados editados posteriormente ficam apenas no navegador e não são enviados ao GitHub.
 
 Documentação: [disponibilidade do Pages](https://docs.github.com/en/pages/getting-started-with-github-pages/what-is-github-pages) e [criar um site Pages](https://docs.github.com/en/pages/getting-started-with-github-pages/creating-a-github-pages-site).
+
+## Instalar no iPhone
+
+A instalação exige que o app seja servido por HTTPS; o Quick Look do app Arquivos não executa uma PWA e não oferece armazenamento confiável. Abra o endereço publicado no Safari, toque em **Compartilhar → Adicionar à Tela de Início** e abra o ícone Enxoval. Depois da primeira carga completa, o service worker mantém a interface e os dados iniciais disponíveis offline.
+
+Os dados editados continuam locais ao Safari/PWA. Eles não entram no repositório nem são sincronizados. Use **Exportar backup** regularmente e salve o JSON em Arquivos ou iCloud Drive. Antes de qualquer restauração, a base atual é guardada como ponto de retorno; **Desfazer restauração** troca com segurança as duas versões.
+
+O código ser privado não torna automaticamente o endereço publicado privado. Use hospedagem HTTPS com controle de acesso se o próprio aplicativo e os dados iniciais não puderem ser públicos.
