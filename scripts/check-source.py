@@ -24,6 +24,7 @@ for index, benchmark in enumerate(benchmarks):
     assert [control.cell(control_row,c).value for c in range(6,11)] == [have,need,have-target,status,action], benchmark_id
     result.append({'id':benchmark_id,'have':have,'need':need,'status':status})
 (root/'tests/workbook-control.json').write_text(json.dumps(result,ensure_ascii=False,indent=2)+'\n')
-assert len(base)==191 and sum(row[4] for row in base)==491 and len(set(row[0] for row in base))==191
-assert control['B4'].value==191 and control['B5'].value==491 and control['B6'].value==12 and control['B7'].value==18
+assert len(base)==187 and sum(row[4] for row in base)==487 and len(set(row[0] for row in base))==187
+assert not {'ITM-0133','ITM-0134','ITM-0135','ITM-0136'} & {row[0] for row in base}
+assert control['B4'].value==187 and control['B5'].value==487 and control['B6'].value==12 and control['B7'].value==18
 print(f'All {len(items)*len(keys)} inventory attributes reconcile; {len(result)} benchmark rows independently evaluated.')

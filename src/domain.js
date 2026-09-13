@@ -1,4 +1,4 @@
-export const SCHEMA_VERSION = 2;
+export const SCHEMA_VERSION = 3;
 export const PHASES = ['RN', '1–3 meses', '3–6 meses', '6–9 meses', '9–12 meses', 'Sem fase'];
 export const TIMINGS = ['Comprar agora', 'Planejar', 'Aguardar'];
 export const itemFields = ['id','category','type','description','quantity','unit','phase','brand','color','gift','fabric'];
