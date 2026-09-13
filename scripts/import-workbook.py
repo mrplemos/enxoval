@@ -10,8 +10,8 @@ def extract(sheet, prefix, keys):
     return [dict(zip(keys, [v if v is not None else '' for v in row[:len(keys)]]))
             for row in list(workbook[sheet].values)[1:]
             if isinstance(row[0], str) and row[0].startswith(prefix)]
-items = extract('Base de Itens', 'ITM-', ['id','category','type','description','original','quantity','unit','size','phase','brand','color','gift','fabric','status','notes'])
-benchmarks = extract('Benchmark Enxoval', 'BEN-', ['id','category','type','description','phase','target','unit','rule','priority','timing','rationale','sources'])
+items = extract('Base de Itens', 'ITM-', ['id','category','type','description','quantity','unit','phase','brand','color','gift','fabric'])
+benchmarks = extract('Benchmark Enxoval', 'BEN-', ['id','category','type','description','phase','target','unit','rule','priority','timing','sources'])
 for rows, numeric in [(items, 'quantity'), (benchmarks, 'target')]:
     for row in rows:
         for key, value in row.items():

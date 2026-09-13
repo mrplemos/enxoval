@@ -2,25 +2,27 @@
 
 Primeira versão funcional do controle de enxoval minimalista, em português, com Dashboard, Compras e Base. Frontend responsivo em HTML, CSS e módulos JavaScript nativos, sem dependências de execução ou serviços externos.
 
-## Versão 0.2
+## Versão 0.3
 
-O Dashboard agora é organizado por fase. Cada fase mostra os totais de metas completas, parciais e faltantes em cartões filtráveis, seguidos por uma lista visual com progresso `temos / recomendado`, quantidade faltante, momento da compra e os itens possuídos que compõem cada total. É possível registrar uma peça diretamente a partir de uma pendência e editar um item já contabilizado sem sair da visão da fase.
+O Dashboard incorpora a base atualizada de 13/09. A fase `1–3 meses` substitui `0–3 meses`, e os campos removidos da planilha também saíram da interface. Tudo que está na Base é considerado possuído; o total “Temos” compara diretamente categoria, tipo, descrição e fase com o Benchmark.
+
+O Dashboard continua organizado por fase. Cada fase mostra os totais de metas completas, parciais e faltantes em cartões filtráveis, seguidos por uma lista visual com progresso `temos / recomendado`, quantidade faltante, momento da compra e os itens possuídos que compõem cada total.
 
 ## Dados iniciais
 
-- Fonte exclusiva: **Enxoval - base minimalista.xlsx** da conversa fornecida.
-- **121 registros / 419 quantidades cadastradas**, incluindo ITM-0120 e ITM-0121.
+- Fonte exclusiva: **Lista Enxoval - base atualizada 13-09.xlsx**, com o Controle recalculado.
+- **191 registros / 491 quantidades cadastradas**. Os 70 novos registros que vieram sem identificação receberam IDs sequenciais de ITM-0122 a ITM-0191; ITM-0120 e ITM-0121 já existiam na base.
 - **46 metas**, extraídas separadamente da aba Benchmark Enxoval.
-- Os 15 campos do inventário e os 12 do benchmark foram preservados. Células vazias tornam-se texto vazio; tamanhos numéricos tornam-se texto. A taxonomia da planilha é mantida, inclusive os dois últimos registros.
+- Os 11 campos do inventário e os 11 do benchmark foram preservados. Células vazias tornam-se texto vazio.
 - `data/provenance.json` contém o SHA-256 da fonte e a reconciliação. A planilha original não é modificada nem adicionada ao repositório.
-- `scripts/import-workbook.py caminho.xlsx` reproduz a extração com Python e openpyxl. Linhas de modelo vazias e a nota final de metodologia não viram registros. As fontes e os racionais de cada meta são preservados.
+- `scripts/import-workbook.py caminho.xlsx` reproduz a extração com Python e openpyxl. Linhas de modelo vazias não viram registros. As fontes de cada meta são preservadas.
 
 ## Funcionalidades
 
 - Dashboard com metas atendidas, quantidades possuídas, pendências imediatas e preparação por fase.
 - Compras separa **Comprar agora**, **Planejar** e **Aguardar**. “Registrar item” abre o formulário com classificação e quantidade faltante preenchidas; nada é contabilizado antes de salvar.
 - Base oferece inventário e benchmark em seções independentes, com adicionar, editar e excluir, busca e filtros. Exclusões pedem confirmação.
-- Cálculos em `src/domain.js`: somente `Possuído` entra em “Temos”; categoria + tipo + fase devem coincidir. “Descrição N3” exige descrição exata; “Tipo N2” soma todas as descrições daquele tipo na fase. Isso reproduz as regras SUMIFS da planilha. Não há conversão automática entre pacotes, peças e unidades: cadastre quantidades na unidade da meta.
+- Cálculos em `src/domain.js`: todo item da Base entra em “Temos”; categoria + tipo + fase devem coincidir. “Descrição N3” exige descrição exata; “Tipo N2” soma todas as descrições daquele tipo na fase. Isso reproduz as regras SUMIFS da planilha. Não há conversão automática entre pacotes, peças e unidades: cadastre quantidades na unidade da meta.
 - Falta = máximo(meta − temos, 0). Status: Completo, Parcial ou Falta. Itens sem benchmark aparecem como **Sem meta**, sem criar compras artificiais. Excesso de uma fase não compensa outra. O percentual é a proporção de metas completas, não uma soma de unidades heterogêneas.
 - IndexedDB guarda inventário e benchmark neste navegador/origem. Não há sincronização entre aparelhos, login ou banco remoto nesta versão. A semente só é aplicada quando não existe uma base; uma base vazia após exclusões/restauração não é repopulada. Cada mutação é uma transação atômica e lê o estado mais recente; outras abas recebem atualização.
 - Backup JSON completo, versionado, inclui inventário e benchmark. Importação valida versão, campos, IDs únicos e quantidades antes de pedir confirmação e substituir a base em uma única transação. Exporte antes de limpar dados do navegador ou mudar de endereço/aparelho.

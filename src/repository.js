@@ -5,7 +5,7 @@ import { validateData } from './domain.js';
  * Implement the same contract in a remote adapter to change the backend.
  */
 export class IndexedDBRepository {
-  constructor(name='enxoval-v1') { this.name=name; }
+  constructor(name='enxoval-v2') { this.name=name; }
   async open() {
     if (this.db) return this.db;
     this.db = await new Promise((resolve,reject)=>{
