@@ -7,19 +7,19 @@
   },
   {
     "id": "BEN-002",
-    "have": 0,
-    "need": 3,
-    "status": "Falta"
-  },
-  {
-    "id": "BEN-003",
-    "have": 1,
-    "need": 3,
+    "have": 2,
+    "need": 1,
     "status": "Parcial"
   },
   {
+    "id": "BEN-003",
+    "have": 4,
+    "need": 0,
+    "status": "Completo"
+  },
+  {
     "id": "BEN-004",
-    "have": 5,
+    "have": 6,
     "need": 0,
     "status": "Completo"
   },
@@ -42,21 +42,27 @@
     "status": "Falta"
   },
   {
+    "id": "BEN-037",
+    "have": 108,
+    "need": 0,
+    "status": "Completo"
+  },
+  {
     "id": "BEN-008",
-    "have": 2,
-    "need": 4,
-    "status": "Parcial"
+    "have": 12,
+    "need": 0,
+    "status": "Completo"
   },
   {
     "id": "BEN-009",
-    "have": 0,
-    "need": 3,
-    "status": "Falta"
+    "have": 4,
+    "need": 0,
+    "status": "Completo"
   },
   {
     "id": "BEN-010",
-    "have": 1,
-    "need": 4,
+    "have": 2,
+    "need": 3,
     "status": "Parcial"
   },
   {
@@ -82,6 +88,12 @@
     "have": 0,
     "need": 1,
     "status": "Falta"
+  },
+  {
+    "id": "BEN-038",
+    "have": 176,
+    "need": 0,
+    "status": "Completo"
   },
   {
     "id": "BEN-015",
@@ -121,8 +133,8 @@
   },
   {
     "id": "BEN-021",
-    "have": 1,
-    "need": 4,
+    "have": 4,
+    "need": 1,
     "status": "Parcial"
   },
   {
@@ -133,9 +145,9 @@
   },
   {
     "id": "BEN-023",
-    "have": 0,
-    "need": 5,
-    "status": "Falta"
+    "have": 1,
+    "need": 4,
+    "status": "Parcial"
   },
   {
     "id": "BEN-024",
@@ -193,15 +205,15 @@
   },
   {
     "id": "BEN-033",
-    "have": 2,
+    "have": 4,
     "need": 0,
     "status": "Completo"
   },
   {
     "id": "BEN-034",
-    "have": 5,
-    "need": 3,
-    "status": "Parcial"
+    "have": 21,
+    "need": 0,
+    "status": "Completo"
   },
   {
     "id": "BEN-035",
@@ -211,19 +223,7 @@
   },
   {
     "id": "BEN-036",
-    "have": 4,
-    "need": 0,
-    "status": "Completo"
-  },
-  {
-    "id": "BEN-037",
-    "have": 108,
-    "need": 0,
-    "status": "Completo"
-  },
-  {
-    "id": "BEN-038",
-    "have": 176,
+    "have": 7,
     "need": 0,
     "status": "Completo"
   },

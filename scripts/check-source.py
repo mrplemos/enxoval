@@ -1,27 +1,29 @@
-"""Independent source reconciliation and SUMIFS evaluation; requires openpyxl."""
-import json, re, sys
+"""Independent source reconciliation and benchmark evaluation; requires openpyxl."""
+import json, sys
 from pathlib import Path
 import openpyxl
 root=Path(__file__).resolve().parents[1]
-w=openpyxl.load_workbook(sys.argv[1],data_only=False)
+w=openpyxl.load_workbook(sys.argv[1],data_only=True)
 base=[r for r in list(w['Base de Itens'].values)[1:] if r[0]]
 items=json.loads((root/'data/inventory.json').read_text())
-keys=['id','category','type','description','original','quantity','unit','size','phase','brand','color','gift','fabric','status','notes']
+keys=['id','category','type','description','quantity','unit','phase','brand','color','gift','fabric']
 for row,item in zip(base,items,strict=True):
     for col,key in enumerate(keys):
         expected=row[col] if key=='quantity' else str(row[col] if row[col] is not None else '')
         assert item[key]==expected,(item['id'],key)
 result=[]
 control=w['Controle']
-for r in range(11,57):
-    formula=control.cell(r,6).value
-    # Read actual criteria columns and references in each workbook formula.
-    pairs=re.findall(r"'Base de Itens'!\$([A-Z]):\$\1,(\$[A-Z]+[0-9]+|\"[^\"]*\")",formula)
-    assert pairs,formula
-    criteria=[(ord(col)-65,control[ref.replace('$','')].value if ref.startswith('$') else ref.strip('"')) for col,ref in pairs]
-    have=sum(row[5] for row in base if all(row[col]==val for col,val in criteria))
-    target=control.cell(r,4).value
+benchmarks=[r for r in list(w['Benchmark Enxoval'].values)[1:] if r[0]]
+for index, benchmark in enumerate(benchmarks):
+    benchmark_id, category, item_type, description, phase, target, _, rule, _, timing, _ = benchmark
+    have=sum(row[4] for row in base if row[1]==category and row[2]==item_type and row[6]==phase and (rule=='Tipo N2' or row[3]==description))
     need=max(target-have,0)
-    result.append({'id':f'BEN-{r-10:03}','have':have,'need':need,'status':'Completo' if need==0 else 'Falta' if have==0 else 'Parcial'})
+    status='Completo' if need==0 else 'Falta' if have==0 else 'Parcial'
+    action='Não comprar' if need==0 else timing
+    control_row=11+index
+    assert [control.cell(control_row,c).value for c in range(6,11)] == [have,need,have-target,status,action], benchmark_id
+    result.append({'id':benchmark_id,'have':have,'need':need,'status':status})
 (root/'tests/workbook-control.json').write_text(json.dumps(result,ensure_ascii=False,indent=2)+'\n')
-print(f'All {len(items)*len(keys)} inventory attributes reconcile; {len(result)} workbook SUMIFS formulas independently evaluated.')
+assert len(base)==191 and sum(row[4] for row in base)==491 and len(set(row[0] for row in base))==191
+assert control['B4'].value==191 and control['B5'].value==491 and control['B6'].value==12 and control['B7'].value==18
+print(f'All {len(items)*len(keys)} inventory attributes reconcile; {len(result)} benchmark rows independently evaluated.')

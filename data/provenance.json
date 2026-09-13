@@ -1,8 +1,8 @@
 {
-  "source": "Enxoval - base minimalista.xlsx",
-  "sha256": "79d459cd91246c8a6e89353fb3a66a37bcf1e98c243e91acba8bba2b5cd6e0e0",
-  "records": 121,
-  "quantity": 419,
+  "source": "Lista Enxoval - base atualizada 13-09 - controle ajustado.xlsx",
+  "sha256": "c1d30b98118872594307a2be63e76ec1039edbcfb000129611e0fac6796d6ebf",
+  "records": 191,
+  "quantity": 491,
   "benchmarks": 46,
   "method": "Values copied from Base de Itens and Benchmark Enxoval. Blank template rows and methodology footer excluded. Controle formulas recalculated by the app."
 }
