@@ -3,11 +3,12 @@ import assert from 'node:assert/strict';
 import {readFileSync} from 'node:fs';
 import {calculate,validateData,parseBackup} from '../src/domain.js';
 const read=name=>JSON.parse(readFileSync(new URL(`../data/${name}.json`,import.meta.url)));
-const seed={schemaVersion:2,items:read('inventory'),benchmarks:read('benchmarks')};
+const seed={schemaVersion:3,items:read('inventory'),benchmarks:read('benchmarks')};
 const copy=()=>structuredClone(seed);
-test('current workbook: 191 records, 491 quantities, 46 independent targets',()=>{
+test('current workbook: 187 records, 487 quantities, 46 independent targets',()=>{
   assert.doesNotThrow(()=>validateData(seed));
-  assert.equal(seed.items.length,191);assert.equal(seed.items.reduce((n,i)=>n+i.quantity,0),491);assert.equal(seed.benchmarks.length,46);
+  assert.equal(seed.items.length,187);assert.equal(seed.items.reduce((n,i)=>n+i.quantity,0),487);assert.equal(seed.benchmarks.length,46);
+  for(const id of ['ITM-0133','ITM-0134','ITM-0135','ITM-0136']) assert.equal(seed.items.some(item=>item.id===id),false);
   assert.equal(seed.items.at(-1).id,'ITM-0191');assert.equal(seed.items.at(-2).id,'ITM-0190');
 });
 test('all 46 calculations reconcile to independent workbook SUMIFS extraction',()=>{
@@ -37,7 +38,7 @@ test('zero target is complete; future needs retain planning timing',()=>{
 });
 test('backup round-trip preserves every attribute and benchmark independently',()=>{
   assert.deepEqual(parseBackup(JSON.stringify(seed)),seed);
-  assert.deepEqual(parseBackup(JSON.stringify({schemaVersion:2,items:[],benchmarks:[]})),{schemaVersion:2,items:[],benchmarks:[]});
+  assert.deepEqual(parseBackup(JSON.stringify({schemaVersion:3,items:[],benchmarks:[]})),{schemaVersion:3,items:[],benchmarks:[]});
 });
 test('invalid and future backups reject before mutation',()=>{
   assert.throws(()=>parseBackup('{broken'));

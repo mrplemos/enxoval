@@ -2,7 +2,7 @@
 
 Primeira versão funcional do controle de enxoval minimalista, em português, com Dashboard, Compras e Base. Frontend responsivo em HTML, CSS e módulos JavaScript nativos, sem dependências de execução ou serviços externos.
 
-## Versão 0.3
+## Versão 0.3.1
 
 O Dashboard incorpora a base atualizada de 13/09. A fase `1–3 meses` substitui `0–3 meses`, e os campos removidos da planilha também saíram da interface. Tudo que está na Base é considerado possuído; o total “Temos” compara diretamente categoria, tipo, descrição e fase com o Benchmark.
 
@@ -11,7 +11,7 @@ O Dashboard continua organizado por fase. Cada fase mostra os totais de metas co
 ## Dados iniciais
 
 - Fonte exclusiva: **Lista Enxoval - base atualizada 13-09.xlsx**, com o Controle recalculado.
-- **191 registros / 491 quantidades cadastradas**. Os 70 novos registros que vieram sem identificação receberam IDs sequenciais de ITM-0122 a ITM-0191; ITM-0120 e ITM-0121 já existiam na base.
+- **187 registros / 487 quantidades cadastradas**. Os registros ITM-0133 a ITM-0136 foram removidos após a revisão da base. Os demais IDs permanecem estáveis.
 - **46 metas**, extraídas separadamente da aba Benchmark Enxoval.
 - Os 11 campos do inventário e os 11 do benchmark foram preservados. Células vazias tornam-se texto vazio.
 - `data/provenance.json` contém o SHA-256 da fonte e a reconciliação. A planilha original não é modificada nem adicionada ao repositório.
