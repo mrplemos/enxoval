@@ -1,0 +1,3253 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+  <meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="Seu enxoval minimalista: acompanhe o que já tem e planeje o que falta.">
+  <meta name="theme-color" content="#243b70">
+  <title>Enxoval · Nosso pequeno começo</title>
+  <link rel="icon" href="data:image/svg+xml,%3Csvg%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20viewBox%3D%220%200%2064%2064%22%3E%3Crect%20width%3D%2264%22%20height%3D%2264%22%20rx%3D%2220%22%20fill%3D%22%23243b70%22%2F%3E%3Ctext%20x%3D%2232%22%20y%3D%2246%22%20text-anchor%3D%22middle%22%20font-family%3D%22Georgia%22%20font-size%3D%2252%22%20fill%3D%22white%22%3Ee%3C%2Ftext%3E%3C%2Fsvg%3E%0A" type="image/svg+xml">
+  <style>:root{font-family:system-ui,-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif;color:#25304a;background:#f5f7fb;font-size:16px;font-synthesis:none;--blue:#243b70;--line:#dce2ed;--muted:#59667c}
+*{box-sizing:border-box}body{margin:0}button,input,select,textarea{font:inherit}button,a,input,select,textarea{touch-action:manipulation}button{border:1px solid var(--line);background:white;color:var(--blue);border-radius:8px;padding:10px 15px;cursor:pointer;font-weight:600;font-size:.875rem}button:hover{background:#edf1fa;border-color:#aab9d4}button:disabled{opacity:.5;cursor:wait}a{color:var(--blue)}button:focus-visible,a:focus-visible,summary:focus-visible,input:focus-visible,select:focus-visible,textarea:focus-visible{outline:3px solid #c78516;outline-offset:3px}.primary{background:var(--blue);color:white;border-color:var(--blue)}.primary:hover{background:#172b57}.danger{color:#a02d43}.skip{position:fixed;top:-80px;left:16px;z-index:20;background:white;padding:14px}.skip:focus{top:8px}header{max-width:1440px;padding:26px 48px 18px;margin:auto;display:flex;align-items:center;justify-content:space-between;gap:20px}.brand{display:flex;align-items:center;gap:12px;text-decoration:none;font-family:Georgia,serif;font-size:2rem;font-weight:bold}.mark{display:grid;place-items:center;width:42px;height:42px;border-radius:15px;background:var(--blue);color:white;font-size:2.4rem;font-style:italic}.brand-note{font-family:system-ui,sans-serif;font-size:.875rem;font-weight:400;color:var(--muted);margin-left:20px}.local{font-size:.875rem;color:var(--muted)}.local:before{content:'●';color:#347367;margin-right:8px}nav{padding:0 48px;max-width:1440px;margin:auto;display:flex;gap:32px;border-bottom:1px solid var(--line)}nav a{padding:18px 0;text-decoration:none;font-weight:600;color:var(--muted);border-bottom:3px solid transparent}nav a[aria-current=page]{color:var(--blue);border-color:var(--blue)}main{max-width:1440px;margin:auto;padding:38px 48px;min-height:60vh}h1{font-family:Georgia,serif;font-size:2.35rem;font-weight:400;letter-spacing:-.04em;line-height:1.15;margin:8px 0 0}h2{font-size:1.15rem;font-weight:650;margin:0}h3{font-weight:600}p{line-height:1.6}.eyebrow{font-size:.75rem;letter-spacing:.14em;font-weight:700;margin:0;color:var(--muted)}.page-heading{display:flex;align-items:center;justify-content:space-between;gap:24px;margin-bottom:30px}.page-heading button{padding:14px 20px}.overview{display:grid;grid-template-columns:1.1fr 1fr 1fr;gap:20px;margin-bottom:28px}.progress-card,.stat{padding:28px 30px;border-radius:16px;min-height:230px}.progress-card{background:var(--blue);color:white;position:relative;overflow:hidden}.progress-card .eyebrow{color:#d8e1f6}.progress-card p{font-size:.875rem;margin-bottom:0}.progress-number{font-family:Georgia,serif;font-size:4.5rem;line-height:1.3}.progress-number span{font-size:2rem;margin-left:4px}.stat{background:white;border:1px solid var(--line)}.stat>span{font-size:.875rem;color:var(--muted)}.stat>strong{display:block;font-family:Georgia,serif;font-size:4rem;font-weight:400;line-height:1.4}.stat p{font-size:.875rem;margin:0 0 12px;color:var(--muted)}.stat a{font-size:.875rem;font-weight:600}progress{display:block;appearance:none;width:100%;height:7px;border:0;border-radius:8px;overflow:hidden;background:#e3e9f4}progress::-webkit-progress-bar{background:#e3e9f4;border-radius:8px}progress::-webkit-progress-value{background:#526daa;border-radius:8px}progress::-moz-progress-bar{background:#526daa}.progress-card progress::-webkit-progress-value{background:#b8ccef}.panel{background:white;border:1px solid var(--line);border-radius:14px;padding:24px;margin-bottom:24px}.section-heading{display:flex;align-items:center;justify-content:space-between;gap:18px;margin-bottom:20px}.section-heading>span,.section-heading>p{font-size:.875rem;color:var(--muted);margin:0}.phases{display:grid;grid-template-columns:repeat(6,1fr);gap:12px}.phase-card{text-align:left;display:grid;gap:12px;padding:18px 14px;font-weight:400;background:#f8f9fd}.phase-card>span{font-weight:600;font-size:.875rem}.phase-card strong{font-size:1.6rem;font-weight:600}.phase-card small{font-size:.875rem;color:var(--muted);font-weight:400}.filters{display:flex;gap:16px;margin-bottom:22px;flex-wrap:wrap}.filters label:first-child{flex:1;min-width:200px}.filters label{min-width:170px}label{display:flex;flex-direction:column;gap:7px;font-size:.875rem;font-weight:600;color:#495570}input,select,textarea{color:#25304a;border:1px solid #bbc6d8;border-radius:7px;padding:11px 12px;background:white;min-width:0;width:100%;font-size:1rem}textarea{min-height:85px;resize:vertical}.table-scroll{overflow-x:auto}table{border-collapse:collapse;width:100%;font-size:.875rem;text-align:left}th{color:var(--muted);font-size:.75rem;letter-spacing:.035em;text-transform:uppercase;padding:14px 12px;background:#f7f9fd;white-space:nowrap;font-weight:650}td{border-bottom:1px solid #e8ecf3;padding:17px 12px;vertical-align:top}tbody tr:last-child td{border-bottom:0}td:first-child{min-width:230px}td>strong{font-weight:600}td small{display:block;color:var(--muted);line-height:1.5;margin-top:5px}td:nth-child(2){min-width:100px}summary{cursor:pointer;line-height:1.45}summary strong{font-weight:600}.detail{max-width:380px;font-size:.875rem;color:var(--muted)}.detail p{margin:12px 0}.badge{font-size:.75rem;display:inline-block;padding:5px 9px;border-radius:20px;white-space:nowrap;font-weight:600}.complete{background:#e4f3ef;color:#215e51}.partial{background:#fff0cf;color:#7c520a}.missing{background:#fbe7ec;color:#8f304a}.row-actions{display:flex;gap:6px}.row-actions button{padding:7px 10px}.table-count{font-size:.875rem;color:var(--muted);margin-top:0}.segments{display:flex;gap:8px;flex-wrap:wrap;margin-bottom:24px}.segments button{background:transparent}.segments button[aria-pressed=true]{background:var(--blue);color:white;border-color:var(--blue)}.segments span{margin-left:8px;opacity:.8;font-weight:400}.intro{color:var(--muted);margin-top:-8px;max-width:750px}.empty{text-align:center;padding:44px 20px;color:var(--muted)}footer{max-width:1344px;margin:0 auto;padding:20px 0 36px;border-top:1px solid var(--line);display:flex;justify-content:space-between;align-items:center;gap:24px;color:var(--muted);font-size:.875rem;line-height:1.5}footer>span{max-width:530px}footer>div{display:flex;gap:8px}dialog{border:1px solid var(--line);border-radius:16px;box-shadow:0 20px 70px #14224733;padding:28px;color:#25304a;max-height:90vh;max-width:740px;width:calc(100% - 32px)}dialog::backdrop{background:#14224780}#confirm{max-width:480px}.form-grid{display:grid;grid-template-columns:1fr 1fr;gap:18px}.wide{grid-column:1/-1}.dialog-actions{display:flex;justify-content:flex-end;gap:10px;margin-top:24px}.hint{font-size:.875rem;color:var(--muted)}#form-error,#confirm-error{color:#a02d43;font-size:.875rem}#notice{position:fixed;bottom:20px;left:50%;transform:translateX(-50%);margin:0;background:#172b57;color:white;padding:15px 22px;border-radius:10px;box-shadow:0 8px 30px #14224730;max-width:calc(100% - 32px);width:max-content;font-size:.875rem;opacity:0;pointer-events:none;z-index:30}#notice.show{opacity:1}.sr-only{position:absolute;width:1px;height:1px;padding:0;margin:-1px;overflow:hidden;clip:rect(0,0,0,0);white-space:nowrap;border:0}
+@media(max-width:1100px){.phases{grid-template-columns:repeat(3,1fr)}header,main{padding-left:28px;padding-right:28px}nav{padding:0 28px}footer{margin:0 28px}.brand-note{display:none}.overview{gap:12px}.stat,.progress-card{padding:22px}}
+@media(max-width:700px){header{padding:20px}.brand{font-size:1.7rem}.local{max-width:105px;font-size:.75rem}nav{padding:0 20px;gap:28px}main{padding:26px 16px}h1{font-size:1.9rem}.page-heading{align-items:flex-start;flex-direction:column;gap:18px}.overview{grid-template-columns:1fr 1fr;gap:12px}.progress-card{grid-column:1/-1;min-height:190px}.progress-number{font-size:4rem}.stat{min-height:195px;padding:20px 16px}.stat>strong{font-size:3rem}.panel{padding:18px 14px}.section-heading{align-items:flex-start;flex-wrap:wrap}.phases{grid-template-columns:repeat(2,1fr)}.filters{gap:12px}.filters label{flex:1;min-width:130px}.filters label:first-child{flex-basis:100%}.form-grid{grid-template-columns:1fr}.wide{grid-column:auto}dialog{padding:22px 18px}footer{margin:0 20px;flex-direction:column;align-items:flex-start}footer>div{flex-wrap:wrap}td,th{padding:14px 10px}.segments button{padding:10px 12px}.page-heading .primary{width:100%}}
+.phase-tabs{display:flex;gap:8px;flex-wrap:wrap;margin-bottom:28px}.phase-tabs button{border-radius:24px;padding:12px 20px}.phase-tabs button[aria-pressed=true]{background:var(--blue);color:white;border-color:var(--blue)}.phase-title{margin-bottom:16px}.phase-title h2{font-family:Georgia,serif;font-size:1.7rem;font-weight:400}.status-cards{display:grid;grid-template-columns:repeat(3,1fr);gap:16px;margin-bottom:28px}.status-card{display:flex;align-items:center;text-align:left;gap:16px;padding:24px;border:2px solid transparent;border-radius:12px}.status-card[aria-pressed=true]{border-color:currentColor;box-shadow:0 0 0 3px white inset}.status-card:hover{border-color:currentColor}.status-icon{font-size:1.8rem}.status-card small{display:block;font-weight:400;margin-top:5px}.status-card strong{margin-left:auto;font-size:2.2rem;font-family:Georgia,serif;font-weight:400}.layette-item{padding:24px 0;border-top:1px solid var(--line)}.item-line{display:flex;align-items:center;gap:28px}.item-name{flex:1;min-width:180px}.item-name h3{margin:0 0 7px;font-size:1rem}.item-name>span{font-size:.875rem;color:var(--muted)}.item-progress{width:140px;flex-shrink:0}.item-progress>span{display:block;margin-bottom:10px;color:var(--muted);font-size:.875rem}.item-progress strong{font-size:1.25rem;color:var(--blue)}.item-status{min-width:150px}.item-status small{display:block;font-size:.875rem;color:var(--muted);margin-top:8px}.owned-details{margin-top:18px;font-size:.875rem;color:var(--muted)}.owned-details summary{width:fit-content}.owned-details ul{list-style:none;padding:0;margin-bottom:0}.owned-details li{display:flex;justify-content:space-between;align-items:center;gap:16px;background:#f7f9fd;padding:14px 18px;margin-top:8px;border-radius:8px}.owned-details li small{display:block;margin-top:6px}.owned-details li strong{color:#25304a;font-weight:500}.owned-details .hint{margin-bottom:0}
+@media(max-width:850px){.item-line{flex-wrap:wrap;gap:18px}.item-name{flex-basis:100%}.item-progress{flex:1}.status-card{padding:18px 12px;gap:10px}.status-icon{display:none}}
+@media(max-width:550px){.status-cards{gap:8px}.status-card{display:flex;flex-direction:column;align-items:flex-start;padding:14px 10px}.status-card small{display:none}.status-card strong{margin:0;font-size:1.8rem}.phase-tabs{gap:6px}.phase-tabs button{padding:10px 14px}.item-line>button{width:100%}.item-status{min-width:130px}.phase-list{padding:20px 16px}}
+@media(prefers-reduced-motion:no-preference){button,a{transition:background .15s ease}#notice{transition:opacity .15s ease}}
+</style>
+</head>
+<body>
+  <a class="skip" href="#content">Pular para conteúdo</a>
+  <header><a class="brand" href="#dashboard"><span class="mark">e</span> enxoval<span class="brand-note">nosso pequeno começo · v0.3.1</span></a><span class="local">Salvo neste navegador</span></header>
+  <nav aria-label="Principal"><a href="#dashboard">Dashboard</a><a href="#compras">Compras</a><a href="#base">Base</a></nav>
+  <main id="content" tabindex="-1"><p>Carregando seu enxoval…</p></main>
+  <footer><span>Seus dados ficam neste navegador. Exporte um backup para guardar ou usar em outro aparelho.</span><div><button id="export">Exportar backup</button><button id="import">Restaurar backup</button><input type="file" id="backup-file" accept="application/json,.json" hidden></div></footer>
+  <dialog id="editor" aria-labelledby="editor-title"></dialog>
+  <dialog id="confirm" aria-labelledby="confirm-title"></dialog>
+  <p id="notice" role="status" aria-live="polite"></p>
+  <script>globalThis.__ENXOVAL_SEED__={items:[
+  {
+    "id": "ITM-0004",
+    "category": "Roupas",
+    "type": "Vestido",
+    "description": "Vestido com fraldinha",
+    "quantity": 1,
+    "unit": "peça",
+    "phase": "1–3 meses",
+    "brand": "Brulane",
+    "color": "Branco com coelinhos",
+    "gift": "Tião e Vilma",
+    "fabric": ""
+  },
+  {
+    "id": "ITM-0007",
+    "category": "Roupas",
+    "type": "Body",
+    "description": "Body manga curta",
+    "quantity": 1,
+    "unit": "peça",
+    "phase": "1–3 meses",
+    "brand": "LCW",
+    "color": "Branco com borboletas",
+    "gift": "Papai e mamãe",
+    "fabric": "Botão corpo"
+  },
+  {
+    "id": "ITM-0008",
+    "category": "Roupas",
+    "type": "Body",
+    "description": "Body sem manga",
+    "quantity": 1,
+    "unit": "peça",
+    "phase": "1–3 meses",
+    "brand": "LCW",
+    "color": "Verde",
+    "gift": "Papai e mamãe",
+    "fabric": "Botão"
+  },
+  {
+    "id": "ITM-0009",
+    "category": "Roupas",
+    "type": "Body",
+    "description": "Body sem manga",
+    "quantity": 1,
+    "unit": "peça",
+    "phase": "1–3 meses",
+    "brand": "LCW",
+    "color": "Amarelo com flores",
+    "gift": "Papai e mamãe",
+    "fabric": "Botão"
+  },
+  {
+    "id": "ITM-0012",
+    "category": "Roupas",
+    "type": "Blusa",
+    "description": "Blusa",
+    "quantity": 1,
+    "unit": "peça",
+    "phase": "1–3 meses",
+    "brand": "C&A",
+    "color": "Rosa",
+    "gift": "Duda",
+    "fabric": ""
+  },
+  {
+    "id": "ITM-0013",
+    "category": "Roupas",
+    "type": "Short",
+    "description": "Short",
+    "quantity": 1,
+    "unit": "peça",
+    "phase": "1–3 meses",
+    "brand": "C&A",
+    "color": "Rosa e branco",
+    "gift": "Duda",
+    "fabric": ""
+  },
+  {
+    "id": "ITM-0014",
+    "category": "Roupas",
+    "type": "Macacão",
+    "description": "Macacão manga longa",
+    "quantity": 1,
+    "unit": "peça",
+    "phase": "1–3 meses",
+    "brand": "Brulane",
+    "color": "Branco com estampa Natal",
+    "gift": "Tião e Vilma",
+    "fabric": "Zíper simples"
+  },
+  {
+    "id": "ITM-0023",
+    "category": "Roupas",
+    "type": "Macacão",
+    "description": "Macacão manga longa",
+    "quantity": 1,
+    "unit": "peça",
+    "phase": "1–3 meses",
+    "brand": "Carters",
+    "color": "Rosa com cerejinhas",
+    "gift": "Papai e mamãe",
+    "fabric": "Zíper duplo"
+  },
+  {
+    "id": "ITM-0024",
+    "category": "Roupas",
+    "type": "Macacão",
+    "description": "Macacão manga longa",
+    "quantity": 1,
+    "unit": "peça",
+    "phase": "1–3 meses",
+    "brand": "Carters",
+    "color": "Amarelo com limões",
+    "gift": "Papai e mamãe",
+    "fabric": "Zíper duplo"
+  },
+  {
+    "id": "ITM-0025",
+    "category": "Roupas",
+    "type": "Macacão",
+    "description": "Macacão manga longa",
+    "quantity": 1,
+    "unit": "peça",
+    "phase": "1–3 meses",
+    "brand": "Carters",
+    "color": "Branco com coqueiros e sol",
+    "gift": "Papai e mamãe",
+    "fabric": "Zíper duplo"
+  },
+  {
+    "id": "ITM-0026",
+    "category": "Roupas",
+    "type": "Macacão",
+    "description": "Macacão manga longa",
+    "quantity": 1,
+    "unit": "peça",
+    "phase": "1–3 meses",
+    "brand": "Carters",
+    "color": "Azul com listras brancas",
+    "gift": "Papai e mamãe",
+    "fabric": "Zíper duplo"
+  },
+  {
+    "id": "ITM-0027",
+    "category": "Roupas",
+    "type": "Body",
+    "description": "Body sem manga",
+    "quantity": 1,
+    "unit": "peça",
+    "phase": "1–3 meses",
+    "brand": "Carters",
+    "color": "Rosa com sol",
+    "gift": "Papai e mamãe",
+    "fabric": "Botão"
+  },
+  {
+    "id": "ITM-0028",
+    "category": "Roupas",
+    "type": "Body",
+    "description": "Body sem manga",
+    "quantity": 1,
+    "unit": "peça",
+    "phase": "1–3 meses",
+    "brand": "Carters",
+    "color": "Azul com estampa mar",
+    "gift": "Papai e mamãe",
+    "fabric": "Botão"
+  },
+  {
+    "id": "ITM-0029",
+    "category": "Roupas",
+    "type": "Body",
+    "description": "Body sem manga",
+    "quantity": 1,
+    "unit": "peça",
+    "phase": "1–3 meses",
+    "brand": "Carters",
+    "color": "Branco com coqueiros e sol",
+    "gift": "Papai e mamãe",
+    "fabric": "Botão"
+  },
+  {
+    "id": "ITM-0046",
+    "category": "Roupas",
+    "type": "Vestido",
+    "description": "Vestido",
+    "quantity": 1,
+    "unit": "peça",
+    "phase": "1–3 meses",
+    "brand": "Riachuelo",
+    "color": "Rosa, azul, verde, branco",
+    "gift": "Papai e mamãe",
+    "fabric": ""
+  },
+  {
+    "id": "ITM-0047",
+    "category": "Roupas",
+    "type": "Jardineira",
+    "description": "Jardineira",
+    "quantity": 1,
+    "unit": "peça",
+    "phase": "1–3 meses",
+    "brand": "LCW",
+    "color": "Rosa com flores",
+    "gift": "Papai e mamãe",
+    "fabric": ""
+  },
+  {
+    "id": "ITM-0048",
+    "category": "Roupas",
+    "type": "Blusa",
+    "description": "Blusa",
+    "quantity": 1,
+    "unit": "peça",
+    "phase": "1–3 meses",
+    "brand": "LCW",
+    "color": "Branca, conjunto da jardineira",
+    "gift": "Papai e mamãe",
+    "fabric": ""
+  },
+  {
+    "id": "ITM-0049",
+    "category": "Roupas",
+    "type": "Macacão",
+    "description": "Macacão manga longa",
+    "quantity": 1,
+    "unit": "peça",
+    "phase": "1–3 meses",
+    "brand": "Brulane",
+    "color": "Branco",
+    "gift": "Tião e Vilma",
+    "fabric": "Zíper simples"
+  },
+  {
+    "id": "ITM-0051",
+    "category": "Roupas",
+    "type": "Macacão",
+    "description": "Macacão manga longa",
+    "quantity": 1,
+    "unit": "peça",
+    "phase": "1–3 meses",
+    "brand": "Little Duda",
+    "color": "Amarelo com cachorro",
+    "gift": "Beth",
+    "fabric": "Botão"
+  },
+  {
+    "id": "ITM-0052",
+    "category": "Roupas",
+    "type": "Body",
+    "description": "Body manga curta",
+    "quantity": 1,
+    "unit": "peça",
+    "phase": "1–3 meses",
+    "brand": "Marko Baby",
+    "color": "Bege com urso",
+    "gift": "Tio Thiago",
+    "fabric": ""
+  },
+  {
+    "id": "ITM-0053",
+    "category": "Roupas",
+    "type": "Calça",
+    "description": "Calça / mijão",
+    "quantity": 1,
+    "unit": "peça",
+    "phase": "1–3 meses",
+    "brand": "Marko Baby",
+    "color": "Bege listras brancas",
+    "gift": "Tio Thiago",
+    "fabric": ""
+  },
+  {
+    "id": "ITM-0061",
+    "category": "Roupas",
+    "type": "Meia",
+    "description": "Meias sortidas",
+    "quantity": 6,
+    "unit": "par",
+    "phase": "1–3 meses",
+    "brand": "Carters",
+    "color": "Colorido, estampado",
+    "gift": "Papai e mamãe",
+    "fabric": ""
+  },
+  {
+    "id": "ITM-0062",
+    "category": "Roupas",
+    "type": "Meia",
+    "description": "Meia bichinho",
+    "quantity": 1,
+    "unit": "par",
+    "phase": "1–3 meses",
+    "brand": "",
+    "color": "Urso",
+    "gift": "Tio Thiago",
+    "fabric": ""
+  },
+  {
+    "id": "ITM-0063",
+    "category": "Roupas",
+    "type": "Meia",
+    "description": "Meia bichinho",
+    "quantity": 1,
+    "unit": "par",
+    "phase": "1–3 meses",
+    "brand": "",
+    "color": "Hipopótamo",
+    "gift": "Marcelle",
+    "fabric": ""
+  },
+  {
+    "id": "ITM-0064",
+    "category": "Roupas",
+    "type": "Sapatinho",
+    "description": "Sapatinhos sortidos",
+    "quantity": 4,
+    "unit": "par",
+    "phase": "1–3 meses",
+    "brand": "",
+    "color": "Vermelha, rosa, branca, rosa crochê",
+    "gift": "Vários",
+    "fabric": ""
+  },
+  {
+    "id": "ITM-0065",
+    "category": "Roupas",
+    "type": "Meia",
+    "description": "Meia Converse",
+    "quantity": 1,
+    "unit": "par",
+    "phase": "1–3 meses",
+    "brand": "",
+    "color": "Cinza",
+    "gift": "Fabrício & Catarina",
+    "fabric": ""
+  },
+  {
+    "id": "ITM-0068",
+    "category": "Roupas",
+    "type": "Acessório de cabelo",
+    "description": "Laço de cabelo",
+    "quantity": 1,
+    "unit": "peça",
+    "phase": "1–3 meses",
+    "brand": "",
+    "color": "Flamengo",
+    "gift": "Tião",
+    "fabric": ""
+  },
+  {
+    "id": "ITM-0077",
+    "category": "Roupas",
+    "type": "Body",
+    "description": "Body sem manga",
+    "quantity": 1,
+    "unit": "peça",
+    "phase": "1–3 meses",
+    "brand": "LCW",
+    "color": "Branco",
+    "gift": "Papai e mamãe",
+    "fabric": ""
+  },
+  {
+    "id": "ITM-0085",
+    "category": "Roupas",
+    "type": "Meia",
+    "description": "Meias sortidas",
+    "quantity": 3,
+    "unit": "par",
+    "phase": "1–3 meses",
+    "brand": "Pimpolho",
+    "color": "Colorido, estampado",
+    "gift": "Dani",
+    "fabric": ""
+  },
+  {
+    "id": "ITM-0096",
+    "category": "Fraldas e itens de higiene",
+    "type": "Fralda",
+    "description": "Fralda descartável",
+    "quantity": 32,
+    "unit": "unidade",
+    "phase": "1–3 meses",
+    "brand": "Pampers Pants",
+    "color": "",
+    "gift": "",
+    "fabric": ""
+  },
+  {
+    "id": "ITM-0098",
+    "category": "Fraldas e itens de higiene",
+    "type": "Fralda",
+    "description": "Fralda descartável",
+    "quantity": 72,
+    "unit": "unidade",
+    "phase": "1–3 meses",
+    "brand": "Pampers Comfort sec",
+    "color": "",
+    "gift": "",
+    "fabric": ""
+  },
+  {
+    "id": "ITM-0099",
+    "category": "Fraldas e itens de higiene",
+    "type": "Fralda",
+    "description": "Fralda descartável",
+    "quantity": 72,
+    "unit": "unidade",
+    "phase": "1–3 meses",
+    "brand": "Pampers Comfort sec",
+    "color": "",
+    "gift": "Beth",
+    "fabric": ""
+  },
+  {
+    "id": "ITM-0002",
+    "category": "Roupas",
+    "type": "Vestido",
+    "description": "Vestido",
+    "quantity": 1,
+    "unit": "peça",
+    "phase": "12+ meses",
+    "brand": "Porto de Galinhas",
+    "color": "Branco com Cajus",
+    "gift": "Papai e mamãe",
+    "fabric": ""
+  },
+  {
+    "id": "ITM-0031",
+    "category": "Roupas",
+    "type": "Vestido",
+    "description": "Vestido",
+    "quantity": 1,
+    "unit": "peça",
+    "phase": "12+ meses",
+    "brand": "Gringo",
+    "color": "Tropical",
+    "gift": "Fabrício & Catarina",
+    "fabric": ""
+  },
+  {
+    "id": "ITM-0075",
+    "category": "Roupas",
+    "type": "Jardineira",
+    "description": "Jardineira",
+    "quantity": 1,
+    "unit": "peça",
+    "phase": "12+ meses",
+    "brand": "Zara",
+    "color": "Jeans",
+    "gift": "Papai e mamãe",
+    "fabric": ""
+  },
+  {
+    "id": "ITM-0076",
+    "category": "Roupas",
+    "type": "Blusa",
+    "description": "Blusa manga longa",
+    "quantity": 1,
+    "unit": "peça",
+    "phase": "12+ meses",
+    "brand": "C&A",
+    "color": "Roxa",
+    "gift": "Duda",
+    "fabric": ""
+  },
+  {
+    "id": "ITM-0090",
+    "category": "Roupas",
+    "type": "Vestido",
+    "description": "Vestido",
+    "quantity": 1,
+    "unit": "peça",
+    "phase": "12+ meses",
+    "brand": "Fábula",
+    "color": "Florido",
+    "gift": "Marcelle (usado)",
+    "fabric": ""
+  },
+  {
+    "id": "ITM-0091",
+    "category": "Roupas",
+    "type": "Acessório de cabelo",
+    "description": "Laço de cabelo",
+    "quantity": 1,
+    "unit": "peça",
+    "phase": "12+ meses",
+    "brand": "Fábula",
+    "color": "Florido",
+    "gift": "Marcelle (usado)",
+    "fabric": ""
+  },
+  {
+    "id": "ITM-0092",
+    "category": "Roupas",
+    "type": "Vestido",
+    "description": "Vestido",
+    "quantity": 1,
+    "unit": "peça",
+    "phase": "12+ meses",
+    "brand": "Fábula",
+    "color": "Salmão e florido",
+    "gift": "Marcelle (usado)",
+    "fabric": ""
+  },
+  {
+    "id": "ITM-0001",
+    "category": "Roupas",
+    "type": "Macacão",
+    "description": "Macacão manga longa",
+    "quantity": 1,
+    "unit": "peça",
+    "phase": "3–6 meses",
+    "brand": "Carters",
+    "color": "Verde",
+    "gift": "Helena",
+    "fabric": "Zíper duplo"
+  },
+  {
+    "id": "ITM-0010",
+    "category": "Roupas",
+    "type": "Body",
+    "description": "Body sem manga",
+    "quantity": 1,
+    "unit": "peça",
+    "phase": "3–6 meses",
+    "brand": "KyLy",
+    "color": "Amarelo",
+    "gift": "Beth",
+    "fabric": "Botão"
+  },
+  {
+    "id": "ITM-0011",
+    "category": "Roupas",
+    "type": "Jardineira",
+    "description": "Jardineira",
+    "quantity": 1,
+    "unit": "peça",
+    "phase": "3–6 meses",
+    "brand": "KyLy",
+    "color": "Amarelo com limões",
+    "gift": "Beth",
+    "fabric": ""
+  },
+  {
+    "id": "ITM-0015",
+    "category": "Roupas",
+    "type": "Macacão",
+    "description": "Macacão sem manga",
+    "quantity": 1,
+    "unit": "peça",
+    "phase": "3–6 meses",
+    "brand": "Renner",
+    "color": "Branco com cerejas",
+    "gift": "Papai e mamãe",
+    "fabric": "Botão"
+  },
+  {
+    "id": "ITM-0032",
+    "category": "Roupas",
+    "type": "Body",
+    "description": "Body manga curta",
+    "quantity": 1,
+    "unit": "peça",
+    "phase": "3–6 meses",
+    "brand": "Converse",
+    "color": "Cinza",
+    "gift": "Fabrício & Catarina",
+    "fabric": "Botão"
+  },
+  {
+    "id": "ITM-0033",
+    "category": "Roupas",
+    "type": "Macacão",
+    "description": "Macacão manga curta",
+    "quantity": 1,
+    "unit": "peça",
+    "phase": "3–6 meses",
+    "brand": "",
+    "color": "Branco com estampa de noite",
+    "gift": "Thiago",
+    "fabric": ""
+  },
+  {
+    "id": "ITM-0034",
+    "category": "Roupas",
+    "type": "Body",
+    "description": "Body manga curta",
+    "quantity": 1,
+    "unit": "peça",
+    "phase": "3–6 meses",
+    "brand": "Renner",
+    "color": "Quadriculado verde com flor e abelha",
+    "gift": "Papai e mamãe",
+    "fabric": ""
+  },
+  {
+    "id": "ITM-0035",
+    "category": "Roupas",
+    "type": "Body",
+    "description": "Body manga curta",
+    "quantity": 1,
+    "unit": "peça",
+    "phase": "3–6 meses",
+    "brand": "Carters",
+    "color": "Branco com borboleta",
+    "gift": "Papai e mamãe",
+    "fabric": "Botão"
+  },
+  {
+    "id": "ITM-0036",
+    "category": "Roupas",
+    "type": "Calça",
+    "description": "Calça / mijão",
+    "quantity": 1,
+    "unit": "peça",
+    "phase": "3–6 meses",
+    "brand": "Carters",
+    "color": "Azul com bolinhas brancas",
+    "gift": "Papai e mamãe",
+    "fabric": ""
+  },
+  {
+    "id": "ITM-0037",
+    "category": "Roupas",
+    "type": "Macacão",
+    "description": "Macacão manga longa",
+    "quantity": 1,
+    "unit": "peça",
+    "phase": "3–6 meses",
+    "brand": "Carters",
+    "color": "Azul com borboletas",
+    "gift": "Papai e mamãe",
+    "fabric": "Zíper duplo"
+  },
+  {
+    "id": "ITM-0039",
+    "category": "Roupas",
+    "type": "Vestido",
+    "description": "Vestido",
+    "quantity": 1,
+    "unit": "peça",
+    "phase": "3–6 meses",
+    "brand": "Alphabeto",
+    "color": "Laranja",
+    "gift": "Papai e mamãe",
+    "fabric": ""
+  },
+  {
+    "id": "ITM-0054",
+    "category": "Roupas",
+    "type": "Macacão",
+    "description": "Macacão manga curta",
+    "quantity": 1,
+    "unit": "peça",
+    "phase": "3–6 meses",
+    "brand": "Alphabeto",
+    "color": "Verde com estampa",
+    "gift": "Tio Thiago",
+    "fabric": ""
+  },
+  {
+    "id": "ITM-0055",
+    "category": "Roupas",
+    "type": "Body",
+    "description": "Body manga curta",
+    "quantity": 1,
+    "unit": "peça",
+    "phase": "3–6 meses",
+    "brand": "Alphabeto",
+    "color": "Branco com caminhoes",
+    "gift": "Tião e Vilma",
+    "fabric": ""
+  },
+  {
+    "id": "ITM-0056",
+    "category": "Roupas",
+    "type": "Jardineira",
+    "description": "Jardineira",
+    "quantity": 1,
+    "unit": "peça",
+    "phase": "3–6 meses",
+    "brand": "Alphabeto",
+    "color": "Vermelha com caminhão",
+    "gift": "Tião e Vilma",
+    "fabric": ""
+  },
+  {
+    "id": "ITM-0057",
+    "category": "Roupas",
+    "type": "Blusa",
+    "description": "Blusa",
+    "quantity": 1,
+    "unit": "peça",
+    "phase": "3–6 meses",
+    "brand": "Kiabi",
+    "color": "Frutinhas",
+    "gift": "Papai e mamãe",
+    "fabric": ""
+  },
+  {
+    "id": "ITM-0058",
+    "category": "Roupas",
+    "type": "Blusa",
+    "description": "Blusa",
+    "quantity": 1,
+    "unit": "peça",
+    "phase": "3–6 meses",
+    "brand": "Kiabi",
+    "color": "Fruta com óculos colorido",
+    "gift": "Papai e mamãe",
+    "fabric": ""
+  },
+  {
+    "id": "ITM-0066",
+    "category": "Roupas",
+    "type": "Meia",
+    "description": "Meia Flamengo",
+    "quantity": 1,
+    "unit": "par",
+    "phase": "3–6 meses",
+    "brand": "",
+    "color": "Vermelho",
+    "gift": "Tião",
+    "fabric": ""
+  },
+  {
+    "id": "ITM-0069",
+    "category": "Roupas",
+    "type": "Touca",
+    "description": "Touca Converse",
+    "quantity": 1,
+    "unit": "peça",
+    "phase": "3–6 meses",
+    "brand": "",
+    "color": "Converse",
+    "gift": "Fabrício & Catarina",
+    "fabric": ""
+  },
+  {
+    "id": "ITM-0073",
+    "category": "Roupas",
+    "type": "Blusa",
+    "description": "Blusa",
+    "quantity": 1,
+    "unit": "peça",
+    "phase": "3–6 meses",
+    "brand": "Lefties",
+    "color": "Branca com listras laranja",
+    "gift": "Papai e mamãe",
+    "fabric": ""
+  },
+  {
+    "id": "ITM-0074",
+    "category": "Roupas",
+    "type": "Short",
+    "description": "Short",
+    "quantity": 1,
+    "unit": "peça",
+    "phase": "3–6 meses",
+    "brand": "Lefties",
+    "color": "Branco com flores amarela e roxa",
+    "gift": "Papai e mamãe",
+    "fabric": ""
+  },
+  {
+    "id": "ITM-0080",
+    "category": "Roupas",
+    "type": "Body",
+    "description": "Body manga curta",
+    "quantity": 1,
+    "unit": "peça",
+    "phase": "3–6 meses",
+    "brand": "",
+    "color": "Flamengo",
+    "gift": "Tião",
+    "fabric": ""
+  },
+  {
+    "id": "ITM-0084",
+    "category": "Roupas",
+    "type": "Body",
+    "description": "Body manga curta",
+    "quantity": 1,
+    "unit": "peça",
+    "phase": "3–6 meses",
+    "brand": "Outro",
+    "color": "Xodó da vovó",
+    "gift": "Vovó Vilma",
+    "fabric": ""
+  },
+  {
+    "id": "ITM-0088",
+    "category": "Roupas",
+    "type": "Meia",
+    "description": "Meias sortidas",
+    "quantity": 3,
+    "unit": "par",
+    "phase": "3–6 meses",
+    "brand": "Outro",
+    "color": "Brancas com corações coloridos",
+    "gift": "?",
+    "fabric": ""
+  },
+  {
+    "id": "ITM-0089",
+    "category": "Roupas",
+    "type": "Body",
+    "description": "Body manga curta",
+    "quantity": 1,
+    "unit": "peça",
+    "phase": "3–6 meses",
+    "brand": "Outro",
+    "color": "Xodó do vovô e vovó",
+    "gift": "Vovó Vilma",
+    "fabric": ""
+  },
+  {
+    "id": "ITM-0003",
+    "category": "Roupas",
+    "type": "Vestido",
+    "description": "Vestido com fraldinha",
+    "quantity": 1,
+    "unit": "peça",
+    "phase": "6–9 meses",
+    "brand": "Renner",
+    "color": "Verde com estampa jardim",
+    "gift": "Papai e mamãe",
+    "fabric": ""
+  },
+  {
+    "id": "ITM-0006",
+    "category": "Roupas",
+    "type": "Vestido",
+    "description": "Vestido com fraldinha",
+    "quantity": 1,
+    "unit": "peça",
+    "phase": "6–9 meses",
+    "brand": "Alphabeto",
+    "color": "Rosa shock com gatinhos",
+    "gift": "Papai e mamãe",
+    "fabric": ""
+  },
+  {
+    "id": "ITM-0030",
+    "category": "Roupas",
+    "type": "Macacão",
+    "description": "Macacão manga curta",
+    "quantity": 1,
+    "unit": "peça",
+    "phase": "6–9 meses",
+    "brand": "Alphabeto",
+    "color": "Laranja com colorido e cavalinho",
+    "gift": "Papai e mamãe",
+    "fabric": "Botão"
+  },
+  {
+    "id": "ITM-0038",
+    "category": "Roupas",
+    "type": "Vestido",
+    "description": "Vestido",
+    "quantity": 1,
+    "unit": "peça",
+    "phase": "6–9 meses",
+    "brand": "Lefties",
+    "color": "Frutas coloridas",
+    "gift": "Papai e mamãe",
+    "fabric": ""
+  },
+  {
+    "id": "ITM-0040",
+    "category": "Roupas",
+    "type": "Jardineira",
+    "description": "Jardineira",
+    "quantity": 1,
+    "unit": "peça",
+    "phase": "6–9 meses",
+    "brand": "Alphabeto",
+    "color": "Rosa shock com gato",
+    "gift": "Papai e mamãe",
+    "fabric": ""
+  },
+  {
+    "id": "ITM-0041",
+    "category": "Roupas",
+    "type": "Body",
+    "description": "Body manga curta",
+    "quantity": 1,
+    "unit": "peça",
+    "phase": "6–9 meses",
+    "brand": "Alphabeto",
+    "color": "Branco com gatinho",
+    "gift": "Papai e mamãe",
+    "fabric": "Botão"
+  },
+  {
+    "id": "ITM-0067",
+    "category": "Roupas",
+    "type": "Meia",
+    "description": "Meia Flamengo",
+    "quantity": 1,
+    "unit": "par",
+    "phase": "9–12 meses",
+    "brand": "",
+    "color": "Vermelho",
+    "gift": "Tião",
+    "fabric": ""
+  },
+  {
+    "id": "ITM-0079",
+    "category": "Roupas",
+    "type": "Body",
+    "description": "Body manga curta",
+    "quantity": 1,
+    "unit": "peça",
+    "phase": "9–12 meses",
+    "brand": "",
+    "color": "Flamengo",
+    "gift": "Tião",
+    "fabric": ""
+  },
+  {
+    "id": "ITM-0005",
+    "category": "Roupas",
+    "type": "Macacão",
+    "description": "Macacão manga longa",
+    "quantity": 1,
+    "unit": "peça",
+    "phase": "RN",
+    "brand": "Brulane",
+    "color": "Rosa claro",
+    "gift": "Tião e Vilma",
+    "fabric": "Botão frente"
+  },
+  {
+    "id": "ITM-0016",
+    "category": "Roupas",
+    "type": "Body",
+    "description": "Body manga curta",
+    "quantity": 1,
+    "unit": "peça",
+    "phase": "RN",
+    "brand": "Carters",
+    "color": "Bege Estampado",
+    "gift": "Papai e mamãe",
+    "fabric": "Botão"
+  },
+  {
+    "id": "ITM-0017",
+    "category": "Roupas",
+    "type": "Body",
+    "description": "Body manga curta",
+    "quantity": 1,
+    "unit": "peça",
+    "phase": "RN",
+    "brand": "Carters",
+    "color": "Rosa claro bolinhas brancas",
+    "gift": "Papai e mamãe",
+    "fabric": "Botão"
+  },
+  {
+    "id": "ITM-0018",
+    "category": "Roupas",
+    "type": "Body",
+    "description": "Body manga curta",
+    "quantity": 1,
+    "unit": "peça",
+    "phase": "RN",
+    "brand": "Carters",
+    "color": "Roxo com flores",
+    "gift": "Papai e mamãe",
+    "fabric": "Botão"
+  },
+  {
+    "id": "ITM-0019",
+    "category": "Roupas",
+    "type": "Body",
+    "description": "Body manga curta",
+    "quantity": 1,
+    "unit": "peça",
+    "phase": "RN",
+    "brand": "Carters",
+    "color": "Roxo com listras",
+    "gift": "Papai e mamãe",
+    "fabric": "Botão"
+  },
+  {
+    "id": "ITM-0020",
+    "category": "Roupas",
+    "type": "Body",
+    "description": "Body manga curta",
+    "quantity": 1,
+    "unit": "peça",
+    "phase": "RN",
+    "brand": "Carters",
+    "color": "Bege com ursinho",
+    "gift": "Papai e mamãe",
+    "fabric": "Botão"
+  },
+  {
+    "id": "ITM-0021",
+    "category": "Roupas",
+    "type": "Macacão",
+    "description": "Macacão manga longa",
+    "quantity": 1,
+    "unit": "peça",
+    "phase": "RN",
+    "brand": "Carters",
+    "color": "Branco com sol",
+    "gift": "Débora",
+    "fabric": "Zíper duplo"
+  },
+  {
+    "id": "ITM-0022",
+    "category": "Roupas",
+    "type": "Macacão",
+    "description": "Macacão manga longa",
+    "quantity": 1,
+    "unit": "peça",
+    "phase": "RN",
+    "brand": "Carters",
+    "color": "Azul e branco com morango no pezinho",
+    "gift": "Papai e mamãe",
+    "fabric": "Zíper duplo"
+  },
+  {
+    "id": "ITM-0042",
+    "category": "Roupas",
+    "type": "Body",
+    "description": "Body manga curta",
+    "quantity": 1,
+    "unit": "peça",
+    "phase": "RN",
+    "brand": "Brulane",
+    "color": "Branco dia dos pais",
+    "gift": "Tião e Vilma",
+    "fabric": "Botão"
+  },
+  {
+    "id": "ITM-0043",
+    "category": "Roupas",
+    "type": "Body",
+    "description": "Body manga curta",
+    "quantity": 1,
+    "unit": "peça",
+    "phase": "RN",
+    "brand": "Carters",
+    "color": "Branco dinossauros",
+    "gift": "Tião e Vilma",
+    "fabric": "Botão"
+  },
+  {
+    "id": "ITM-0044",
+    "category": "Roupas",
+    "type": "Body",
+    "description": "Body manga curta",
+    "quantity": 1,
+    "unit": "peça",
+    "phase": "RN",
+    "brand": "Carters",
+    "color": "Verde listras brancas",
+    "gift": "Tião e Vilma",
+    "fabric": "Botão"
+  },
+  {
+    "id": "ITM-0045",
+    "category": "Roupas",
+    "type": "Calça",
+    "description": "Calça / mijão",
+    "quantity": 1,
+    "unit": "peça",
+    "phase": "RN",
+    "brand": "Carters",
+    "color": "Verde listras brancas dinossauro",
+    "gift": "Tião e Vilma",
+    "fabric": ""
+  },
+  {
+    "id": "ITM-0050",
+    "category": "Roupas",
+    "type": "Macacão",
+    "description": "Macacão manga longa",
+    "quantity": 1,
+    "unit": "peça",
+    "phase": "RN",
+    "brand": "Brulane",
+    "color": "Branca com ursinho",
+    "gift": "Tião e Vilma",
+    "fabric": "Botão"
+  },
+  {
+    "id": "ITM-0071",
+    "category": "Roupas",
+    "type": "Saída de maternidade",
+    "description": "Saída de maternidade",
+    "quantity": 1,
+    "unit": "peça",
+    "phase": "RN",
+    "brand": "Babies",
+    "color": "amarela",
+    "gift": "Vovó Vilma",
+    "fabric": ""
+  },
+  {
+    "id": "ITM-0072",
+    "category": "Roupas",
+    "type": "Saída de maternidade",
+    "description": "Saída de maternidade",
+    "quantity": 1,
+    "unit": "peça",
+    "phase": "RN",
+    "brand": "Babies",
+    "color": "branca",
+    "gift": "Bisa",
+    "fabric": ""
+  },
+  {
+    "id": "ITM-0078",
+    "category": "Roupas",
+    "type": "Body",
+    "description": "Body manga curta",
+    "quantity": 1,
+    "unit": "peça",
+    "phase": "RN",
+    "brand": "",
+    "color": "Vasco",
+    "gift": "Débora",
+    "fabric": ""
+  },
+  {
+    "id": "ITM-0081",
+    "category": "Roupas",
+    "type": "Macacão",
+    "description": "Macacão manga longa",
+    "quantity": 1,
+    "unit": "peça",
+    "phase": "RN",
+    "brand": "Carters",
+    "color": "Listrado com carneirinho",
+    "gift": "Débora",
+    "fabric": "Zíper duplo"
+  },
+  {
+    "id": "ITM-0082",
+    "category": "Roupas",
+    "type": "Touca",
+    "description": "Touca de tricô",
+    "quantity": 1,
+    "unit": "peça",
+    "phase": "RN",
+    "brand": "Babies",
+    "color": "Amarela",
+    "gift": "Vovó Vilma",
+    "fabric": ""
+  },
+  {
+    "id": "ITM-0083",
+    "category": "Roupas",
+    "type": "Luva",
+    "description": "Luva de tricô",
+    "quantity": 1,
+    "unit": "par",
+    "phase": "RN",
+    "brand": "Babies",
+    "color": "Amarela",
+    "gift": "Vovó Vilma",
+    "fabric": ""
+  },
+  {
+    "id": "ITM-0086",
+    "category": "Roupas",
+    "type": "Meia",
+    "description": "Meias sortidas",
+    "quantity": 6,
+    "unit": "par",
+    "phase": "RN",
+    "brand": "Carters",
+    "color": "Colorido, estampado",
+    "gift": "Marcelle (usado)",
+    "fabric": ""
+  },
+  {
+    "id": "ITM-0087",
+    "category": "Roupas",
+    "type": "Luva",
+    "description": "Luvas sortidas",
+    "quantity": 3,
+    "unit": "par",
+    "phase": "RN",
+    "brand": "Outro",
+    "color": "Colorido, estampado",
+    "gift": "Marcelle (usado)",
+    "fabric": ""
+  },
+  {
+    "id": "ITM-0093",
+    "category": "Fraldas e itens de higiene",
+    "type": "Fralda",
+    "description": "Fralda descartável",
+    "quantity": 36,
+    "unit": "unidade",
+    "phase": "RN",
+    "brand": "Pampers",
+    "color": "",
+    "gift": "Vovó Vilma",
+    "fabric": ""
+  },
+  {
+    "id": "ITM-0094",
+    "category": "Fraldas e itens de higiene",
+    "type": "Fralda",
+    "description": "Fralda descartável",
+    "quantity": 36,
+    "unit": "unidade",
+    "phase": "RN",
+    "brand": "Pampers",
+    "color": "",
+    "gift": "Beth",
+    "fabric": ""
+  },
+  {
+    "id": "ITM-0095",
+    "category": "Fraldas e itens de higiene",
+    "type": "Fralda",
+    "description": "Fralda descartável",
+    "quantity": 36,
+    "unit": "unidade",
+    "phase": "RN",
+    "brand": "Pampers",
+    "color": "",
+    "gift": "",
+    "fabric": ""
+  },
+  {
+    "id": "ITM-0120",
+    "category": "Roupas",
+    "type": "Luva",
+    "description": "Luva algodão",
+    "quantity": 1,
+    "unit": "peça",
+    "phase": "RN",
+    "brand": "",
+    "color": "Branca",
+    "gift": "Marcelle (usado)",
+    "fabric": ""
+  },
+  {
+    "id": "ITM-0070",
+    "category": "Roupas",
+    "type": "Sapatinho",
+    "description": "Havaianas",
+    "quantity": 1,
+    "unit": "par",
+    "phase": "Sem fase",
+    "brand": "",
+    "color": "Verde e amarelo",
+    "gift": "Tia Dani",
+    "fabric": ""
+  },
+  {
+    "id": "ITM-0100",
+    "category": "Fraldas e itens de higiene",
+    "type": "Sabonete",
+    "description": "Sabonete líquido / gel de limpeza",
+    "quantity": 1,
+    "unit": "item",
+    "phase": "Sem fase",
+    "brand": "Mustela",
+    "color": "",
+    "gift": "Beth",
+    "fabric": ""
+  },
+  {
+    "id": "ITM-0059",
+    "category": "Outros acessórios",
+    "type": "Óculos",
+    "description": "Óculos de sol",
+    "quantity": 1,
+    "unit": "peça",
+    "phase": "Sem fase",
+    "brand": "",
+    "color": "",
+    "gift": "Fabrício & Catarina",
+    "fabric": ""
+  },
+  {
+    "id": "ITM-0060",
+    "category": "Acessórios têxteis",
+    "type": "Naninha",
+    "description": "Naninha de carrinho",
+    "quantity": 1,
+    "unit": "peça",
+    "phase": "Sem fase",
+    "brand": "",
+    "color": "",
+    "gift": "Fabrício & Catarina",
+    "fabric": ""
+  },
+  {
+    "id": "ITM-0121",
+    "category": "Outros acessórios",
+    "type": "Acessório carrinho",
+    "description": "Lençol elástico e Almofada carrinho bebê",
+    "quantity": 1,
+    "unit": "peça",
+    "phase": "Sem fase",
+    "brand": "",
+    "color": "Rosa",
+    "gift": "Marcelle (usado)",
+    "fabric": ""
+  },
+  {
+    "id": "ITM-0097",
+    "category": "Fraldas e itens de higiene",
+    "type": "Óleo",
+    "description": "Óleo corporal",
+    "quantity": 1,
+    "unit": "item",
+    "phase": "Sem fase",
+    "brand": "Johnsons",
+    "color": "",
+    "gift": "Beth",
+    "fabric": ""
+  },
+  {
+    "id": "ITM-0101",
+    "category": "Fraldas e itens de higiene",
+    "type": "Creme",
+    "description": "Creme para assaduras",
+    "quantity": 1,
+    "unit": "item",
+    "phase": "Sem fase",
+    "brand": "",
+    "color": "",
+    "gift": "Beth",
+    "fabric": ""
+  },
+  {
+    "id": "ITM-0102",
+    "category": "Fraldas e itens de higiene",
+    "type": "Sabonete",
+    "description": "Sabonete líquido / gel de limpeza",
+    "quantity": 1,
+    "unit": "item",
+    "phase": "Sem fase",
+    "brand": "Johnsons",
+    "color": "",
+    "gift": "Beth",
+    "fabric": ""
+  },
+  {
+    "id": "ITM-0103",
+    "category": "Fraldas e itens de higiene",
+    "type": "Creme",
+    "description": "Creme para assaduras",
+    "quantity": 1,
+    "unit": "item",
+    "phase": "Sem fase",
+    "brand": "",
+    "color": "",
+    "gift": "Beth",
+    "fabric": ""
+  },
+  {
+    "id": "ITM-0104",
+    "category": "Acessórios têxteis",
+    "type": "Toalha",
+    "description": "Toalha com capuz",
+    "quantity": 1,
+    "unit": "peça",
+    "phase": "Sem fase",
+    "brand": "",
+    "color": "Branca com rosa e bichinhos",
+    "gift": "Tia Dani",
+    "fabric": ""
+  },
+  {
+    "id": "ITM-0105",
+    "category": "Acessórios têxteis",
+    "type": "Toalha",
+    "description": "Toalha com capuz",
+    "quantity": 1,
+    "unit": "peça",
+    "phase": "Sem fase",
+    "brand": "Babies",
+    "color": "Branca e amarela",
+    "gift": "Vovó Vilma",
+    "fabric": ""
+  },
+  {
+    "id": "ITM-0106",
+    "category": "Acessórios têxteis",
+    "type": "Pano de boca",
+    "description": "Pano de boca",
+    "quantity": 1,
+    "unit": "peça",
+    "phase": "Sem fase",
+    "brand": "",
+    "color": "Fadinha",
+    "gift": "Tia Dani",
+    "fabric": ""
+  },
+  {
+    "id": "ITM-0107",
+    "category": "Acessórios têxteis",
+    "type": "Pano de boca",
+    "description": "Pano de boca",
+    "quantity": 1,
+    "unit": "peça",
+    "phase": "Sem fase",
+    "brand": "",
+    "color": "Arco Íris",
+    "gift": "Tia Dani",
+    "fabric": ""
+  },
+  {
+    "id": "ITM-0108",
+    "category": "Acessórios têxteis",
+    "type": "Pano de boca",
+    "description": "Pano de boca",
+    "quantity": 1,
+    "unit": "peça",
+    "phase": "Sem fase",
+    "brand": "Babies",
+    "color": "Branca e amarela",
+    "gift": "Vovó Vilma",
+    "fabric": ""
+  },
+  {
+    "id": "ITM-0109",
+    "category": "Acessórios têxteis",
+    "type": "Pano de boca",
+    "description": "Pano de boca",
+    "quantity": 1,
+    "unit": "peça",
+    "phase": "Sem fase",
+    "brand": "Babies",
+    "color": "Branca e amarela",
+    "gift": "Vovó Vilma",
+    "fabric": ""
+  },
+  {
+    "id": "ITM-0110",
+    "category": "Acessórios têxteis",
+    "type": "Pano de boca",
+    "description": "Pano de boca",
+    "quantity": 1,
+    "unit": "peça",
+    "phase": "Sem fase",
+    "brand": "",
+    "color": "Bege com naninha",
+    "gift": "Tio Thiago",
+    "fabric": ""
+  },
+  {
+    "id": "ITM-0111",
+    "category": "Acessórios têxteis",
+    "type": "Manta",
+    "description": "Manta grande",
+    "quantity": 1,
+    "unit": "peça",
+    "phase": "Sem fase",
+    "brand": "",
+    "color": "Amarela microfibra",
+    "gift": "Beth",
+    "fabric": ""
+  },
+  {
+    "id": "ITM-0112",
+    "category": "Acessórios têxteis",
+    "type": "Manta",
+    "description": "Manta pequena",
+    "quantity": 1,
+    "unit": "peça",
+    "phase": "Sem fase",
+    "brand": "Babies",
+    "color": "Branca suedine",
+    "gift": "Vovó Vilma",
+    "fabric": ""
+  },
+  {
+    "id": "ITM-0113",
+    "category": "Acessórios têxteis",
+    "type": "Manta",
+    "description": "Manta média",
+    "quantity": 1,
+    "unit": "peça",
+    "phase": "Sem fase",
+    "brand": "Babies",
+    "color": "Amarela tricô",
+    "gift": "Vovó Vilma",
+    "fabric": ""
+  },
+  {
+    "id": "ITM-0114",
+    "category": "Outros acessórios",
+    "type": "Almofada de amamentação",
+    "description": "Rosquinha de amamentação",
+    "quantity": 2,
+    "unit": "peça",
+    "phase": "Sem fase",
+    "brand": "",
+    "color": "Branca",
+    "gift": "Marcele (usado)",
+    "fabric": ""
+  },
+  {
+    "id": "ITM-0115",
+    "category": "Acessórios têxteis",
+    "type": "Manta",
+    "description": "Manta média",
+    "quantity": 1,
+    "unit": "peça",
+    "phase": "Sem fase",
+    "brand": "Babies",
+    "color": "Branca tricô",
+    "gift": "Bisa",
+    "fabric": ""
+  },
+  {
+    "id": "ITM-0116",
+    "category": "Outros acessórios",
+    "type": "Brinquedo",
+    "description": "Urubu de pelúcia",
+    "quantity": 1,
+    "unit": "peça",
+    "phase": "Sem fase",
+    "brand": "",
+    "color": "Flamengo",
+    "gift": "Tião",
+    "fabric": ""
+  },
+  {
+    "id": "ITM-0117",
+    "category": "Outros acessórios",
+    "type": "Brinquedo",
+    "description": "Urso de pelúcia",
+    "quantity": 1,
+    "unit": "peça",
+    "phase": "Sem fase",
+    "brand": "",
+    "color": "Rosa",
+    "gift": "Helena",
+    "fabric": ""
+  },
+  {
+    "id": "ITM-0118",
+    "category": "Outros acessórios",
+    "type": "Brinquedo",
+    "description": "Patinho de pelúcia",
+    "quantity": 1,
+    "unit": "peça",
+    "phase": "Sem fase",
+    "brand": "",
+    "color": "Branco de tricô",
+    "gift": "Fabrício e Catarina",
+    "fabric": ""
+  },
+  {
+    "id": "ITM-0119",
+    "category": "Outros acessórios",
+    "type": "Livro",
+    "description": "Livro do bebê",
+    "quantity": 1,
+    "unit": "peça",
+    "phase": "Sem fase",
+    "brand": "",
+    "color": "",
+    "gift": "Tia Vera",
+    "fabric": ""
+  },
+  {
+    "id": "ITM-0122",
+    "category": "Roupas",
+    "type": "Body",
+    "description": "Body manga longa",
+    "quantity": 1,
+    "unit": "peça",
+    "phase": "RN",
+    "brand": "Carters",
+    "color": "Lilás",
+    "gift": "Vovo Lena",
+    "fabric": ""
+  },
+  {
+    "id": "ITM-0123",
+    "category": "Roupas",
+    "type": "Body",
+    "description": "Body manga longa",
+    "quantity": 1,
+    "unit": "peça",
+    "phase": "RN",
+    "brand": "Carters",
+    "color": "Raposinha",
+    "gift": "Vovo Lena",
+    "fabric": ""
+  },
+  {
+    "id": "ITM-0124",
+    "category": "Roupas",
+    "type": "Calça",
+    "description": "Calça / mijão",
+    "quantity": 1,
+    "unit": "peça",
+    "phase": "RN",
+    "brand": "Carters",
+    "color": "Lilás",
+    "gift": "Vovo Lena",
+    "fabric": ""
+  },
+  {
+    "id": "ITM-0125",
+    "category": "Roupas",
+    "type": "Calça",
+    "description": "Calça / mijão",
+    "quantity": 1,
+    "unit": "peça",
+    "phase": "RN",
+    "brand": "Carters",
+    "color": "Rosa claro",
+    "gift": "Vovo Lena",
+    "fabric": ""
+  },
+  {
+    "id": "ITM-0126",
+    "category": "Roupas",
+    "type": "Calça",
+    "description": "Calça / mijão",
+    "quantity": 1,
+    "unit": "peça",
+    "phase": "RN",
+    "brand": "Carters",
+    "color": "Rosa escuro",
+    "gift": "Vovo Lena",
+    "fabric": ""
+  },
+  {
+    "id": "ITM-0127",
+    "category": "Roupas",
+    "type": "Macacão",
+    "description": "Macacão manga longa",
+    "quantity": 1,
+    "unit": "peça",
+    "phase": "RN",
+    "brand": "Carters",
+    "color": "Sorvetes",
+    "gift": "Vovo Lena",
+    "fabric": "Zíper duplo"
+  },
+  {
+    "id": "ITM-0128",
+    "category": "Roupas",
+    "type": "Body",
+    "description": "Body manga curta",
+    "quantity": 1,
+    "unit": "peça",
+    "phase": "1–3 meses",
+    "brand": "Carters",
+    "color": "Amarelo, bolso pato",
+    "gift": "Vovo Lena",
+    "fabric": ""
+  },
+  {
+    "id": "ITM-0129",
+    "category": "Roupas",
+    "type": "Body",
+    "description": "Body manga curta",
+    "quantity": 1,
+    "unit": "peça",
+    "phase": "1–3 meses",
+    "brand": "Carters",
+    "color": "Verde",
+    "gift": "Vovo Lena",
+    "fabric": ""
+  },
+  {
+    "id": "ITM-0130",
+    "category": "Roupas",
+    "type": "Body",
+    "description": "Body manga curta",
+    "quantity": 1,
+    "unit": "peça",
+    "phase": "1–3 meses",
+    "brand": "Carters",
+    "color": "Cinza, bolso vaca",
+    "gift": "Vovo Lena",
+    "fabric": ""
+  },
+  {
+    "id": "ITM-0131",
+    "category": "Roupas",
+    "type": "Body",
+    "description": "Body manga curta",
+    "quantity": 1,
+    "unit": "peça",
+    "phase": "1–3 meses",
+    "brand": "Carters",
+    "color": "Azul",
+    "gift": "Vovo Lena",
+    "fabric": ""
+  },
+  {
+    "id": "ITM-0132",
+    "category": "Roupas",
+    "type": "Body",
+    "description": "Body manga curta",
+    "quantity": 1,
+    "unit": "peça",
+    "phase": "1–3 meses",
+    "brand": "Carters",
+    "color": "Rosa, bolso elefante",
+    "gift": "Vovo Lena",
+    "fabric": ""
+  },
+  {
+    "id": "ITM-0137",
+    "category": "Roupas",
+    "type": "Vestido",
+    "description": "Vestido",
+    "quantity": 1,
+    "unit": "peça",
+    "phase": "9–12 meses",
+    "brand": "Carters",
+    "color": "Branco balões",
+    "gift": "Vovo Lena",
+    "fabric": ""
+  },
+  {
+    "id": "ITM-0138",
+    "category": "Roupas",
+    "type": "Casaquinho",
+    "description": "Casaquinho",
+    "quantity": 1,
+    "unit": "peça",
+    "phase": "9–12 meses",
+    "brand": "Carters",
+    "color": "Lilás",
+    "gift": "Vovo Lena",
+    "fabric": ""
+  },
+  {
+    "id": "ITM-0139",
+    "category": "Outros acessórios",
+    "type": "Óculos",
+    "description": "Óculos de sol",
+    "quantity": 1,
+    "unit": "peça",
+    "phase": "Sem fase",
+    "brand": "Carters",
+    "color": "Óculos escuros",
+    "gift": "Vovo Lena",
+    "fabric": ""
+  },
+  {
+    "id": "ITM-0140",
+    "category": "Roupas",
+    "type": "Body",
+    "description": "Body manga longa",
+    "quantity": 1,
+    "unit": "peça",
+    "phase": "1–3 meses",
+    "brand": "Carters",
+    "color": "Rosa listrado",
+    "gift": "Vovo Lena",
+    "fabric": ""
+  },
+  {
+    "id": "ITM-0141",
+    "category": "Roupas",
+    "type": "Body",
+    "description": "Body manga longa",
+    "quantity": 1,
+    "unit": "peça",
+    "phase": "1–3 meses",
+    "brand": "Carters",
+    "color": "Estampa variada",
+    "gift": "Vovo Lena",
+    "fabric": ""
+  },
+  {
+    "id": "ITM-0142",
+    "category": "Roupas",
+    "type": "Body",
+    "description": "Body manga longa",
+    "quantity": 1,
+    "unit": "peça",
+    "phase": "1–3 meses",
+    "brand": "Carters",
+    "color": "Verde corações",
+    "gift": "Vovo Lena",
+    "fabric": ""
+  },
+  {
+    "id": "ITM-0143",
+    "category": "Roupas",
+    "type": "Body",
+    "description": "Body manga longa",
+    "quantity": 1,
+    "unit": "peça",
+    "phase": "1–3 meses",
+    "brand": "Carters",
+    "color": "Rosa escuro",
+    "gift": "Vovo Lena",
+    "fabric": ""
+  },
+  {
+    "id": "ITM-0144",
+    "category": "Roupas",
+    "type": "Body",
+    "description": "Body manga curta",
+    "quantity": 1,
+    "unit": "peça",
+    "phase": "1–3 meses",
+    "brand": "Carters",
+    "color": "Lilás",
+    "gift": "Vovo Lena",
+    "fabric": ""
+  },
+  {
+    "id": "ITM-0145",
+    "category": "Roupas",
+    "type": "Calça",
+    "description": "Calça / mijão",
+    "quantity": 1,
+    "unit": "peça",
+    "phase": "1–3 meses",
+    "brand": "Carters",
+    "color": "Branco balões",
+    "gift": "Vovo Lena",
+    "fabric": ""
+  },
+  {
+    "id": "ITM-0146",
+    "category": "Roupas",
+    "type": "Casaquinho",
+    "description": "Casaquinho",
+    "quantity": 1,
+    "unit": "peça",
+    "phase": "1–3 meses",
+    "brand": "Carters",
+    "color": "Branco balões",
+    "gift": "Vovo Lena",
+    "fabric": ""
+  },
+  {
+    "id": "ITM-0147",
+    "category": "Roupas",
+    "type": "Body",
+    "description": "Body manga curta",
+    "quantity": 1,
+    "unit": "peça",
+    "phase": "6–9 meses",
+    "brand": "Carters",
+    "color": "Branco balões",
+    "gift": "Vovo Lena",
+    "fabric": ""
+  },
+  {
+    "id": "ITM-0148",
+    "category": "Roupas",
+    "type": "Body",
+    "description": "Body manga curta",
+    "quantity": 1,
+    "unit": "peça",
+    "phase": "6–9 meses",
+    "brand": "Carters",
+    "color": "Lilás listrado",
+    "gift": "Vovo Lena",
+    "fabric": ""
+  },
+  {
+    "id": "ITM-0149",
+    "category": "Roupas",
+    "type": "Calça",
+    "description": "Calça / mijão",
+    "quantity": 1,
+    "unit": "peça",
+    "phase": "6–9 meses",
+    "brand": "Carters",
+    "color": "Lilás listrado",
+    "gift": "Vovo Lena",
+    "fabric": ""
+  },
+  {
+    "id": "ITM-0150",
+    "category": "Outros acessórios",
+    "type": "Aspirador nasal",
+    "description": "Aspirador nasal",
+    "quantity": 1,
+    "unit": "peça",
+    "phase": "Sem fase",
+    "brand": "Likluk",
+    "color": "",
+    "gift": "Papai e mamãe",
+    "fabric": ""
+  },
+  {
+    "id": "ITM-0151",
+    "category": "Acessórios têxteis",
+    "type": "Toalha",
+    "description": "Toalha com capuz",
+    "quantity": 1,
+    "unit": "peça",
+    "phase": "Sem fase",
+    "brand": "Bush bug",
+    "color": "Branca com patinhos, com fralda",
+    "gift": "Beth",
+    "fabric": ""
+  },
+  {
+    "id": "ITM-0152",
+    "category": "Acessórios têxteis",
+    "type": "Toalha",
+    "description": "Toalha com capuz",
+    "quantity": 1,
+    "unit": "peça",
+    "phase": "Sem fase",
+    "brand": "Bush bug",
+    "color": "Branca com arco-íris, com fralda",
+    "gift": "Papai e mamãe",
+    "fabric": ""
+  },
+  {
+    "id": "ITM-0153",
+    "category": "Acessórios têxteis",
+    "type": "Manta",
+    "description": "Manta média",
+    "quantity": 1,
+    "unit": "peça",
+    "phase": "Sem fase",
+    "brand": "Bush bug",
+    "color": "Branca com coelinho",
+    "gift": "Beth",
+    "fabric": ""
+  },
+  {
+    "id": "ITM-0154",
+    "category": "Acessórios têxteis",
+    "type": "Babador",
+    "description": "Babador",
+    "quantity": 1,
+    "unit": "peça",
+    "phase": "Sem fase",
+    "brand": "Bush bug",
+    "color": "Rosa com patinho",
+    "gift": "Beth",
+    "fabric": ""
+  },
+  {
+    "id": "ITM-0155",
+    "category": "Roupas",
+    "type": "Vestido",
+    "description": "Vestido",
+    "quantity": 1,
+    "unit": "peça",
+    "phase": "12+ meses",
+    "brand": "Bush bug",
+    "color": "Verde com branco listrado",
+    "gift": "Beth",
+    "fabric": ""
+  },
+  {
+    "id": "ITM-0156",
+    "category": "Acessórios têxteis",
+    "type": "Fralda de ombro",
+    "description": "Fralda de ombro",
+    "quantity": 1,
+    "unit": "peça",
+    "phase": "Sem fase",
+    "brand": "Bush bug",
+    "color": "Branco com coelinho",
+    "gift": "Beth",
+    "fabric": ""
+  },
+  {
+    "id": "ITM-0157",
+    "category": "Acessórios têxteis",
+    "type": "Fralda de ombro",
+    "description": "Fralda de ombro",
+    "quantity": 1,
+    "unit": "peça",
+    "phase": "Sem fase",
+    "brand": "Bush bug",
+    "color": "Branco com cogumelos",
+    "gift": "Beth",
+    "fabric": ""
+  },
+  {
+    "id": "ITM-0158",
+    "category": "Acessórios têxteis",
+    "type": "Pano de boca",
+    "description": "Pano de boca",
+    "quantity": 1,
+    "unit": "peça",
+    "phase": "Sem fase",
+    "brand": "Bush bug",
+    "color": "Branco com veado, elástico",
+    "gift": "Beth",
+    "fabric": ""
+  },
+  {
+    "id": "ITM-0159",
+    "category": "Acessórios têxteis",
+    "type": "Pano de boca",
+    "description": "Pano de boca",
+    "quantity": 1,
+    "unit": "peça",
+    "phase": "Sem fase",
+    "brand": "Bush bug",
+    "color": "Branco com raposa",
+    "gift": "Beth",
+    "fabric": ""
+  },
+  {
+    "id": "ITM-0160",
+    "category": "Acessórios têxteis",
+    "type": "Pano de boca",
+    "description": "Pano de boca",
+    "quantity": 1,
+    "unit": "peça",
+    "phase": "Sem fase",
+    "brand": "Bush bug",
+    "color": "Branco com arco-íris",
+    "gift": "Beth",
+    "fabric": ""
+  },
+  {
+    "id": "ITM-0161",
+    "category": "Acessórios têxteis",
+    "type": "Pano de boca",
+    "description": "Pano de boca",
+    "quantity": 1,
+    "unit": "peça",
+    "phase": "Sem fase",
+    "brand": "Bush bug",
+    "color": "Branco com arco-íris",
+    "gift": "Beth",
+    "fabric": ""
+  },
+  {
+    "id": "ITM-0162",
+    "category": "Acessórios têxteis",
+    "type": "Pano de boca",
+    "description": "Pano de boca",
+    "quantity": 1,
+    "unit": "peça",
+    "phase": "Sem fase",
+    "brand": "Bush bug",
+    "color": "Branco com coelinho",
+    "gift": "Beth",
+    "fabric": ""
+  },
+  {
+    "id": "ITM-0163",
+    "category": "Acessórios têxteis",
+    "type": "Cueiro",
+    "description": "Cueiro",
+    "quantity": 1,
+    "unit": "peça",
+    "phase": "Sem fase",
+    "brand": "Bush bug",
+    "color": "Verde com bichos",
+    "gift": "Papai e mamãe",
+    "fabric": ""
+  },
+  {
+    "id": "ITM-0164",
+    "category": "Acessórios têxteis",
+    "type": "Cueiro",
+    "description": "Cueiro",
+    "quantity": 1,
+    "unit": "peça",
+    "phase": "Sem fase",
+    "brand": "Bush bug",
+    "color": "Bege com bichos",
+    "gift": "Papai e mamãe",
+    "fabric": ""
+  },
+  {
+    "id": "ITM-0165",
+    "category": "Acessórios têxteis",
+    "type": "Manta",
+    "description": "Manta média",
+    "quantity": 1,
+    "unit": "peça",
+    "phase": "Sem fase",
+    "brand": "Bush bug",
+    "color": "Branca com arco-íris",
+    "gift": "Vovo Lena",
+    "fabric": ""
+  },
+  {
+    "id": "ITM-0166",
+    "category": "Acessórios têxteis",
+    "type": "Manta",
+    "description": "Manta grande",
+    "quantity": 1,
+    "unit": "peça",
+    "phase": "Sem fase",
+    "brand": "Bush bug",
+    "color": "Rosa claro",
+    "gift": "Vovo Lena",
+    "fabric": ""
+  },
+  {
+    "id": "ITM-0167",
+    "category": "Acessórios têxteis",
+    "type": "Pano de boca",
+    "description": "Pano de boca",
+    "quantity": 3,
+    "unit": "peça",
+    "phase": "Sem fase",
+    "brand": "Bush bug",
+    "color": "Branco com abelha",
+    "gift": "Vovo Lena",
+    "fabric": ""
+  },
+  {
+    "id": "ITM-0168",
+    "category": "Acessórios têxteis",
+    "type": "Pano de boca",
+    "description": "Pano de boca",
+    "quantity": 1,
+    "unit": "peça",
+    "phase": "Sem fase",
+    "brand": "Bush bug",
+    "color": "Branco com abelha, maior",
+    "gift": "Vovo Lena",
+    "fabric": ""
+  },
+  {
+    "id": "ITM-0169",
+    "category": "Roupas",
+    "type": "Body",
+    "description": "Body manga curta",
+    "quantity": 1,
+    "unit": "peça",
+    "phase": "6–9 meses",
+    "brand": "Bush bug",
+    "color": "Rosa",
+    "gift": "Papai e mamãe",
+    "fabric": ""
+  },
+  {
+    "id": "ITM-0170",
+    "category": "Roupas",
+    "type": "Jardineira",
+    "description": "Jardineira",
+    "quantity": 1,
+    "unit": "peça",
+    "phase": "6–9 meses",
+    "brand": "Bush bug",
+    "color": "Branca com flores bordadas",
+    "gift": "Papai e mamãe",
+    "fabric": ""
+  },
+  {
+    "id": "ITM-0171",
+    "category": "Acessórios têxteis",
+    "type": "Pano de boca",
+    "description": "Pano de boca",
+    "quantity": 1,
+    "unit": "peça",
+    "phase": "Sem fase",
+    "brand": "Luli for babies",
+    "color": "Lavanda",
+    "gift": "Papai e mamãe",
+    "fabric": ""
+  },
+  {
+    "id": "ITM-0172",
+    "category": "Acessórios têxteis",
+    "type": "Pano de boca",
+    "description": "Pano de boca",
+    "quantity": 1,
+    "unit": "peça",
+    "phase": "Sem fase",
+    "brand": "Luli for babies",
+    "color": "Joaninha",
+    "gift": "Papai e mamãe",
+    "fabric": ""
+  },
+  {
+    "id": "ITM-0173",
+    "category": "Acessórios têxteis",
+    "type": "Pano de boca",
+    "description": "Pano de boca",
+    "quantity": 1,
+    "unit": "peça",
+    "phase": "Sem fase",
+    "brand": "Luli for babies",
+    "color": "Ganso",
+    "gift": "Papai e mamãe",
+    "fabric": ""
+  },
+  {
+    "id": "ITM-0174",
+    "category": "Acessórios têxteis",
+    "type": "Pano de boca",
+    "description": "Pano de boca",
+    "quantity": 1,
+    "unit": "peça",
+    "phase": "Sem fase",
+    "brand": "Luli for babies",
+    "color": "Cerejinha",
+    "gift": "Papai e mamãe",
+    "fabric": ""
+  },
+  {
+    "id": "ITM-0175",
+    "category": "Acessórios têxteis",
+    "type": "Pano de boca",
+    "description": "Pano de boca",
+    "quantity": 1,
+    "unit": "peça",
+    "phase": "Sem fase",
+    "brand": "Luli for babies",
+    "color": "Xadrez rosa",
+    "gift": "Papai e mamãe",
+    "fabric": ""
+  },
+  {
+    "id": "ITM-0176",
+    "category": "Acessórios têxteis",
+    "type": "Fralda de ombro",
+    "description": "Fralda de ombro",
+    "quantity": 1,
+    "unit": "peça",
+    "phase": "Sem fase",
+    "brand": "Luli for babies",
+    "color": "Rosa",
+    "gift": "Papai e mamãe",
+    "fabric": ""
+  },
+  {
+    "id": "ITM-0177",
+    "category": "Acessórios têxteis",
+    "type": "Fralda de ombro",
+    "description": "Fralda de ombro",
+    "quantity": 1,
+    "unit": "peça",
+    "phase": "Sem fase",
+    "brand": "Luli for babies",
+    "color": "Flores",
+    "gift": "Papai e mamãe",
+    "fabric": ""
+  },
+  {
+    "id": "ITM-0178",
+    "category": "Acessórios têxteis",
+    "type": "Fralda de ombro",
+    "description": "Fralda de ombro",
+    "quantity": 1,
+    "unit": "peça",
+    "phase": "Sem fase",
+    "brand": "Luli for babies",
+    "color": "Roxa",
+    "gift": "Papai e mamãe",
+    "fabric": ""
+  },
+  {
+    "id": "ITM-0179",
+    "category": "Acessórios têxteis",
+    "type": "Fralda de ombro",
+    "description": "Fralda de ombro",
+    "quantity": 1,
+    "unit": "peça",
+    "phase": "Sem fase",
+    "brand": "Luli for babies",
+    "color": "Abelinha",
+    "gift": "Papai e mamãe",
+    "fabric": ""
+  },
+  {
+    "id": "ITM-0180",
+    "category": "Acessórios têxteis",
+    "type": "Cueiro",
+    "description": "Cueiro",
+    "quantity": 1,
+    "unit": "peça",
+    "phase": "Sem fase",
+    "brand": "Luli for babies",
+    "color": "Cerejinha",
+    "gift": "Papai e mamãe",
+    "fabric": ""
+  },
+  {
+    "id": "ITM-0181",
+    "category": "Acessórios têxteis",
+    "type": "Cueiro",
+    "description": "Cueiro",
+    "quantity": 1,
+    "unit": "peça",
+    "phase": "Sem fase",
+    "brand": "Ateliê Cerejinha",
+    "color": "Arco Íris",
+    "gift": "Papai e mamãe",
+    "fabric": ""
+  },
+  {
+    "id": "ITM-0182",
+    "category": "Acessórios têxteis",
+    "type": "Cueiro",
+    "description": "Cueiro",
+    "quantity": 1,
+    "unit": "peça",
+    "phase": "Sem fase",
+    "brand": "Ateliê Cerejinha",
+    "color": "Flanela",
+    "gift": "Papai e mamãe",
+    "fabric": ""
+  },
+  {
+    "id": "ITM-0183",
+    "category": "Acessórios têxteis",
+    "type": "Cueiro",
+    "description": "Cueiro",
+    "quantity": 1,
+    "unit": "peça",
+    "phase": "Sem fase",
+    "brand": "Ateliê Cerejinha",
+    "color": "Margarida",
+    "gift": "Papai e mamãe",
+    "fabric": ""
+  },
+  {
+    "id": "ITM-0184",
+    "category": "Acessórios têxteis",
+    "type": "Pano de boca",
+    "description": "Pano de boca",
+    "quantity": 1,
+    "unit": "peça",
+    "phase": "Sem fase",
+    "brand": "Ateliê Cerejinha",
+    "color": "Arco Íris",
+    "gift": "Papai e mamãe",
+    "fabric": ""
+  },
+  {
+    "id": "ITM-0185",
+    "category": "Acessórios têxteis",
+    "type": "Fralda de ombro",
+    "description": "Fralda de ombro",
+    "quantity": 1,
+    "unit": "peça",
+    "phase": "Sem fase",
+    "brand": "Ateliê Cerejinha",
+    "color": "Arco Íris",
+    "gift": "Papai e mamãe",
+    "fabric": ""
+  },
+  {
+    "id": "ITM-0186",
+    "category": "Outros acessórios",
+    "type": "Almofada de amamentação",
+    "description": "Almofada de amementação",
+    "quantity": 1,
+    "unit": "peça",
+    "phase": "Sem fase",
+    "brand": "Ateliê Cerejinha",
+    "color": "Xadrez picnic",
+    "gift": "Papai e mamãe",
+    "fabric": ""
+  },
+  {
+    "id": "ITM-0187",
+    "category": "Outros acessórios",
+    "type": "Bolsa",
+    "description": "Bolsa impermeável dupla",
+    "quantity": 1,
+    "unit": "peça",
+    "phase": "Sem fase",
+    "brand": "Ateliê Cerejinha",
+    "color": "Arco Íris",
+    "gift": "Papai e mamãe",
+    "fabric": ""
+  },
+  {
+    "id": "ITM-0188",
+    "category": "Outros acessórios",
+    "type": "Bolsa",
+    "description": "Bolsa impermeável simples",
+    "quantity": 1,
+    "unit": "peça",
+    "phase": "Sem fase",
+    "brand": "Ateliê Cerejinha",
+    "color": "África",
+    "gift": "Papai e mamãe",
+    "fabric": ""
+  },
+  {
+    "id": "ITM-0189",
+    "category": "Acessórios têxteis",
+    "type": "Cueiro",
+    "description": "Cueiro",
+    "quantity": 1,
+    "unit": "peça",
+    "phase": "Sem fase",
+    "brand": "Mundo Poca",
+    "color": "Margarida",
+    "gift": "Papai e mamãe",
+    "fabric": ""
+  },
+  {
+    "id": "ITM-0190",
+    "category": "Acessórios têxteis",
+    "type": "Fralda de ombro",
+    "description": "Fralda de ombro",
+    "quantity": 1,
+    "unit": "peça",
+    "phase": "Sem fase",
+    "brand": "Mundo Poca",
+    "color": "Limonada",
+    "gift": "Papai e mamãe",
+    "fabric": ""
+  },
+  {
+    "id": "ITM-0191",
+    "category": "Acessórios têxteis",
+    "type": "Pano de boca",
+    "description": "Pano de boca",
+    "quantity": 1,
+    "unit": "peça",
+    "phase": "Sem fase",
+    "brand": "Mundo Poca",
+    "color": "Arco Íris",
+    "gift": "Papai e mamãe",
+    "fabric": ""
+  }
+]
+,benchmarks:[
+  {
+    "id": "BEN-001",
+    "category": "Roupas",
+    "type": "Body",
+    "description": "Body manga curta",
+    "phase": "RN",
+    "target": 6,
+    "unit": "peça",
+    "rule": "Descrição N3",
+    "priority": "Alta",
+    "timing": "Comprar agora",
+    "sources": "https://www.ifraldas.com.br/lista-de-enxoval-de-bebe/ | https://www.ifraldas.com.br/enxoval-de-bebe-verao/ | https://www.mamaeplugada.com.br/lista-enxoval-de-bebe-pratico-24692 | https://viversempressa.com/2015/04/27/montando-um-enxoval-minimalista-para-o-bebe/"
+  },
+  {
+    "id": "BEN-002",
+    "category": "Roupas",
+    "type": "Body",
+    "description": "Body manga longa",
+    "phase": "RN",
+    "target": 3,
+    "unit": "peça",
+    "rule": "Descrição N3",
+    "priority": "Alta",
+    "timing": "Comprar agora",
+    "sources": "https://www.ifraldas.com.br/lista-de-enxoval-de-bebe/ | https://www.ifraldas.com.br/enxoval-de-bebe-verao/ | https://www.mamaeplugada.com.br/lista-enxoval-de-bebe-pratico-24692 | https://viversempressa.com/2015/04/27/montando-um-enxoval-minimalista-para-o-bebe/"
+  },
+  {
+    "id": "BEN-003",
+    "category": "Roupas",
+    "type": "Calça",
+    "description": "Calça / mijão",
+    "phase": "RN",
+    "target": 4,
+    "unit": "peça",
+    "rule": "Descrição N3",
+    "priority": "Alta",
+    "timing": "Comprar agora",
+    "sources": "https://www.ifraldas.com.br/lista-de-enxoval-de-bebe/ | https://www.ifraldas.com.br/enxoval-de-bebe-verao/ | https://www.mamaeplugada.com.br/lista-enxoval-de-bebe-pratico-24692 | https://viversempressa.com/2015/04/27/montando-um-enxoval-minimalista-para-o-bebe/"
+  },
+  {
+    "id": "BEN-004",
+    "category": "Roupas",
+    "type": "Macacão",
+    "description": "Macacão manga longa",
+    "phase": "RN",
+    "target": 4,
+    "unit": "peça",
+    "rule": "Descrição N3",
+    "priority": "Alta",
+    "timing": "Comprar agora",
+    "sources": "https://www.ifraldas.com.br/lista-de-enxoval-de-bebe/ | https://www.ifraldas.com.br/enxoval-de-bebe-verao/ | https://www.mamaeplugada.com.br/lista-enxoval-de-bebe-pratico-24692 | https://viversempressa.com/2015/04/27/montando-um-enxoval-minimalista-para-o-bebe/"
+  },
+  {
+    "id": "BEN-005",
+    "category": "Roupas",
+    "type": "Saída de maternidade",
+    "description": "Todos",
+    "phase": "RN",
+    "target": 1,
+    "unit": "peça",
+    "rule": "Tipo N2",
+    "priority": "Alta",
+    "timing": "Comprar agora",
+    "sources": "https://www.ifraldas.com.br/lista-de-enxoval-de-bebe/ | https://www.ifraldas.com.br/enxoval-de-bebe-verao/ | https://www.mamaeplugada.com.br/lista-enxoval-de-bebe-pratico-24692 | https://viversempressa.com/2015/04/27/montando-um-enxoval-minimalista-para-o-bebe/"
+  },
+  {
+    "id": "BEN-006",
+    "category": "Roupas",
+    "type": "Meia",
+    "description": "Todos",
+    "phase": "RN",
+    "target": 3,
+    "unit": "par",
+    "rule": "Tipo N2",
+    "priority": "Alta",
+    "timing": "Comprar agora",
+    "sources": "https://www.ifraldas.com.br/lista-de-enxoval-de-bebe/ | https://www.ifraldas.com.br/enxoval-de-bebe-verao/ | https://www.mamaeplugada.com.br/lista-enxoval-de-bebe-pratico-24692 | https://viversempressa.com/2015/04/27/montando-um-enxoval-minimalista-para-o-bebe/"
+  },
+  {
+    "id": "BEN-007",
+    "category": "Roupas",
+    "type": "Casaquinho",
+    "description": "Casaquinho leve",
+    "phase": "RN",
+    "target": 1,
+    "unit": "peça",
+    "rule": "Descrição N3",
+    "priority": "Alta",
+    "timing": "Comprar agora",
+    "sources": "https://www.ifraldas.com.br/lista-de-enxoval-de-bebe/ | https://www.ifraldas.com.br/enxoval-de-bebe-verao/ | https://www.mamaeplugada.com.br/lista-enxoval-de-bebe-pratico-24692 | https://viversempressa.com/2015/04/27/montando-um-enxoval-minimalista-para-o-bebe/"
+  },
+  {
+    "id": "BEN-037",
+    "category": "Fraldas e itens de higiene",
+    "type": "Fralda",
+    "description": "Fralda descartável",
+    "phase": "RN",
+    "target": 36,
+    "unit": "unidade",
+    "rule": "Descrição N3",
+    "priority": "Alta",
+    "timing": "Comprar agora",
+    "sources": "https://www.ifraldas.com.br/lista-de-enxoval-de-bebe/ | https://www.ifraldas.com.br/enxoval-de-bebe-verao/ | https://www.mamaeplugada.com.br/lista-enxoval-de-bebe-pratico-24692 | https://viversempressa.com/2015/04/27/montando-um-enxoval-minimalista-para-o-bebe/"
+  },
+  {
+    "id": "BEN-008",
+    "category": "Roupas",
+    "type": "Body",
+    "description": "Body manga curta",
+    "phase": "1–3 meses",
+    "target": 6,
+    "unit": "peça",
+    "rule": "Descrição N3",
+    "priority": "Alta",
+    "timing": "Comprar agora",
+    "sources": "https://www.ifraldas.com.br/lista-de-enxoval-de-bebe/ | https://www.ifraldas.com.br/enxoval-de-bebe-verao/ | https://www.mamaeplugada.com.br/lista-enxoval-de-bebe-pratico-24692 | https://viversempressa.com/2015/04/27/montando-um-enxoval-minimalista-para-o-bebe/"
+  },
+  {
+    "id": "BEN-009",
+    "category": "Roupas",
+    "type": "Body",
+    "description": "Body manga longa",
+    "phase": "1–3 meses",
+    "target": 3,
+    "unit": "peça",
+    "rule": "Descrição N3",
+    "priority": "Alta",
+    "timing": "Comprar agora",
+    "sources": "https://www.ifraldas.com.br/lista-de-enxoval-de-bebe/ | https://www.ifraldas.com.br/enxoval-de-bebe-verao/ | https://www.mamaeplugada.com.br/lista-enxoval-de-bebe-pratico-24692 | https://viversempressa.com/2015/04/27/montando-um-enxoval-minimalista-para-o-bebe/"
+  },
+  {
+    "id": "BEN-010",
+    "category": "Roupas",
+    "type": "Calça",
+    "description": "Calça / mijão",
+    "phase": "1–3 meses",
+    "target": 5,
+    "unit": "peça",
+    "rule": "Descrição N3",
+    "priority": "Alta",
+    "timing": "Comprar agora",
+    "sources": "https://www.ifraldas.com.br/lista-de-enxoval-de-bebe/ | https://www.ifraldas.com.br/enxoval-de-bebe-verao/ | https://www.mamaeplugada.com.br/lista-enxoval-de-bebe-pratico-24692 | https://viversempressa.com/2015/04/27/montando-um-enxoval-minimalista-para-o-bebe/"
+  },
+  {
+    "id": "BEN-011",
+    "category": "Roupas",
+    "type": "Macacão",
+    "description": "Macacão manga longa",
+    "phase": "1–3 meses",
+    "target": 5,
+    "unit": "peça",
+    "rule": "Descrição N3",
+    "priority": "Alta",
+    "timing": "Comprar agora",
+    "sources": "https://www.ifraldas.com.br/lista-de-enxoval-de-bebe/ | https://www.ifraldas.com.br/enxoval-de-bebe-verao/ | https://www.mamaeplugada.com.br/lista-enxoval-de-bebe-pratico-24692 | https://viversempressa.com/2015/04/27/montando-um-enxoval-minimalista-para-o-bebe/"
+  },
+  {
+    "id": "BEN-012",
+    "category": "Roupas",
+    "type": "Macacão",
+    "description": "Macacão manga curta",
+    "phase": "1–3 meses",
+    "target": 3,
+    "unit": "peça",
+    "rule": "Descrição N3",
+    "priority": "Alta",
+    "timing": "Comprar agora",
+    "sources": "https://www.ifraldas.com.br/lista-de-enxoval-de-bebe/ | https://www.ifraldas.com.br/enxoval-de-bebe-verao/ | https://www.mamaeplugada.com.br/lista-enxoval-de-bebe-pratico-24692 | https://viversempressa.com/2015/04/27/montando-um-enxoval-minimalista-para-o-bebe/"
+  },
+  {
+    "id": "BEN-013",
+    "category": "Roupas",
+    "type": "Meia",
+    "description": "Todos",
+    "phase": "1–3 meses",
+    "target": 3,
+    "unit": "par",
+    "rule": "Tipo N2",
+    "priority": "Alta",
+    "timing": "Comprar agora",
+    "sources": "https://www.ifraldas.com.br/lista-de-enxoval-de-bebe/ | https://www.ifraldas.com.br/enxoval-de-bebe-verao/ | https://www.mamaeplugada.com.br/lista-enxoval-de-bebe-pratico-24692 | https://viversempressa.com/2015/04/27/montando-um-enxoval-minimalista-para-o-bebe/"
+  },
+  {
+    "id": "BEN-014",
+    "category": "Roupas",
+    "type": "Casaquinho",
+    "description": "Casaquinho leve",
+    "phase": "1–3 meses",
+    "target": 1,
+    "unit": "peça",
+    "rule": "Descrição N3",
+    "priority": "Alta",
+    "timing": "Comprar agora",
+    "sources": "https://www.ifraldas.com.br/lista-de-enxoval-de-bebe/ | https://www.ifraldas.com.br/enxoval-de-bebe-verao/ | https://www.mamaeplugada.com.br/lista-enxoval-de-bebe-pratico-24692 | https://viversempressa.com/2015/04/27/montando-um-enxoval-minimalista-para-o-bebe/"
+  },
+  {
+    "id": "BEN-038",
+    "category": "Fraldas e itens de higiene",
+    "type": "Fralda",
+    "description": "Fralda descartável",
+    "phase": "1–3 meses",
+    "target": 72,
+    "unit": "unidade",
+    "rule": "Descrição N3",
+    "priority": "Alta",
+    "timing": "Comprar agora",
+    "sources": "https://www.ifraldas.com.br/lista-de-enxoval-de-bebe/ | https://www.ifraldas.com.br/enxoval-de-bebe-verao/ | https://www.mamaeplugada.com.br/lista-enxoval-de-bebe-pratico-24692 | https://viversempressa.com/2015/04/27/montando-um-enxoval-minimalista-para-o-bebe/"
+  },
+  {
+    "id": "BEN-015",
+    "category": "Roupas",
+    "type": "Body",
+    "description": "Body manga curta",
+    "phase": "3–6 meses",
+    "target": 6,
+    "unit": "peça",
+    "rule": "Descrição N3",
+    "priority": "Média",
+    "timing": "Planejar",
+    "sources": "https://www.ifraldas.com.br/lista-de-enxoval-de-bebe/ | https://www.ifraldas.com.br/enxoval-de-bebe-verao/ | https://www.mamaeplugada.com.br/lista-enxoval-de-bebe-pratico-24692 | https://viversempressa.com/2015/04/27/montando-um-enxoval-minimalista-para-o-bebe/"
+  },
+  {
+    "id": "BEN-016",
+    "category": "Roupas",
+    "type": "Body",
+    "description": "Body manga longa",
+    "phase": "3–6 meses",
+    "target": 3,
+    "unit": "peça",
+    "rule": "Descrição N3",
+    "priority": "Média",
+    "timing": "Planejar",
+    "sources": "https://www.ifraldas.com.br/lista-de-enxoval-de-bebe/ | https://www.ifraldas.com.br/enxoval-de-bebe-verao/ | https://www.mamaeplugada.com.br/lista-enxoval-de-bebe-pratico-24692 | https://viversempressa.com/2015/04/27/montando-um-enxoval-minimalista-para-o-bebe/"
+  },
+  {
+    "id": "BEN-017",
+    "category": "Roupas",
+    "type": "Calça",
+    "description": "Calça / mijão",
+    "phase": "3–6 meses",
+    "target": 5,
+    "unit": "peça",
+    "rule": "Descrição N3",
+    "priority": "Média",
+    "timing": "Planejar",
+    "sources": "https://www.ifraldas.com.br/lista-de-enxoval-de-bebe/ | https://www.ifraldas.com.br/enxoval-de-bebe-verao/ | https://www.mamaeplugada.com.br/lista-enxoval-de-bebe-pratico-24692 | https://viversempressa.com/2015/04/27/montando-um-enxoval-minimalista-para-o-bebe/"
+  },
+  {
+    "id": "BEN-018",
+    "category": "Roupas",
+    "type": "Macacão",
+    "description": "Macacão manga longa",
+    "phase": "3–6 meses",
+    "target": 4,
+    "unit": "peça",
+    "rule": "Descrição N3",
+    "priority": "Média",
+    "timing": "Planejar",
+    "sources": "https://www.ifraldas.com.br/lista-de-enxoval-de-bebe/ | https://www.ifraldas.com.br/enxoval-de-bebe-verao/ | https://www.mamaeplugada.com.br/lista-enxoval-de-bebe-pratico-24692 | https://viversempressa.com/2015/04/27/montando-um-enxoval-minimalista-para-o-bebe/"
+  },
+  {
+    "id": "BEN-019",
+    "category": "Roupas",
+    "type": "Macacão",
+    "description": "Macacão manga curta",
+    "phase": "3–6 meses",
+    "target": 3,
+    "unit": "peça",
+    "rule": "Descrição N3",
+    "priority": "Média",
+    "timing": "Planejar",
+    "sources": "https://www.ifraldas.com.br/lista-de-enxoval-de-bebe/ | https://www.ifraldas.com.br/enxoval-de-bebe-verao/ | https://www.mamaeplugada.com.br/lista-enxoval-de-bebe-pratico-24692 | https://viversempressa.com/2015/04/27/montando-um-enxoval-minimalista-para-o-bebe/"
+  },
+  {
+    "id": "BEN-020",
+    "category": "Roupas",
+    "type": "Meia",
+    "description": "Todos",
+    "phase": "3–6 meses",
+    "target": 3,
+    "unit": "par",
+    "rule": "Tipo N2",
+    "priority": "Média",
+    "timing": "Planejar",
+    "sources": "https://www.ifraldas.com.br/lista-de-enxoval-de-bebe/ | https://www.ifraldas.com.br/enxoval-de-bebe-verao/ | https://www.mamaeplugada.com.br/lista-enxoval-de-bebe-pratico-24692 | https://viversempressa.com/2015/04/27/montando-um-enxoval-minimalista-para-o-bebe/"
+  },
+  {
+    "id": "BEN-021",
+    "category": "Roupas",
+    "type": "Body",
+    "description": "Body manga curta",
+    "phase": "6–9 meses",
+    "target": 5,
+    "unit": "peça",
+    "rule": "Descrição N3",
+    "priority": "Média",
+    "timing": "Aguardar",
+    "sources": "https://www.ifraldas.com.br/lista-de-enxoval-de-bebe/ | https://www.ifraldas.com.br/enxoval-de-bebe-verao/ | https://www.mamaeplugada.com.br/lista-enxoval-de-bebe-pratico-24692 | https://viversempressa.com/2015/04/27/montando-um-enxoval-minimalista-para-o-bebe/"
+  },
+  {
+    "id": "BEN-022",
+    "category": "Roupas",
+    "type": "Body",
+    "description": "Body manga longa",
+    "phase": "6–9 meses",
+    "target": 2,
+    "unit": "peça",
+    "rule": "Descrição N3",
+    "priority": "Média",
+    "timing": "Aguardar",
+    "sources": "https://www.ifraldas.com.br/lista-de-enxoval-de-bebe/ | https://www.ifraldas.com.br/enxoval-de-bebe-verao/ | https://www.mamaeplugada.com.br/lista-enxoval-de-bebe-pratico-24692 | https://viversempressa.com/2015/04/27/montando-um-enxoval-minimalista-para-o-bebe/"
+  },
+  {
+    "id": "BEN-023",
+    "category": "Roupas",
+    "type": "Calça",
+    "description": "Calça / mijão",
+    "phase": "6–9 meses",
+    "target": 5,
+    "unit": "peça",
+    "rule": "Descrição N3",
+    "priority": "Média",
+    "timing": "Aguardar",
+    "sources": "https://www.ifraldas.com.br/lista-de-enxoval-de-bebe/ | https://www.ifraldas.com.br/enxoval-de-bebe-verao/ | https://www.mamaeplugada.com.br/lista-enxoval-de-bebe-pratico-24692 | https://viversempressa.com/2015/04/27/montando-um-enxoval-minimalista-para-o-bebe/"
+  },
+  {
+    "id": "BEN-024",
+    "category": "Roupas",
+    "type": "Macacão",
+    "description": "Macacão manga longa",
+    "phase": "6–9 meses",
+    "target": 3,
+    "unit": "peça",
+    "rule": "Descrição N3",
+    "priority": "Média",
+    "timing": "Aguardar",
+    "sources": "https://www.ifraldas.com.br/lista-de-enxoval-de-bebe/ | https://www.ifraldas.com.br/enxoval-de-bebe-verao/ | https://www.mamaeplugada.com.br/lista-enxoval-de-bebe-pratico-24692 | https://viversempressa.com/2015/04/27/montando-um-enxoval-minimalista-para-o-bebe/"
+  },
+  {
+    "id": "BEN-025",
+    "category": "Roupas",
+    "type": "Macacão",
+    "description": "Macacão manga curta",
+    "phase": "6–9 meses",
+    "target": 3,
+    "unit": "peça",
+    "rule": "Descrição N3",
+    "priority": "Média",
+    "timing": "Aguardar",
+    "sources": "https://www.ifraldas.com.br/lista-de-enxoval-de-bebe/ | https://www.ifraldas.com.br/enxoval-de-bebe-verao/ | https://www.mamaeplugada.com.br/lista-enxoval-de-bebe-pratico-24692 | https://viversempressa.com/2015/04/27/montando-um-enxoval-minimalista-para-o-bebe/"
+  },
+  {
+    "id": "BEN-026",
+    "category": "Roupas",
+    "type": "Meia",
+    "description": "Todos",
+    "phase": "6–9 meses",
+    "target": 3,
+    "unit": "par",
+    "rule": "Tipo N2",
+    "priority": "Média",
+    "timing": "Aguardar",
+    "sources": "https://www.ifraldas.com.br/lista-de-enxoval-de-bebe/ | https://www.ifraldas.com.br/enxoval-de-bebe-verao/ | https://www.mamaeplugada.com.br/lista-enxoval-de-bebe-pratico-24692 | https://viversempressa.com/2015/04/27/montando-um-enxoval-minimalista-para-o-bebe/"
+  },
+  {
+    "id": "BEN-027",
+    "category": "Roupas",
+    "type": "Body",
+    "description": "Body manga curta",
+    "phase": "9–12 meses",
+    "target": 5,
+    "unit": "peça",
+    "rule": "Descrição N3",
+    "priority": "Média",
+    "timing": "Aguardar",
+    "sources": "https://www.ifraldas.com.br/lista-de-enxoval-de-bebe/ | https://www.ifraldas.com.br/enxoval-de-bebe-verao/ | https://www.mamaeplugada.com.br/lista-enxoval-de-bebe-pratico-24692 | https://viversempressa.com/2015/04/27/montando-um-enxoval-minimalista-para-o-bebe/"
+  },
+  {
+    "id": "BEN-028",
+    "category": "Roupas",
+    "type": "Body",
+    "description": "Body manga longa",
+    "phase": "9–12 meses",
+    "target": 2,
+    "unit": "peça",
+    "rule": "Descrição N3",
+    "priority": "Média",
+    "timing": "Aguardar",
+    "sources": "https://www.ifraldas.com.br/lista-de-enxoval-de-bebe/ | https://www.ifraldas.com.br/enxoval-de-bebe-verao/ | https://www.mamaeplugada.com.br/lista-enxoval-de-bebe-pratico-24692 | https://viversempressa.com/2015/04/27/montando-um-enxoval-minimalista-para-o-bebe/"
+  },
+  {
+    "id": "BEN-029",
+    "category": "Roupas",
+    "type": "Calça",
+    "description": "Calça / mijão",
+    "phase": "9–12 meses",
+    "target": 5,
+    "unit": "peça",
+    "rule": "Descrição N3",
+    "priority": "Média",
+    "timing": "Aguardar",
+    "sources": "https://www.ifraldas.com.br/lista-de-enxoval-de-bebe/ | https://www.ifraldas.com.br/enxoval-de-bebe-verao/ | https://www.mamaeplugada.com.br/lista-enxoval-de-bebe-pratico-24692 | https://viversempressa.com/2015/04/27/montando-um-enxoval-minimalista-para-o-bebe/"
+  },
+  {
+    "id": "BEN-030",
+    "category": "Roupas",
+    "type": "Macacão",
+    "description": "Macacão manga longa",
+    "phase": "9–12 meses",
+    "target": 3,
+    "unit": "peça",
+    "rule": "Descrição N3",
+    "priority": "Média",
+    "timing": "Aguardar",
+    "sources": "https://www.ifraldas.com.br/lista-de-enxoval-de-bebe/ | https://www.ifraldas.com.br/enxoval-de-bebe-verao/ | https://www.mamaeplugada.com.br/lista-enxoval-de-bebe-pratico-24692 | https://viversempressa.com/2015/04/27/montando-um-enxoval-minimalista-para-o-bebe/"
+  },
+  {
+    "id": "BEN-031",
+    "category": "Roupas",
+    "type": "Macacão",
+    "description": "Macacão manga curta",
+    "phase": "9–12 meses",
+    "target": 3,
+    "unit": "peça",
+    "rule": "Descrição N3",
+    "priority": "Média",
+    "timing": "Aguardar",
+    "sources": "https://www.ifraldas.com.br/lista-de-enxoval-de-bebe/ | https://www.ifraldas.com.br/enxoval-de-bebe-verao/ | https://www.mamaeplugada.com.br/lista-enxoval-de-bebe-pratico-24692 | https://viversempressa.com/2015/04/27/montando-um-enxoval-minimalista-para-o-bebe/"
+  },
+  {
+    "id": "BEN-032",
+    "category": "Roupas",
+    "type": "Meia",
+    "description": "Todos",
+    "phase": "9–12 meses",
+    "target": 3,
+    "unit": "par",
+    "rule": "Tipo N2",
+    "priority": "Média",
+    "timing": "Aguardar",
+    "sources": "https://www.ifraldas.com.br/lista-de-enxoval-de-bebe/ | https://www.ifraldas.com.br/enxoval-de-bebe-verao/ | https://www.mamaeplugada.com.br/lista-enxoval-de-bebe-pratico-24692 | https://viversempressa.com/2015/04/27/montando-um-enxoval-minimalista-para-o-bebe/"
+  },
+  {
+    "id": "BEN-033",
+    "category": "Acessórios têxteis",
+    "type": "Toalha",
+    "description": "Toalha com capuz",
+    "phase": "Sem fase",
+    "target": 2,
+    "unit": "peça",
+    "rule": "Descrição N3",
+    "priority": "Alta",
+    "timing": "Comprar agora",
+    "sources": "https://www.ifraldas.com.br/lista-de-enxoval-de-bebe/ | https://www.ifraldas.com.br/enxoval-de-bebe-verao/ | https://www.mamaeplugada.com.br/lista-enxoval-de-bebe-pratico-24692 | https://viversempressa.com/2015/04/27/montando-um-enxoval-minimalista-para-o-bebe/"
+  },
+  {
+    "id": "BEN-034",
+    "category": "Acessórios têxteis",
+    "type": "Pano de boca",
+    "description": "Pano de boca",
+    "phase": "Sem fase",
+    "target": 8,
+    "unit": "peça",
+    "rule": "Descrição N3",
+    "priority": "Alta",
+    "timing": "Comprar agora",
+    "sources": "https://www.ifraldas.com.br/lista-de-enxoval-de-bebe/ | https://www.ifraldas.com.br/enxoval-de-bebe-verao/ | https://www.mamaeplugada.com.br/lista-enxoval-de-bebe-pratico-24692 | https://viversempressa.com/2015/04/27/montando-um-enxoval-minimalista-para-o-bebe/"
+  },
+  {
+    "id": "BEN-035",
+    "category": "Acessórios têxteis",
+    "type": "Cueiro / fralda multiuso",
+    "description": "Cueiro / fralda grande de algodão ou muslin",
+    "phase": "Sem fase",
+    "target": 6,
+    "unit": "peça",
+    "rule": "Descrição N3",
+    "priority": "Alta",
+    "timing": "Comprar agora",
+    "sources": "https://www.ifraldas.com.br/lista-de-enxoval-de-bebe/ | https://www.ifraldas.com.br/enxoval-de-bebe-verao/ | https://www.mamaeplugada.com.br/lista-enxoval-de-bebe-pratico-24692 | https://viversempressa.com/2015/04/27/montando-um-enxoval-minimalista-para-o-bebe/"
+  },
+  {
+    "id": "BEN-036",
+    "category": "Acessórios têxteis",
+    "type": "Manta",
+    "description": "Todos",
+    "phase": "Sem fase",
+    "target": 2,
+    "unit": "peça",
+    "rule": "Tipo N2",
+    "priority": "Alta",
+    "timing": "Comprar agora",
+    "sources": "https://www.ifraldas.com.br/lista-de-enxoval-de-bebe/ | https://www.ifraldas.com.br/enxoval-de-bebe-verao/ | https://www.mamaeplugada.com.br/lista-enxoval-de-bebe-pratico-24692 | https://viversempressa.com/2015/04/27/montando-um-enxoval-minimalista-para-o-bebe/"
+  },
+  {
+    "id": "BEN-039",
+    "category": "Fraldas e itens de higiene",
+    "type": "Algodão",
+    "description": "Algodão",
+    "phase": "Sem fase",
+    "target": 1,
+    "unit": "pacote",
+    "rule": "Descrição N3",
+    "priority": "Alta",
+    "timing": "Comprar agora",
+    "sources": "https://www.ifraldas.com.br/lista-de-enxoval-de-bebe/ | https://www.ifraldas.com.br/enxoval-de-bebe-verao/ | https://www.mamaeplugada.com.br/lista-enxoval-de-bebe-pratico-24692 | https://viversempressa.com/2015/04/27/montando-um-enxoval-minimalista-para-o-bebe/"
+  },
+  {
+    "id": "BEN-040",
+    "category": "Fraldas e itens de higiene",
+    "type": "Lenço umedecido",
+    "description": "Lenço umedecido sem perfume",
+    "phase": "Sem fase",
+    "target": 1,
+    "unit": "pacote",
+    "rule": "Descrição N3",
+    "priority": "Média",
+    "timing": "Comprar agora",
+    "sources": "https://www.ifraldas.com.br/lista-de-enxoval-de-bebe/ | https://www.ifraldas.com.br/enxoval-de-bebe-verao/ | https://www.mamaeplugada.com.br/lista-enxoval-de-bebe-pratico-24692 | https://viversempressa.com/2015/04/27/montando-um-enxoval-minimalista-para-o-bebe/"
+  },
+  {
+    "id": "BEN-041",
+    "category": "Fraldas e itens de higiene",
+    "type": "Creme",
+    "description": "Creme para assaduras",
+    "phase": "Sem fase",
+    "target": 1,
+    "unit": "item",
+    "rule": "Descrição N3",
+    "priority": "Alta",
+    "timing": "Comprar agora",
+    "sources": "https://www.ifraldas.com.br/lista-de-enxoval-de-bebe/ | https://www.ifraldas.com.br/enxoval-de-bebe-verao/ | https://www.mamaeplugada.com.br/lista-enxoval-de-bebe-pratico-24692 | https://viversempressa.com/2015/04/27/montando-um-enxoval-minimalista-para-o-bebe/"
+  },
+  {
+    "id": "BEN-042",
+    "category": "Fraldas e itens de higiene",
+    "type": "Sabonete",
+    "description": "Sabonete líquido / gel de limpeza",
+    "phase": "Sem fase",
+    "target": 1,
+    "unit": "item",
+    "rule": "Descrição N3",
+    "priority": "Alta",
+    "timing": "Comprar agora",
+    "sources": "https://www.ifraldas.com.br/lista-de-enxoval-de-bebe/ | https://www.ifraldas.com.br/enxoval-de-bebe-verao/ | https://www.mamaeplugada.com.br/lista-enxoval-de-bebe-pratico-24692 | https://viversempressa.com/2015/04/27/montando-um-enxoval-minimalista-para-o-bebe/"
+  },
+  {
+    "id": "BEN-043",
+    "category": "Fraldas e itens de higiene",
+    "type": "Soro fisiológico",
+    "description": "Soro fisiológico 0,9%",
+    "phase": "Sem fase",
+    "target": 1,
+    "unit": "item",
+    "rule": "Descrição N3",
+    "priority": "Média",
+    "timing": "Comprar agora",
+    "sources": "https://www.ifraldas.com.br/lista-de-enxoval-de-bebe/ | https://www.ifraldas.com.br/enxoval-de-bebe-verao/ | https://www.mamaeplugada.com.br/lista-enxoval-de-bebe-pratico-24692 | https://viversempressa.com/2015/04/27/montando-um-enxoval-minimalista-para-o-bebe/"
+  },
+  {
+    "id": "BEN-044",
+    "category": "Fraldas e itens de higiene",
+    "type": "Cortador / lixa",
+    "description": "Cortador ou lixa de unha",
+    "phase": "Sem fase",
+    "target": 1,
+    "unit": "item",
+    "rule": "Descrição N3",
+    "priority": "Alta",
+    "timing": "Comprar agora",
+    "sources": "https://www.ifraldas.com.br/lista-de-enxoval-de-bebe/ | https://www.ifraldas.com.br/enxoval-de-bebe-verao/ | https://www.mamaeplugada.com.br/lista-enxoval-de-bebe-pratico-24692 | https://viversempressa.com/2015/04/27/montando-um-enxoval-minimalista-para-o-bebe/"
+  },
+  {
+    "id": "BEN-045",
+    "category": "Fraldas e itens de higiene",
+    "type": "Termômetro",
+    "description": "Termômetro digital",
+    "phase": "Sem fase",
+    "target": 1,
+    "unit": "item",
+    "rule": "Descrição N3",
+    "priority": "Alta",
+    "timing": "Comprar agora",
+    "sources": "https://www.ifraldas.com.br/lista-de-enxoval-de-bebe/ | https://www.ifraldas.com.br/enxoval-de-bebe-verao/ | https://www.mamaeplugada.com.br/lista-enxoval-de-bebe-pratico-24692 | https://viversempressa.com/2015/04/27/montando-um-enxoval-minimalista-para-o-bebe/"
+  },
+  {
+    "id": "BEN-046",
+    "category": "Fraldas e itens de higiene",
+    "type": "Aspirador nasal",
+    "description": "Aspirador nasal",
+    "phase": "Sem fase",
+    "target": 1,
+    "unit": "item",
+    "rule": "Descrição N3",
+    "priority": "Média",
+    "timing": "Comprar agora",
+    "sources": "https://www.ifraldas.com.br/lista-de-enxoval-de-bebe/ | https://www.ifraldas.com.br/enxoval-de-bebe-verao/ | https://www.mamaeplugada.com.br/lista-enxoval-de-bebe-pratico-24692 | https://viversempressa.com/2015/04/27/montando-um-enxoval-minimalista-para-o-bebe/"
+  }
+]
+};
+const SCHEMA_VERSION = 3;
+const PHASES = ['RN', '1–3 meses', '3–6 meses', '6–9 meses', '9–12 meses', 'Sem fase'];
+const TIMINGS = ['Comprar agora', 'Planejar', 'Aguardar'];
+const itemFields = ['id','category','type','description','quantity','unit','phase','brand','color','gift','fabric'];
+const benchmarkFields = ['id','category','type','description','phase','target','unit','rule','priority','timing','sources'];
+function matches(item, benchmark) {
+  return item.category === benchmark.category && item.type === benchmark.type && item.phase === benchmark.phase &&
+    (benchmark.rule === 'Tipo N2' || item.description === benchmark.description);
+}
+function calculate(items, benchmarks) {
+  return benchmarks.map(b => {
+    const included = items.filter(i => matches(i,b));
+    const have = included.reduce((n,i) => n+i.quantity,0);
+    const need = Math.max(b.target-have,0);
+    return {...b,have,need,included:included.map(i=>i.id),surplus:Math.max(have-b.target,0),status:need===0?'Completo':have===0?'Falta':'Parcial',action:need===0?'Não comprar':b.timing};
+  });
+}
+function validateData(data) {
+  if (!data || data.schemaVersion !== SCHEMA_VERSION || !Array.isArray(data.items) || !Array.isArray(data.benchmarks)) throw new Error('Backup incompatível. Use um arquivo exportado pelo Enxoval na versão atual.');
+  for (const [rows,fields,number] of [[data.items,itemFields,'quantity'],[data.benchmarks,benchmarkFields,'target']]) {
+    if (rows.length>10000) throw new Error('O backup ultrapassa o limite de 10.000 registros.');
+    const ids = new Set();
+    for (const row of rows) {
+      if (!row || typeof row !== 'object') throw new Error('Registro inválido.');
+      for (const field of fields) {
+        if (field===number) { if (!Number.isSafeInteger(row[field]) || row[field]<0) throw new Error('Quantidades devem ser inteiros não negativos.'); }
+        else if (typeof row[field]!=='string' || row[field].length>10000) throw new Error(`Campo inválido: ${field}.`);
+      }
+      if (['id','category','type','description','phase','unit'].some(f=>!row[f].trim())) throw new Error('Preencha identificação, classificação, fase e unidade.');
+      if (ids.has(row.id)) throw new Error('O backup contém IDs duplicados.');
+      ids.add(row.id);
+      if (number==='target' && (!['Tipo N2','Descrição N3'].includes(row.rule) || !TIMINGS.includes(row.timing) || !['Alta','Média','Baixa'].includes(row.priority))) throw new Error('Regra de benchmark inválida.');
+    }
+  }
+  return structuredClone({schemaVersion:SCHEMA_VERSION,items:data.items,benchmarks:data.benchmarks});
+}
+function parseBackup(text) {
+  if (text.length>10_000_000) throw new Error('Backup muito grande (máximo 10 MB).');
+  return validateData(JSON.parse(text));
+}
+
+
+/** Storage contract used by the UI: load(), saveItem(item), deleteItem(id),
+ * saveBenchmark(benchmark), deleteBenchmark(id), replaceAll(data).
+ * All return promises. Mutations resolve only after durable commit.
+ * Implement the same contract in a remote adapter to change the backend.
+ */
+class IndexedDBRepository {
+  constructor(name='enxoval-v3') { this.name=name; }
+  async open() {
+    if (this.db) return this.db;
+    this.db = await new Promise((resolve,reject)=>{
+      const request=indexedDB.open(this.name,1);
+      request.onupgradeneeded=()=>request.result.createObjectStore('state');
+      request.onsuccess=()=>resolve(request.result);
+      request.onerror=()=>reject(request.error);
+      request.onblocked=()=>reject(new Error('Feche as outras abas do Enxoval e tente novamente.'));
+    });
+    this.db.onversionchange=()=>{this.db.close();this.db=null;};
+    return this.db;
+  }
+  async transaction(mode, update) {
+    const db=await this.open();
+    return new Promise((resolve,reject)=>{
+      const tx=db.transaction('state',mode), store=tx.objectStore('state');
+      let result, failure;
+      const req=store.get('current');
+      req.onsuccess=()=>{
+        try {result=update(req.result); if(mode==='readwrite') store.put(result,'current');}
+        catch(e) {failure=e;tx.abort();}
+      };
+      tx.oncomplete=()=>resolve(result);
+      tx.onerror=()=>reject(failure || tx.error);
+      tx.onabort=()=>reject(failure || tx.error || new Error('Não foi possível salvar.'));
+    });
+  }
+  async initialize(seed) { return this.transaction('readwrite',state=>validateData(state ?? seed)); }
+  async load() { return this.transaction('readonly',state=>validateData(state)); }
+  async mutate(fn) { return this.transaction('readwrite',state=>{const data=validateData(state);fn(data);return validateData(data);}); }
+  async saveItem(item) { return this.mutate(d=>{const n=d.items.findIndex(i=>i.id===item.id);if(n<0)d.items.push(item);else d.items[n]=item;}); }
+  async deleteItem(id) { return this.mutate(d=>{d.items=d.items.filter(i=>i.id!==id);}); }
+  async saveBenchmark(item) { return this.mutate(d=>{const n=d.benchmarks.findIndex(i=>i.id===item.id);if(n<0)d.benchmarks.push(item);else d.benchmarks[n]=item;}); }
+  async deleteBenchmark(id) { return this.mutate(d=>{d.benchmarks=d.benchmarks.filter(i=>i.id!==id);}); }
+  async replaceAll(data) { const valid=validateData(data);return this.transaction('readwrite',()=>valid); }
+}
+const repository=new IndexedDBRepository();
+
+
+
+
+const $=s=>document.querySelector(s);
+const esc=v=>String(v??'').replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
+let data, tab='inventory', phase='', query='', category='', timing='Comprar agora', dashboardPhase='RN', dashboardStatus='', timer;
+const channel=typeof BroadcastChannel==='function'?new BroadcastChannel('enxoval-changes'):null;
+const uniq=values=>[...new Set(values.filter(Boolean))];
+const options=(values,current='',empty='')=>(empty?`<option value="">${esc(empty)}</option>`:'')+values.map(v=>`<option ${v===current?'selected':''}>${esc(v)}</option>`).join('');
+const route=()=>['dashboard','compras','base'].includes(location.hash.slice(1))?location.hash.slice(1):'dashboard';
+function notify(message) {clearTimeout(timer);$('#notice').textContent=message;$('#notice').classList.add('show');timer=setTimeout(()=>$('#notice').classList.remove('show'),6000);}
+function error(e) {console.error(e);notify(e.message || 'Não foi possível concluir. Tente novamente.');}
+function announceChange() {channel?.postMessage('changed');}
+async function update(action,message) {data=await action();render();announceChange();notify(message);}
+const title=b=>b.rule==='Tipo N2'?b.type:b.description;
+const badge=r=>`<span class="badge ${r.need===0?'complete':r.have?'partial':'missing'}">${esc(r.status)}</span>`;
+const fits=r=>(!phase||r.phase===phase)&&(!category||r.category===category)&&(!query||[r.description,r.type,r.brand,r.color,r.gift].join(' ').toLocaleLowerCase('pt-BR').includes(query.toLocaleLowerCase('pt-BR')));
+
+function filters() {return `<div class="filters"><label>Buscar<input id="search" type="search" value="${esc(query)}" placeholder="Item, marca, presente…"></label><label>Fase<select id="phase">${options(uniq([...PHASES,...data.items.map(i=>i.phase),...data.benchmarks.map(b=>b.phase)]),phase,'Todas as fases')}</select></label><label>Categoria<select id="category">${options(uniq([...data.items,...data.benchmarks].map(i=>i.category)),category,'Todas as categorias')}</select></label></div>`;}
+function render() {
+  if(!data)return;
+  const page=route(), rows=calculate(data.items,data.benchmarks), shown=rows.filter(fits);
+  document.querySelectorAll('nav a').forEach(a=>{if(a.hash===`#${page}`)a.setAttribute('aria-current','page');else a.removeAttribute('aria-current');});
+  let html=`<div class="page-heading"><div><p class="eyebrow">NOSSO ENXOVAL</p><h1>${{dashboard:'Um pequeno passo de cada vez.',compras:'O que ainda falta',base:'Tudo no seu lugar'}[page]}</h1></div><button class="primary" data-action="add">+ Adicionar item</button></div>`;
+  if(page==='dashboard') {
+    const phases=uniq([...PHASES.filter(p=>rows.some(r=>r.phase===p)),...rows.map(r=>r.phase)]);
+    if(!phases.includes(dashboardPhase))dashboardPhase=phases[0]||'RN';
+    const phaseRows=rows.filter(r=>r.phase===dashboardPhase);
+    const visible=phaseRows.filter(r=>!dashboardStatus||r.status===dashboardStatus);
+    html+=`<div class="phase-tabs" aria-label="Fase do enxoval">${phases.map(p=>`<button data-dashboard-phase="${esc(p)}" aria-pressed="${p===dashboardPhase}">${esc(p)}</button>`).join('')}</div>
+      <div class="section-heading phase-title"><h2>${esc(dashboardPhase)}</h2><span>${phaseRows.length} itens de referência</span></div>
+      <div class="status-cards" aria-label="Filtrar por situação">${[['Completo','complete','✓','Tudo pronto'],['Parcial','partial','◐','Já começamos'],['Falta','missing','○','Ainda precisamos']].map(([status,cls,icon,label])=>`<button class="status-card ${cls}" data-dashboard-status="${status}" aria-pressed="${dashboardStatus===status}"><span class="status-icon" aria-hidden="true">${icon}</span><span>${status}<small>${label}</small></span><strong>${phaseRows.filter(r=>r.status===status).length}</strong></button>`).join('')}</div>
+      <section class="panel phase-list"><div class="section-heading"><h2>${dashboardStatus||'Todos os itens'}</h2>${dashboardStatus?'<button data-dashboard-status="">Ver todos</button>':'<span>Temos / recomendado</span>'}</div>
+      ${visible.length?visible.map(r=>`<article class="layette-item"><div class="item-line"><div class="item-name"><h3>${esc(title(r))}</h3><span>${esc(r.category)} · ${esc(r.unit)}</span></div><div class="item-progress"><span><strong>${r.have}</strong> / ${r.target}</span><progress value="${Math.min(r.have,r.target)}" max="${r.target||1}" aria-label="${esc(title(r))}: temos ${r.have} de ${r.target}"></progress></div><div class="item-status">${badge(r)}<small>${r.need?`Faltam ${r.need} · ${esc(r.timing)}`:r.surplus?`${r.surplus} acima da referência`:'Quantidade atendida'}</small></div>${r.need?`<button data-register="${esc(r.id)}">+ Registrar item</button>`:''}</div><details class="owned-details"><summary>Ver itens possuídos (${r.included.length})</summary>${r.included.length?`<ul>${r.included.map(id=>{const i=data.items.find(i=>i.id===id);return `<li><span><strong>${i.quantity} × ${esc(i.description)}</strong><small>${esc([i.brand,i.color,i.gift&&'Presente de '+i.gift].filter(Boolean).join(' · '))}</small></span><button data-edit="${esc(i.id)}">Editar</button></li>`;}).join('')}</ul>`:'<p>Nenhum item correspondente nesta fase.</p>'}</details></article>`).join(''):'<div class="empty"><h3>Nenhum item nesta situação</h3><p>Selecione outro status ou veja todos os itens da fase.</p></div>'}</section>`;
+  } else if(page==='compras') {
+    html+=`<p class="intro">As necessidades acompanham a base automaticamente. Registre o que ganhou ou comprou para atualizar esta lista.</p><div class="segments" aria-label="Momento da compra">${TIMINGS.map(t=>`<button data-timing="${t}" aria-pressed="${timing===t}">${t} <span>${rows.filter(r=>r.need&&r.timing===t).length}</span></button>`).join('')}</div><section class="panel">${filters()}${benchmarkTable(shown.filter(r=>r.need&&r.timing===timing),false,true)}</section>`;
+  } else {
+    html+=`<div class="segments"><button data-tab="inventory" aria-pressed="${tab==='inventory'}">Inventário <span>${data.items.length}</span></button><button data-tab="benchmark" aria-pressed="${tab==='benchmark'}">Benchmark <span>${rows.length}</span></button></div><section class="panel">${tab==='benchmark'?'<div class="section-heading"><p>Metas independentes do inventário. Ajuste a referência sem alterar o que vocês têm.</p><button data-action="add-benchmark">+ Adicionar meta</button></div>':''}${filters()}${tab==='inventory'?inventoryTable(data.items.filter(fits)):benchmarkTable(shown,true)}</section>`;
+  }
+  $('#content').innerHTML=html;
+  if($('#phase')) $('#phase').onchange=e=>{phase=e.target.value;render();};
+  if($('#category')) $('#category').onchange=e=>{category=e.target.value;render();};
+  if($('#search')) $('#search').oninput=e=>{const pos=e.target.selectionStart;query=e.target.value;render();$('#search').focus();$('#search').setSelectionRange(pos,pos);};
+}
+function benchmarkTable(rows,edit=false,buy=false) {
+  if(!rows.length)return '<div class="empty"><h3>Nenhuma pendência por aqui.</h3><p>Não há metas para estes filtros, ou todas já foram atendidas.</p></div>';
+  return `<div class="table-scroll"><table><caption class="sr-only">Comparação do inventário com as metas</caption><thead><tr><th>Item de referência</th><th>Fase</th><th>Meta</th><th>Temos</th><th>Falta</th><th>Situação</th><th>${edit?'Gerenciar':'Próximo passo'}</th></tr></thead><tbody>${rows.map(r=>`<tr><td><details><summary><strong>${esc(title(r))}</strong><small>${esc(r.category)} · ${esc(r.unit)}</small></summary><div class="detail"><p>Contagem: ${esc(r.rule)} · Prioridade ${esc(r.priority)}</p><p>Incluídos: ${r.included.length?r.included.map(id=>{const i=data.items.find(i=>i.id===id);return `${i.quantity} × ${esc(i.description)} (${esc(i.phase)})`;}).join('; '):'nenhum item correspondente'}</p>${r.sources.split(' | ').filter(s=>/^https?:\/\//.test(s)).map((s,n)=>`<a href="${esc(s)}" target="_blank" rel="noopener noreferrer">Fonte ${n+1}</a>`).join(' · ')}</div></details></td><td>${esc(r.phase)}</td><td>${r.target}</td><td>${r.have}</td><td><strong>${r.need}</strong></td><td>${badge(r)}</td><td>${edit?`<div class="row-actions"><button data-edit-benchmark="${esc(r.id)}">Editar</button><button class="danger" data-delete-benchmark="${esc(r.id)}" aria-label="Excluir meta ${esc(title(r))}">Excluir</button></div>`:buy?`<button data-register="${esc(r.id)}">Registrar item</button>`:esc(r.action)}</td></tr>`).join('')}</tbody></table></div>`;
+}
+function inventoryTable(items) {
+  if(!items.length)return '<div class="empty"><h3>Nenhum item encontrado</h3><p>Altere os filtros ou adicione um item à base.</p></div>';
+  return `<p class="table-count">${items.length} registros · ${items.reduce((s,i)=>s+i.quantity,0)} quantidades cadastradas</p><div class="table-scroll"><table><caption class="sr-only">Inventário do enxoval</caption><thead><tr><th>Item</th><th>Fase</th><th>Quantidade</th><th>Detalhes</th><th>Ações</th></tr></thead><tbody>${items.map(i=>`<tr><td><strong>${esc(i.description)}</strong><small>${esc(i.category)} → ${esc(i.type)}</small><small>${esc(i.id)}${data.benchmarks.some(b=>matches(i,b))?'':' · Sem meta'}</small></td><td>${esc(i.phase)}</td><td><strong>${i.quantity}</strong> ${esc(i.unit)}</td><td><details><summary>${esc([i.brand,i.color].filter(Boolean).join(' · ')||'Ver atributos')}</summary><p>Presente de: ${esc(i.gift||'—')}<br>Fecho/tecido: ${esc(i.fabric||'—')}</p></details></td><td><div class="row-actions"><button data-edit="${esc(i.id)}" aria-label="Editar ${esc(i.description)}">Editar</button><button class="danger" data-delete="${esc(i.id)}" aria-label="Excluir ${esc(i.description)}">Excluir</button></div></td></tr>`).join('')}</tbody></table></div>`;
+}
+const field=(key,label,value,extra='')=>`<label>${label}<input name="${key}" value="${esc(value)}" ${extra}></label>`;
+const select=(key,label,values,value)=>`<label>${label}<select name="${key}">${options(values,value)}</select></label>`;
+function openEditor(id,kind='item',benchmarkId) {
+  const isBench=kind==='benchmark', collection=isBench?data.benchmarks:data.items;
+  const existing=collection.find(i=>i.id===id), b=data.benchmarks.find(i=>i.id===benchmarkId);
+  const item=existing|| (isBench?{category:'Roupas',type:'',description:'',phase:'RN',target:1,unit:'peça',rule:'Descrição N3',priority:'Alta',timing:'Comprar agora',sources:''}:{category:b?.category||'Roupas',type:b?.type||'',description:b?(b.rule==='Tipo N2'?b.type:b.description):'',quantity:b?calculate(data.items,[b])[0].need:1,unit:b?.unit||'peça',phase:b?.phase||'RN',brand:'',color:'',gift:'',fabric:''});
+  const lists=['category','type','description','unit'].map(key=>`<datalist id="list-${key}">${options(uniq([...data.items,...data.benchmarks].map(i=>i[key])))}</datalist>`).join('');
+  $('#editor').innerHTML=`<form id="edit-form"><div class="section-heading"><h2 id="editor-title">${existing?'Editar':'+ Adicionar'} ${isBench?'meta':'item'}</h2><button type="button" data-close aria-label="Fechar">✕</button></div><div class="form-grid">${field('category','Categoria N1',item.category,'required list="list-category"')}${field('type','Tipo N2',item.type,'required list="list-type"')}${field('description',isBench?'Descrição N3 / escopo':'Descrição N3',item.description,'required list="list-description"')}${select('phase','Fase',uniq([...PHASES,...data.items.map(i=>i.phase),...data.benchmarks.map(i=>i.phase)]),item.phase)}${field(isBench?'target':'quantity',isBench?'Quantidade recomendada':'Quantidade',isBench?item.target:item.quantity,'required type="number" min="0" max="1000000" step="1"')}${field('unit','Unidade',item.unit,'required list="list-unit"')}${isBench?select('rule','Regra de contagem',['Descrição N3','Tipo N2'],item.rule)+select('priority','Prioridade',['Alta','Média','Baixa'],item.priority)+select('timing','Momento',TIMINGS,item.timing)+field('sources','Fontes (URLs separadas por |)',item.sources):field('brand','Loja / marca',item.brand)+field('color','Cor / descrição',item.color)+field('gift','Presente de',item.gift)+field('fabric','Fecho / tecido',item.fabric)}</div>${lists}<p class="hint">${isBench?'Tipo N2 soma todas as descrições do mesmo tipo e fase. Descrição N3 soma apenas a descrição exata.':'Tudo que está na Base é considerado possuído e entra automaticamente no total “Temos” quando a classificação e a fase correspondem ao benchmark.'}</p><p id="form-error" role="alert"></p><div class="dialog-actions"><button type="button" data-close>Cancelar</button><button class="primary" type="submit">Salvar ${isBench?'meta':'item'}</button></div></form>`;
+  $('#editor').showModal();
+  $('#edit-form').onsubmit=async e=>{
+    e.preventDefault();const button=e.submitter;button.disabled=true;
+    try {const values=Object.fromEntries(new FormData(e.target));Object.keys(values).forEach(k=>values[k]=values[k].trim());values[isBench?'target':'quantity']=Number(values[isBench?'target':'quantity']);values.id=existing?.id||`${isBench?'BEN':'ITM'}-${crypto.randomUUID()}`;
+      await update(()=>isBench?repository.saveBenchmark(values):repository.saveItem(values),'Salvo. Os totais já foram atualizados.');$('#editor').close();
+    } catch(e) {$('#form-error').textContent=e.message;} finally {button.disabled=false;}
+  };
+}
+function confirmAction(heading,message,action,label='Excluir') {
+  $('#confirm').innerHTML=`<h2 id="confirm-title">${esc(heading)}</h2><p>${esc(message)}</p><p id="confirm-error" role="alert"></p><div class="dialog-actions"><button data-cancel>Cancelar</button><button class="${label==='Excluir'?'danger':'primary'}" id="confirm-yes">${esc(label)}</button></div>`;
+  $('#confirm').showModal();$('#confirm [data-cancel]').onclick=()=>$('#confirm').close();
+  $('#confirm-yes').onclick=async e=>{e.target.disabled=true;try{await action();$('#confirm').close();}catch(err){$('#confirm-error').textContent=err.message;e.target.disabled=false;}};
+}
+document.addEventListener('click',e=>{
+  const button=e.target.closest('button');if(!button||!data)return;const d=button.dataset;
+  if('close'in d)$('#editor').close();
+  if(d.action==='add')openEditor();
+  if(d.action==='add-benchmark')openEditor(null,'benchmark');
+  if(d.edit)openEditor(d.edit);
+  if(d.editBenchmark)openEditor(d.editBenchmark,'benchmark');
+  if(d.register)openEditor(null,'item',d.register);
+  if('dashboardPhase' in d){dashboardPhase=d.dashboardPhase;dashboardStatus='';render();}
+  if('dashboardStatus' in d){dashboardStatus=dashboardStatus===d.dashboardStatus?'':d.dashboardStatus;render();}
+  if(d.tab){tab=d.tab;render();}
+  if(d.timing){timing=d.timing;render();}
+  if(d.phase){phase=d.phase;timing=data.benchmarks.find(b=>b.phase===phase)?.timing||'Comprar agora';location.hash='compras';render();}
+  if(d.delete||d.deleteBenchmark){const isBench=!!d.deleteBenchmark,id=d.deleteBenchmark||d.delete,item=(isBench?data.benchmarks:data.items).find(i=>i.id===id);confirmAction(`Excluir ${isBench?'meta':'item'}?`,`${item.description} será removido. Os totais serão recalculados.`,()=>update(()=>isBench?repository.deleteBenchmark(id):repository.deleteItem(id),'Registro excluído.'));}
+});
+$('#export').onclick=async()=>{try{const current=await repository.load();const url=URL.createObjectURL(new Blob([JSON.stringify({...current,exportedAt:new Date().toISOString()},null,2)],{type:'application/json'}));const a=document.createElement('a');a.href=url;a.download=`enxoval-backup-${new Date().toISOString().slice(0,10)}.json`;a.click();setTimeout(()=>URL.revokeObjectURL(url),30000);notify('Backup exportado. Guarde o arquivo em um lugar seguro.');}catch(e){error(e);}};
+$('#import').onclick=()=>$('#backup-file').click();
+$('#backup-file').onchange=async e=>{const file=e.target.files[0];e.target.value='';if(!file)return;try{if(file.size>10_000_000)throw new Error('Backup muito grande (máximo 10 MB).');const backup=parseBackup(await file.text());confirmAction('Restaurar backup?',`Substituir a base atual por ${backup.items.length} itens e ${backup.benchmarks.length} metas? Exporte a base atual antes, se quiser guardá-la.`,()=>update(()=>repository.replaceAll(backup),'Backup restaurado.'),'Restaurar');}catch(err){error(err);}};
+window.addEventListener('hashchange',()=>{render();$('#content').focus();});
+channel?.addEventListener('message',async()=>{try{data=await repository.load();render();}catch(e){error(e);}});
+document.addEventListener('visibilitychange',async()=>{if(!document.hidden&&data){try{data=await repository.load();render();}catch(e){error(e);}}});
+async function boot() {
+  try {
+    const embedded=globalThis.__ENXOVAL_SEED__;
+    const [items,benchmarks]=embedded?[embedded.items,embedded.benchmarks]:await Promise.all(['inventory','benchmarks'].map(async name=>{const res=await fetch(new URL(`./data/${name}.json`,location.href));if(!res.ok)throw new Error('Não foi possível carregar os dados iniciais. Recarregue a página.');return res.json();}));
+    data=await repository.initialize({schemaVersion:SCHEMA_VERSION,items,benchmarks});render();
+  } catch(e) {$('#content').innerHTML=`<section class="panel"><h1>Não foi possível abrir o enxoval</h1><p>${esc(e.message)}</p><p>Permita o armazenamento do navegador e recarregue. Seus dados existentes não foram substituídos.</p><button id="retry">Tentar novamente</button></section>`;$('#retry').onclick=boot;}
+}
+boot();
+</script>
+</body>
+</html>

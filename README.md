@@ -39,6 +39,8 @@ npm start
 
 Abra `http://127.0.0.1:4173`. Use servidor HTTP; abrir index.html diretamente com file:// não é suportado. `npm run build` gera `dist/` com os arquivos estáticos. Todos os caminhos são relativos, compatíveis com `/enxoval/` no GitHub Pages.
 
+Para compartilhar sem hospedagem, envie o arquivo `enxoval-compartilhar.html` gerado pelo build. Ele contém interface e dados iniciais em um único arquivo e pode ser aberto diretamente no navegador. Cada pessoa mantém suas próprias alterações no navegador e pode usar o backup para transferi-las.
+
 Os testes cobrem a integridade da fonte, reconciliação das 46 metas com uma extração independente das regras da planilha, limites de contagem e importação/exportação. Não há dependências de produção nem CDN.
 
 ## Evolução do armazenamento
