@@ -94,7 +94,8 @@ channel?.addEventListener('message',async()=>{try{data=await repository.load();r
 document.addEventListener('visibilitychange',async()=>{if(!document.hidden&&data){try{data=await repository.load();render();}catch(e){error(e);}}});
 async function boot() {
   try {
-    const [items,benchmarks]=await Promise.all(['inventory','benchmarks'].map(async name=>{const res=await fetch(new URL(`../data/${name}.json`,import.meta.url));if(!res.ok)throw new Error('Não foi possível carregar os dados iniciais. Recarregue a página.');return res.json();}));
+    const embedded=globalThis.__ENXOVAL_SEED__;
+    const [items,benchmarks]=embedded?[embedded.items,embedded.benchmarks]:await Promise.all(['inventory','benchmarks'].map(async name=>{const res=await fetch(new URL(`./data/${name}.json`,location.href));if(!res.ok)throw new Error('Não foi possível carregar os dados iniciais. Recarregue a página.');return res.json();}));
     data=await repository.initialize({schemaVersion:SCHEMA_VERSION,items,benchmarks});render();
   } catch(e) {$('#content').innerHTML=`<section class="panel"><h1>Não foi possível abrir o enxoval</h1><p>${esc(e.message)}</p><p>Permita o armazenamento do navegador e recarregue. Seus dados existentes não foram substituídos.</p><button id="retry">Tentar novamente</button></section>`;$('#retry').onclick=boot;}
 }
