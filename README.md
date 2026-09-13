@@ -2,6 +2,10 @@
 
 Primeira versão funcional do controle de enxoval minimalista, em português, com Dashboard, Compras e Base. Frontend responsivo em HTML, CSS e módulos JavaScript nativos, sem dependências de execução ou serviços externos.
 
+## Versão 0.2
+
+O Dashboard agora é organizado por fase. Cada fase mostra os totais de metas completas, parciais e faltantes em cartões filtráveis, seguidos por uma lista visual com progresso `temos / recomendado`, quantidade faltante, momento da compra e os itens possuídos que compõem cada total. É possível registrar uma peça diretamente a partir de uma pendência e editar um item já contabilizado sem sair da visão da fase.
+
 ## Dados iniciais
 
 - Fonte exclusiva: **Enxoval - base minimalista.xlsx** da conversa fornecida.

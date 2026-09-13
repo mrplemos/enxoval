@@ -3,7 +3,7 @@ import {repository} from './repository.js';
 
 const $=s=>document.querySelector(s);
 const esc=v=>String(v??'').replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
-let data, tab='inventory', phase='', query='', category='', timing='Comprar agora', timer;
+let data, tab='inventory', phase='', query='', category='', timing='Comprar agora', dashboardPhase='RN', dashboardStatus='', timer;
 const channel=typeof BroadcastChannel==='function'?new BroadcastChannel('enxoval-changes'):null;
 const uniq=values=>[...new Set(values.filter(Boolean))];
 const options=(values,current='',empty='')=>(empty?`<option value="">${esc(empty)}</option>`:'')+values.map(v=>`<option ${v===current?'selected':''}>${esc(v)}</option>`).join('');
@@ -23,19 +23,24 @@ function render() {
   document.querySelectorAll('nav a').forEach(a=>{if(a.hash===`#${page}`)a.setAttribute('aria-current','page');else a.removeAttribute('aria-current');});
   let html=`<div class="page-heading"><div><p class="eyebrow">NOSSO ENXOVAL</p><h1>${{dashboard:'Um pequeno passo de cada vez.',compras:'O que ainda falta',base:'Tudo no seu lugar'}[page]}</h1></div><button class="primary" data-action="add">+ Adicionar item</button></div>`;
   if(page==='dashboard') {
-    const owned=data.items.filter(i=>i.status==='Possuído'), ready=rows.filter(r=>!r.need).length, immediate=rows.filter(r=>r.need&&r.timing==='Comprar agora'), percent=rows.length?Math.round(ready/rows.length*100):0;
-    html+=`<section class="overview" aria-label="Resumo do enxoval"><div class="progress-card"><span class="eyebrow">METAS ATENDIDAS</span><div class="progress-number">${percent}<span>%</span></div><progress max="100" value="${percent}" aria-label="Metas atendidas">${percent}%</progress><p>${ready} de ${rows.length} metas completas</p></div><div class="stat"><span>Já temos</span><strong>${owned.reduce((s,i)=>s+i.quantity,0)}</strong><p>quantidades cadastradas · ${owned.length} registros</p></div><div class="stat"><span>Comprar agora</span><strong>${immediate.length}</strong><p>itens de referência pendentes</p><a href="#compras">Ver lista de compras →</a></div></section>`;
-    html+=`<section class="panel"><div class="section-heading"><h2>Preparação por fase</h2><span>Metas completas / total</span></div><div class="phases">${uniq(rows.map(r=>r.phase)).map(p=>{const rs=rows.filter(r=>r.phase===p),complete=rs.filter(r=>!r.need).length;return `<button class="phase-card" data-phase="${esc(p)}"><span>${esc(p)}</span><strong>${complete}<small> / ${rs.length}</small></strong><progress max="${rs.length}" value="${complete}" aria-label="${esc(p)}: ${complete} de ${rs.length}"></progress><small>${esc(rs[0].timing)}</small></button>`;}).join('')}</div></section>`;
-    html+=`<section class="panel"><div class="section-heading"><h2>Visão do benchmark</h2><span>Temos, falta e próxima ação</span></div>${filters()}${benchmarkTable(shown,false)}</section>`;
+    const phases=uniq([...PHASES.filter(p=>rows.some(r=>r.phase===p)),...rows.map(r=>r.phase)]);
+    if(!phases.includes(dashboardPhase))dashboardPhase=phases[0]||'RN';
+    const phaseRows=rows.filter(r=>r.phase===dashboardPhase);
+    const visible=phaseRows.filter(r=>!dashboardStatus||r.status===dashboardStatus);
+    html+=`<div class="phase-tabs" aria-label="Fase do enxoval">${phases.map(p=>`<button data-dashboard-phase="${esc(p)}" aria-pressed="${p===dashboardPhase}">${esc(p)}</button>`).join('')}</div>
+      <div class="section-heading phase-title"><h2>${esc(dashboardPhase)}</h2><span>${phaseRows.length} itens de referência</span></div>
+      <div class="status-cards" aria-label="Filtrar por situação">${[['Completo','complete','✓','Tudo pronto'],['Parcial','partial','◐','Já começamos'],['Falta','missing','○','Ainda precisamos']].map(([status,cls,icon,label])=>`<button class="status-card ${cls}" data-dashboard-status="${status}" aria-pressed="${dashboardStatus===status}"><span class="status-icon" aria-hidden="true">${icon}</span><span>${status}<small>${label}</small></span><strong>${phaseRows.filter(r=>r.status===status).length}</strong></button>`).join('')}</div>
+      <section class="panel phase-list"><div class="section-heading"><h2>${dashboardStatus||'Todos os itens'}</h2>${dashboardStatus?'<button data-dashboard-status="">Ver todos</button>':'<span>Temos / recomendado</span>'}</div>
+      ${visible.length?visible.map(r=>`<article class="layette-item"><div class="item-line"><div class="item-name"><h3>${esc(title(r))}</h3><span>${esc(r.category)} · ${esc(r.unit)}</span></div><div class="item-progress"><span><strong>${r.have}</strong> / ${r.target}</span><progress value="${Math.min(r.have,r.target)}" max="${r.target||1}" aria-label="${esc(title(r))}: temos ${r.have} de ${r.target}"></progress></div><div class="item-status">${badge(r)}<small>${r.need?`Faltam ${r.need} · ${esc(r.timing)}`:r.surplus?`${r.surplus} acima da referência`:'Quantidade atendida'}</small></div>${r.need?`<button data-register="${esc(r.id)}">+ Registrar item</button>`:''}</div><details class="owned-details"><summary>Ver itens possuídos (${r.included.length})</summary>${r.included.length?`<ul>${r.included.map(id=>{const i=data.items.find(i=>i.id===id);return `<li><span><strong>${i.quantity} × ${esc(i.original||i.description)}</strong><small>${esc([i.size,i.brand,i.color,i.gift&&'Presente de '+i.gift].filter(Boolean).join(' · '))}</small></span><button data-edit="${esc(i.id)}">Editar</button></li>`;}).join('')}</ul>`:'<p>Nenhum item possuído correspondente nesta fase.</p>'}<p class="hint">${esc(r.rationale)}</p></details></article>`).join(''):'<div class="empty"><h3>Nenhum item nesta situação</h3><p>Selecione outro status ou veja todos os itens da fase.</p></div>'}</section>`;
   } else if(page==='compras') {
     html+=`<p class="intro">As necessidades acompanham a base automaticamente. Registre o que ganhou ou comprou para atualizar esta lista.</p><div class="segments" aria-label="Momento da compra">${TIMINGS.map(t=>`<button data-timing="${t}" aria-pressed="${timing===t}">${t} <span>${rows.filter(r=>r.need&&r.timing===t).length}</span></button>`).join('')}</div><section class="panel">${filters()}${benchmarkTable(shown.filter(r=>r.need&&r.timing===timing),false,true)}</section>`;
   } else {
     html+=`<div class="segments"><button data-tab="inventory" aria-pressed="${tab==='inventory'}">Inventário <span>${data.items.length}</span></button><button data-tab="benchmark" aria-pressed="${tab==='benchmark'}">Benchmark <span>${rows.length}</span></button></div><section class="panel">${tab==='benchmark'?'<div class="section-heading"><p>Metas independentes do inventário. Ajuste a referência sem alterar o que vocês têm.</p><button data-action="add-benchmark">+ Adicionar meta</button></div>':''}${filters()}${tab==='inventory'?inventoryTable(data.items.filter(fits)):benchmarkTable(shown,true)}</section>`;
   }
   $('#content').innerHTML=html;
-  $('#phase').onchange=e=>{phase=e.target.value;render();};
-  $('#category').onchange=e=>{category=e.target.value;render();};
-  $('#search').oninput=e=>{const pos=e.target.selectionStart;query=e.target.value;render();$('#search').focus();$('#search').setSelectionRange(pos,pos);};
+  if($('#phase')) $('#phase').onchange=e=>{phase=e.target.value;render();};
+  if($('#category')) $('#category').onchange=e=>{category=e.target.value;render();};
+  if($('#search')) $('#search').oninput=e=>{const pos=e.target.selectionStart;query=e.target.value;render();$('#search').focus();$('#search').setSelectionRange(pos,pos);};
 }
 function benchmarkTable(rows,edit=false,buy=false) {
   if(!rows.length)return '<div class="empty"><h3>Nenhuma pendência por aqui.</h3><p>Não há metas para estes filtros, ou todas já foram atendidas.</p></div>';
@@ -74,6 +79,8 @@ document.addEventListener('click',e=>{
   if(d.edit)openEditor(d.edit);
   if(d.editBenchmark)openEditor(d.editBenchmark,'benchmark');
   if(d.register)openEditor(null,'item',d.register);
+  if('dashboardPhase' in d){dashboardPhase=d.dashboardPhase;dashboardStatus='';render();}
+  if('dashboardStatus' in d){dashboardStatus=dashboardStatus===d.dashboardStatus?'':d.dashboardStatus;render();}
   if(d.tab){tab=d.tab;render();}
   if(d.timing){timing=d.timing;render();}
   if(d.phase){phase=d.phase;timing=data.benchmarks.find(b=>b.phase===phase)?.timing||'Comprar agora';location.hash='compras';render();}
