@@ -2,6 +2,7 @@ import test from 'node:test';
 import assert from 'node:assert/strict';
 import {readFileSync} from 'node:fs';
 import {calculate,validateData,parseBackup} from '../src/domain.js';
+import {LocalStorageRepository} from '../src/repository.js';
 const read=name=>JSON.parse(readFileSync(new URL(`../data/${name}.json`,import.meta.url)));
 const seed={schemaVersion:3,items:read('inventory'),benchmarks:read('benchmarks')};
 const copy=()=>structuredClone(seed);
@@ -43,4 +44,13 @@ test('backup round-trip preserves every attribute and benchmark independently',(
 test('invalid and future backups reject before mutation',()=>{
   assert.throws(()=>parseBackup('{broken'));
   for(const mutate of [d=>d.schemaVersion=1,d=>d.items.push(d.items[0]),d=>d.items[0].quantity=-1,d=>d.items[0].quantity=1.5,d=>d.items[0].quantity='2',d=>delete d.items[0].brand,d=>d.benchmarks[0].rule='Anything',d=>d.benchmarks[0].target=null,d=>d.items[0].category='']){const d=copy();mutate(d);assert.throws(()=>validateData(d));}
+});
+test('single-file storage opens, persists CRUD and survives blocked browser storage',async()=>{
+  const values=new Map(),storage={getItem:key=>values.get(key)??null,setItem:(key,value)=>values.set(key,value)};
+  const repo=new LocalStorageRepository('test',storage);
+  assert.deepEqual(await repo.initialize(seed),seed);
+  await repo.deleteItem(seed.items[0].id);assert.equal((await repo.load()).items.length,186);
+  const blocked=new LocalStorageRepository('blocked',{getItem(){throw new Error('blocked');},setItem(){throw new Error('blocked');}});
+  assert.deepEqual(await blocked.initialize(seed),seed);
+  await blocked.deleteItem(seed.items[0].id);assert.equal((await blocked.load()).items.length,186);
 });

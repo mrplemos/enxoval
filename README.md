@@ -2,7 +2,7 @@
 
 Primeira versão funcional do controle de enxoval minimalista, em português, com Dashboard, Compras e Base. Frontend responsivo em HTML, CSS e módulos JavaScript nativos, sem dependências de execução ou serviços externos.
 
-## Versão 0.3.1
+## Versão 0.3.2
 
 O Dashboard incorpora a base atualizada de 13/09. A fase `1–3 meses` substitui `0–3 meses`, e os campos removidos da planilha também saíram da interface. Tudo que está na Base é considerado possuído; o total “Temos” compara diretamente categoria, tipo, descrição e fase com o Benchmark.
 
@@ -39,7 +39,7 @@ npm start
 
 Abra `http://127.0.0.1:4173`. Use servidor HTTP; abrir index.html diretamente com file:// não é suportado. `npm run build` gera `dist/` com os arquivos estáticos. Todos os caminhos são relativos, compatíveis com `/enxoval/` no GitHub Pages.
 
-Para compartilhar sem hospedagem, envie o arquivo `enxoval-compartilhar.html` gerado pelo build. Ele contém interface e dados iniciais em um único arquivo e pode ser aberto diretamente no navegador. Cada pessoa mantém suas próprias alterações no navegador e pode usar o backup para transferi-las.
+Para compartilhar sem hospedagem, envie o arquivo `enxoval-compartilhar.html` gerado pelo build. Ele contém interface e dados iniciais em um único arquivo e pode ser aberto diretamente no navegador. Ao abrir por `file://`, usa armazenamento local compatível com arquivos baixados; se o navegador bloquear todo armazenamento local, o dashboard ainda abre em modo temporário. Cada pessoa pode exportar um backup para preservar ou transferir suas alterações.
 
 Os testes cobrem a integridade da fonte, reconciliação das 46 metas com uma extração independente das regras da planilha, limites de contagem e importação/exportação. Não há dependências de produção nem CDN.
 
