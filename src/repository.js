@@ -42,4 +42,32 @@ export class IndexedDBRepository {
   async deleteBenchmark(id) { return this.mutate(d=>{d.benchmarks=d.benchmarks.filter(i=>i.id!==id);}); }
   async replaceAll(data) { const valid=validateData(data);return this.transaction('readwrite',()=>valid); }
 }
-export const repository=new IndexedDBRepository();
+
+/** Storage for a self-contained HTML file opened directly from Downloads.
+ * Browsers may deny IndexedDB to file:// pages, while localStorage is usually
+ * available. If localStorage is also denied, the in-memory copy still lets the
+ * dashboard open and the user can export a backup before closing the page.
+ */
+export class LocalStorageRepository {
+  constructor(name='enxoval-v3-file',storage=globalThis.localStorage) {this.name=name;this.storage=storage;this.memory=null;}
+  read() {
+    try {const value=this.storage?.getItem(this.name);return value?JSON.parse(value):this.memory;}
+    catch {return this.memory;}
+  }
+  write(data) {
+    const copy=structuredClone(data);this.memory=copy;
+    try {this.storage?.setItem(this.name,JSON.stringify(copy));} catch {}
+    return structuredClone(copy);
+  }
+  async initialize(seed) {return this.write(validateData(this.read()??seed));}
+  async load() {return structuredClone(validateData(this.read()));}
+  async mutate(fn) {const data=structuredClone(validateData(this.read()));fn(data);return this.write(validateData(data));}
+  async saveItem(item) {return this.mutate(d=>{const n=d.items.findIndex(i=>i.id===item.id);if(n<0)d.items.push(item);else d.items[n]=item;});}
+  async deleteItem(id) {return this.mutate(d=>{d.items=d.items.filter(i=>i.id!==id);});}
+  async saveBenchmark(item) {return this.mutate(d=>{const n=d.benchmarks.findIndex(i=>i.id===item.id);if(n<0)d.benchmarks.push(item);else d.benchmarks[n]=item;});}
+  async deleteBenchmark(id) {return this.mutate(d=>{d.benchmarks=d.benchmarks.filter(i=>i.id!==id);});}
+  async replaceAll(data) {return this.write(validateData(data));}
+}
+
+const openedAsFile=typeof location!=='undefined'&&location.protocol==='file:';
+export const repository=openedAsFile?new LocalStorageRepository():new IndexedDBRepository();
