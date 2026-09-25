@@ -1,4 +1,5 @@
 import { validateData } from './domain.js';
+import {SUPABASE_URL,SUPABASE_PUBLISHABLE_KEY} from './supabase-config.js';
 /** Storage contract used by the UI: load(), saveItem(item), deleteItem(id),
  * saveBenchmark(benchmark), deleteBenchmark(id), replaceAll(data).
  * All return promises. Mutations resolve only after durable commit.
@@ -69,5 +70,39 @@ export class LocalStorageRepository {
   async replaceAll(data) {return this.write(validateData(data));}
 }
 
-const openedAsFile=typeof location!=='undefined'&&location.protocol==='file:';
-export const repository=openedAsFile?new LocalStorageRepository():new IndexedDBRepository();
+export class SupabaseRepository {
+  constructor(url,key,storage=globalThis.localStorage) {this.url=url;this.key=key;this.storage=storage;this.storageKey='enxoval-supabase-session-v1';}
+  readSession() {try{return JSON.parse(this.storage?.getItem(this.storageKey)||'null');}catch{return null;}}
+  saveSession(session) {try{this.storage?.setItem(this.storageKey,JSON.stringify(session));}catch{}return session;}
+  clearSession() {try{this.storage?.removeItem(this.storageKey);}catch{}}
+  getSignedInUser() {return this.readSession()?.user||null;}
+  async auth(path,body,token='') {
+    const response=await fetch(`${this.url}/auth/v1/${path}`,{method:'POST',headers:{apikey:this.key,'Content-Type':'application/json',...(token?{Authorization:`Bearer ${token}`}:{})},body:JSON.stringify(body)});
+    const result=await response.json().catch(()=>({}));
+    if(!response.ok)throw new Error(result.msg||result.message||result.error_description||'Não foi possível entrar. Confira o e-mail e a senha.');
+    return result;
+  }
+  async signIn(email,password) {const session=await this.auth('token?grant_type=password',{email,password});session.expires_at=Math.floor(Date.now()/1000)+session.expires_in;return this.saveSession(session);}
+  async signOut() {const session=this.readSession();this.clearSession();if(session?.access_token)await this.auth('logout',{},session.access_token).catch(()=>{});}
+  async session() {
+    let session=this.readSession();if(!session)return null;
+    if((session.expires_at||0)>Math.floor(Date.now()/1000)+60)return session;
+    try {const refreshed=await this.auth('token?grant_type=refresh_token',{refresh_token:session.refresh_token});refreshed.expires_at=Math.floor(Date.now()/1000)+refreshed.expires_in;return this.saveSession(refreshed);}
+    catch {this.clearSession();return null;}
+  }
+  async request(path,{method='GET',body,prefer,authRequired=false}={}) {
+    const session=await this.session();if(authRequired&&!session)throw new Error('Entre para editar a base.');
+    const response=await fetch(`${this.url}/rest/v1/${path}`,{method,headers:{apikey:this.key,...(session?{Authorization:`Bearer ${session.access_token}`}:{ }),'Content-Type':'application/json',...(prefer?{Prefer:prefer}:{})},body:body===undefined?undefined:JSON.stringify(body)});
+    if(!response.ok){const result=await response.json().catch(()=>({}));throw new Error(result.message||'Não foi possível acessar a base compartilhada.');}
+    if(response.status===204)return null;return response.json().catch(()=>null);
+  }
+  async initialize() {return this.load();}
+  async load() {const [items,benchmarks]=await Promise.all([this.request('inventory?select=data&order=id.asc'),this.request('benchmarks?select=data&order=id.asc')]);return validateData({schemaVersion:3,items:items.map(row=>row.data),benchmarks:benchmarks.map(row=>row.data)});}
+  async saveItem(item) {await this.request('inventory?on_conflict=id',{method:'POST',body:{id:item.id,data:item},prefer:'resolution=merge-duplicates',authRequired:true});return this.load();}
+  async deleteItem(id) {await this.request(`inventory?id=eq.${encodeURIComponent(id)}`,{method:'DELETE',authRequired:true});return this.load();}
+  async saveBenchmark(item) {await this.request('benchmarks?on_conflict=id',{method:'POST',body:{id:item.id,data:item},prefer:'resolution=merge-duplicates',authRequired:true});return this.load();}
+  async deleteBenchmark(id) {await this.request(`benchmarks?id=eq.${encodeURIComponent(id)}`,{method:'DELETE',authRequired:true});return this.load();}
+  async replaceAll(data) {const valid=validateData(data);await this.request('rpc/replace_enxoval',{method:'POST',body:{p_items:valid.items,p_benchmarks:valid.benchmarks},authRequired:true});return this.load();}
+}
+
+export const repository=new SupabaseRepository(SUPABASE_URL,SUPABASE_PUBLISHABLE_KEY);

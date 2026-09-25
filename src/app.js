@@ -1,13 +1,14 @@
-import {calculate,matches,PHASES,TIMINGS,SCHEMA_VERSION,parseBackup} from './domain.js';
+import {calculate,matches,PHASES,TIMINGS,parseBackup} from './domain.js';
 import {repository} from './repository.js';
 
 const $=s=>document.querySelector(s);
 const esc=v=>String(v??'').replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
 let data, tab='inventory', phase='', query='', category='', timing='Comprar agora', dashboardPhase='RN', dashboardStatus='', timer;
+let canEdit=!!repository.getSignedInUser();
 const channel=typeof BroadcastChannel==='function'?new BroadcastChannel('enxoval-changes'):null;
 const uniq=values=>[...new Set(values.filter(Boolean))];
 const options=(values,current='',empty='')=>(empty?`<option value="">${esc(empty)}</option>`:'')+values.map(v=>`<option ${v===current?'selected':''}>${esc(v)}</option>`).join('');
-const route=()=>['dashboard','compras','base'].includes(location.hash.slice(1))?location.hash.slice(1):'dashboard';
+const route=()=>{const requested=location.hash.slice(1);return requested==='base'&&!canEdit?'dashboard':['dashboard','compras','base'].includes(requested)?requested:'dashboard';};
 function notify(message) {clearTimeout(timer);$('#notice').textContent=message;$('#notice').classList.add('show');timer=setTimeout(()=>$('#notice').classList.remove('show'),6000);}
 function error(e) {console.error(e);notify(e.message || 'Não foi possível concluir. Tente novamente.');}
 function announceChange() {channel?.postMessage('changed');}
@@ -21,7 +22,8 @@ function render() {
   if(!data)return;
   const page=route(), rows=calculate(data.items,data.benchmarks), shown=rows.filter(fits);
   document.querySelectorAll('nav a').forEach(a=>{if(a.hash===`#${page}`)a.setAttribute('aria-current','page');else a.removeAttribute('aria-current');});
-  let html=`<div class="page-heading"><div><p class="eyebrow">NOSSO ENXOVAL</p><h1>${{dashboard:'Um pequeno passo de cada vez.',compras:'O que ainda falta',base:'Tudo no seu lugar'}[page]}</h1></div><button class="primary" data-action="add">+ Adicionar item</button></div>`;
+  updateAccess();
+  let html=`<div class="page-heading"><div><p class="eyebrow">NOSSO ENXOVAL</p><h1>${{dashboard:'Um pequeno passo de cada vez.',compras:'O que ainda falta',base:'Tudo no seu lugar'}[page]}</h1></div>${canEdit?'<button class="primary" data-action="add">+ Adicionar item</button>':'<button data-action="login">Entrar para editar</button>'}</div>`;
   if(page==='dashboard') {
     const phases=uniq([...PHASES.filter(p=>rows.some(r=>r.phase===p)),...rows.map(r=>r.phase)]);
     if(!phases.includes(dashboardPhase))dashboardPhase=phases[0]||'RN';
@@ -31,7 +33,7 @@ function render() {
       <div class="section-heading phase-title"><h2>${esc(dashboardPhase)}</h2><span>${phaseRows.length} itens de referência</span></div>
       <div class="status-cards" aria-label="Filtrar por situação">${[['Completo','complete','✓','Tudo pronto'],['Parcial','partial','◐','Já começamos'],['Falta','missing','○','Ainda precisamos']].map(([status,cls,icon,label])=>`<button class="status-card ${cls}" data-dashboard-status="${status}" aria-pressed="${dashboardStatus===status}"><span class="status-icon" aria-hidden="true">${icon}</span><span>${status}<small>${label}</small></span><strong>${phaseRows.filter(r=>r.status===status).length}</strong></button>`).join('')}</div>
       <section class="panel phase-list"><div class="section-heading"><h2>${dashboardStatus||'Todos os itens'}</h2>${dashboardStatus?'<button data-dashboard-status="">Ver todos</button>':'<span>Temos / recomendado</span>'}</div>
-      ${visible.length?visible.map(r=>`<article class="layette-item"><div class="item-line"><div class="item-name"><h3>${esc(title(r))}</h3><span>${esc(r.category)} · ${esc(r.unit)}</span></div><div class="item-progress"><span><strong>${r.have}</strong> / ${r.target}</span><progress value="${Math.min(r.have,r.target)}" max="${r.target||1}" aria-label="${esc(title(r))}: temos ${r.have} de ${r.target}"></progress></div><div class="item-status">${badge(r)}<small>${r.need?`Faltam ${r.need} · ${esc(r.timing)}`:r.surplus?`${r.surplus} acima da referência`:'Quantidade atendida'}</small></div>${r.need?`<button data-register="${esc(r.id)}">+ Registrar item</button>`:''}</div><details class="owned-details"><summary>Ver itens possuídos (${r.included.length})</summary>${r.included.length?`<ul>${r.included.map(id=>{const i=data.items.find(i=>i.id===id);return `<li><span><strong>${i.quantity} × ${esc(i.description)}</strong><small>${esc([i.brand,i.color,i.gift&&'Presente de '+i.gift].filter(Boolean).join(' · '))}</small></span><button data-edit="${esc(i.id)}">Editar</button></li>`;}).join('')}</ul>`:'<p>Nenhum item correspondente nesta fase.</p>'}</details></article>`).join(''):'<div class="empty"><h3>Nenhum item nesta situação</h3><p>Selecione outro status ou veja todos os itens da fase.</p></div>'}</section>`;
+      ${visible.length?visible.map(r=>`<article class="layette-item"><div class="item-line"><div class="item-name"><h3>${esc(title(r))}</h3><span>${esc(r.category)} · ${esc(r.unit)}</span></div><div class="item-progress"><span><strong>${r.have}</strong> / ${r.target}</span><progress value="${Math.min(r.have,r.target)}" max="${r.target||1}" aria-label="${esc(title(r))}: temos ${r.have} de ${r.target}"></progress></div><div class="item-status">${badge(r)}<small>${r.need?`Faltam ${r.need} · ${esc(r.timing)}`:r.surplus?`${r.surplus} acima da referência`:'Quantidade atendida'}</small></div>${r.need&&canEdit?`<button data-register="${esc(r.id)}">+ Registrar item</button>`:''}</div><details class="owned-details"><summary>Ver itens possuídos (${r.included.length})</summary>${r.included.length?`<ul>${r.included.map(id=>{const i=data.items.find(i=>i.id===id);return `<li><span><strong>${i.quantity} × ${esc(i.description)}</strong><small>${esc([i.brand,i.color,i.gift&&'Presente de '+i.gift].filter(Boolean).join(' · '))}</small></span>${canEdit?`<button data-edit="${esc(i.id)}">Editar</button>`:''}</li>`;}).join('')}</ul>`:'<p>Nenhum item correspondente nesta fase.</p>'}</details></article>`).join(''):'<div class="empty"><h3>Nenhum item nesta situação</h3><p>Selecione outro status ou veja todos os itens da fase.</p></div>'}</section>`;
   } else if(page==='compras') {
     html+=`<p class="intro">As necessidades acompanham a base automaticamente. Registre o que ganhou ou comprou para atualizar esta lista.</p><div class="segments" aria-label="Momento da compra">${TIMINGS.map(t=>`<button data-timing="${t}" aria-pressed="${timing===t}">${t} <span>${rows.filter(r=>r.need&&r.timing===t).length}</span></button>`).join('')}</div><section class="panel">${filters()}${benchmarkTable(shown.filter(r=>r.need&&r.timing===timing),false,true)}</section>`;
   } else {
@@ -44,7 +46,7 @@ function render() {
 }
 function benchmarkTable(rows,edit=false,buy=false) {
   if(!rows.length)return '<div class="empty"><h3>Nenhuma pendência por aqui.</h3><p>Não há metas para estes filtros, ou todas já foram atendidas.</p></div>';
-  return `<div class="table-scroll"><table><caption class="sr-only">Comparação do inventário com as metas</caption><thead><tr><th>Item de referência</th><th>Fase</th><th>Meta</th><th>Temos</th><th>Falta</th><th>Situação</th><th>${edit?'Gerenciar':'Próximo passo'}</th></tr></thead><tbody>${rows.map(r=>`<tr><td><details><summary><strong>${esc(title(r))}</strong><small>${esc(r.category)} · ${esc(r.unit)}</small></summary><div class="detail"><p>Contagem: ${esc(r.rule)} · Prioridade ${esc(r.priority)}</p><p>Incluídos: ${r.included.length?r.included.map(id=>{const i=data.items.find(i=>i.id===id);return `${i.quantity} × ${esc(i.description)} (${esc(i.phase)})`;}).join('; '):'nenhum item correspondente'}</p>${r.sources.split(' | ').filter(s=>/^https?:\/\//.test(s)).map((s,n)=>`<a href="${esc(s)}" target="_blank" rel="noopener noreferrer">Fonte ${n+1}</a>`).join(' · ')}</div></details></td><td>${esc(r.phase)}</td><td>${r.target}</td><td>${r.have}</td><td><strong>${r.need}</strong></td><td>${badge(r)}</td><td>${edit?`<div class="row-actions"><button data-edit-benchmark="${esc(r.id)}">Editar</button><button class="danger" data-delete-benchmark="${esc(r.id)}" aria-label="Excluir meta ${esc(title(r))}">Excluir</button></div>`:buy?`<button data-register="${esc(r.id)}">Registrar item</button>`:esc(r.action)}</td></tr>`).join('')}</tbody></table></div>`;
+  return `<div class="table-scroll"><table><caption class="sr-only">Comparação do inventário com as metas</caption><thead><tr><th>Item de referência</th><th>Fase</th><th>Meta</th><th>Temos</th><th>Falta</th><th>Situação</th><th>${edit?'Gerenciar':'Próximo passo'}</th></tr></thead><tbody>${rows.map(r=>`<tr><td><details><summary><strong>${esc(title(r))}</strong><small>${esc(r.category)} · ${esc(r.unit)}</small></summary><div class="detail"><p>Contagem: ${esc(r.rule)} · Prioridade ${esc(r.priority)}</p><p>Incluídos: ${r.included.length?r.included.map(id=>{const i=data.items.find(i=>i.id===id);return `${i.quantity} × ${esc(i.description)} (${esc(i.phase)})`;}).join('; '):'nenhum item correspondente'}</p>${r.sources.split(' | ').filter(s=>/^https?:\/\//.test(s)).map((s,n)=>`<a href="${esc(s)}" target="_blank" rel="noopener noreferrer">Fonte ${n+1}</a>`).join(' · ')}</div></details></td><td>${esc(r.phase)}</td><td>${r.target}</td><td>${r.have}</td><td><strong>${r.need}</strong></td><td>${badge(r)}</td><td>${edit?`<div class="row-actions"><button data-edit-benchmark="${esc(r.id)}">Editar</button><button class="danger" data-delete-benchmark="${esc(r.id)}" aria-label="Excluir meta ${esc(title(r))}">Excluir</button></div>`:buy&&canEdit?`<button data-register="${esc(r.id)}">Registrar item</button>`:esc(r.action)}</td></tr>`).join('')}</tbody></table></div>`;
 }
 function inventoryTable(items) {
   if(!items.length)return '<div class="empty"><h3>Nenhum item encontrado</h3><p>Altere os filtros ou adicione um item à base.</p></div>';
@@ -71,8 +73,22 @@ function confirmAction(heading,message,action,label='Excluir') {
   $('#confirm').showModal();$('#confirm [data-cancel]').onclick=()=>$('#confirm').close();
   $('#confirm-yes').onclick=async e=>{e.target.disabled=true;try{await action();$('#confirm').close();}catch(err){$('#confirm-error').textContent=err.message;e.target.disabled=false;}};
 }
+function updateAccess() {
+  const user=repository.getSignedInUser();canEdit=!!user;
+  $('#base-link').hidden=!canEdit;$('#backup-actions').hidden=!canEdit;
+  $('#access').innerHTML=canEdit?`<span class="sync-dot">●</span> Sincronizado <button data-action="logout">Sair</button>`:`<span class="sync-dot">●</span> Consulta pública <button data-action="login">Entrar</button>`;
+}
+function openLogin() {
+  $('#login').innerHTML=`<form id="login-form"><div class="section-heading"><div><p class="eyebrow">ÁREA DE EDIÇÃO</p><h2 id="login-title">Entrar na Base</h2></div><button type="button" data-login-close aria-label="Fechar">✕</button></div><p>O Dashboard continua disponível para consulta sem login.</p><label>E-mail<input name="email" type="email" autocomplete="username" required></label><label>Senha<input name="password" type="password" autocomplete="current-password" required></label><p id="login-error" role="alert"></p><div class="dialog-actions"><button type="button" data-login-close>Cancelar</button><button class="primary" type="submit">Entrar e editar</button></div></form>`;
+  $('#login').showModal();$('#login-form [name="email"]').focus();
+  $('#login-form').onsubmit=async e=>{e.preventDefault();const button=e.submitter;button.disabled=true;try{const values=Object.fromEntries(new FormData(e.target));await repository.signIn(values.email.trim(),values.password);canEdit=true;data=await repository.load();$('#login').close();render();notify('Modo de edição ativado.');}catch(err){$('#login-error').textContent=err.message;}finally{button.disabled=false;}};
+}
 document.addEventListener('click',e=>{
-  const button=e.target.closest('button');if(!button||!data)return;const d=button.dataset;
+  const button=e.target.closest('button');if(!button)return;const d=button.dataset;
+  if('loginClose'in d)$('#login').close();
+  if(d.action==='login')openLogin();
+  if(d.action==='logout'){repository.signOut().finally(()=>{canEdit=false;if(location.hash==='#base')location.hash='dashboard';render();notify('Você saiu do modo de edição.');});}
+  if(!data)return;
   if('close'in d)$('#editor').close();
   if(d.action==='add')openEditor();
   if(d.action==='add-benchmark')openEditor(null,'benchmark');
@@ -94,9 +110,7 @@ channel?.addEventListener('message',async()=>{try{data=await repository.load();r
 document.addEventListener('visibilitychange',async()=>{if(!document.hidden&&data){try{data=await repository.load();render();}catch(e){error(e);}}});
 async function boot() {
   try {
-    const embedded=globalThis.__ENXOVAL_SEED__;
-    const [items,benchmarks]=embedded?[embedded.items,embedded.benchmarks]:await Promise.all(['inventory','benchmarks'].map(async name=>{const res=await fetch(new URL(`./data/${name}.json`,location.href));if(!res.ok)throw new Error('Não foi possível carregar os dados iniciais. Recarregue a página.');return res.json();}));
-    data=await repository.initialize({schemaVersion:SCHEMA_VERSION,items,benchmarks});render();
-  } catch(e) {$('#content').innerHTML=`<section class="panel"><h1>Não foi possível abrir o enxoval</h1><p>${esc(e.message)}</p><p>Permita o armazenamento do navegador e recarregue. Seus dados existentes não foram substituídos.</p><button id="retry">Tentar novamente</button></section>`;$('#retry').onclick=boot;}
+    data=await repository.initialize();render();
+  } catch(e) {$('#content').innerHTML=`<section class="panel"><h1>Não foi possível abrir o enxoval</h1><p>${esc(e.message)}</p><p>Verifique sua conexão e tente novamente.</p><button id="retry">Tentar novamente</button></section>`;$('#retry').onclick=boot;}
 }
 boot();
