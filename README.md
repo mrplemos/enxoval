@@ -39,6 +39,10 @@ npm start
 
 Abra `http://127.0.0.1:4173`. Use servidor HTTP; abrir index.html diretamente com file:// não é suportado. `npm run build` gera `dist/` com os arquivos estáticos. Todos os caminhos são relativos, compatíveis com `/enxoval/` no GitHub Pages.
 
+## Acesso e sincronização
+
+Dashboard e Compras usam leitura pública da base hospedada no Supabase. A Base e todas as ações de adicionar, editar, excluir e restaurar backup exigem login. As permissões também são aplicadas no banco por RLS, portanto esconder os controles na interface não é a única proteção. A configuração pública do cliente fica em `src/supabase-config.js`; a senha do editor nunca deve ser incluída no repositório.
+
 Para compartilhar sem hospedagem, envie o arquivo `enxoval-compartilhar.html` gerado pelo build. Ele contém interface e dados iniciais em um único arquivo e pode ser aberto diretamente no navegador. Ao abrir por `file://`, usa armazenamento local compatível com arquivos baixados; se o navegador bloquear todo armazenamento local, o dashboard ainda abre em modo temporário. Cada pessoa pode exportar um backup para preservar ou transferir suas alterações.
 
 Os testes cobrem a integridade da fonte, reconciliação das 46 metas com uma extração independente das regras da planilha, limites de contagem e importação/exportação. Não há dependências de produção nem CDN.

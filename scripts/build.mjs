@@ -3,13 +3,14 @@ await rm('dist',{recursive:true,force:true});
 await mkdir('dist',{recursive:true});
 for(const path of ['index.html','favicon.svg','.nojekyll','src','data']) await cp(path,`dist/${path}`,{recursive:true});
 
-const [html,css,favicon,inventory,benchmarks,domain,repository,app]=await Promise.all([
+const [html,css,favicon,inventory,benchmarks,config,domain,repository,app]=await Promise.all([
   readFile('index.html','utf8'),readFile('src/styles.css','utf8'),readFile('favicon.svg','utf8'),
   readFile('data/inventory.json','utf8'),readFile('data/benchmarks.json','utf8'),
-  readFile('src/domain.js','utf8'),readFile('src/repository.js','utf8'),readFile('src/app.js','utf8'),
+  readFile('src/supabase-config.js','utf8'),readFile('src/domain.js','utf8'),readFile('src/repository.js','utf8'),readFile('src/app.js','utf8'),
 ]);
 const seed=`globalThis.__ENXOVAL_SEED__={items:${inventory},benchmarks:${benchmarks}};`;
 const bundle=[
+  config.replace(/^export /gm,''),
   domain.replace(/^export /gm,''),
   repository.replace(/^import .*$/gm,'').replace(/^export /gm,''),
   app.replace(/^import .*$/gm,''),
