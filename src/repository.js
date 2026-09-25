@@ -71,7 +71,12 @@ export class LocalStorageRepository {
 }
 
 export class SupabaseRepository {
-  constructor(url,key,storage=globalThis.localStorage) {this.url=url;this.key=key;this.storage=storage;this.storageKey='enxoval-supabase-session-v1';}
+  constructor(url,key,storage=globalThis.sessionStorage) {
+    this.url=url;this.key=key;this.storage=storage;this.storageKey='enxoval-supabase-session-v1';
+    // v0.4 stored the refresh token in localStorage. Remove that legacy copy so
+    // upgrading signs the editor out and future sessions end with the browser tab.
+    try {globalThis.localStorage?.removeItem(this.storageKey);} catch {}
+  }
   readSession() {try{return JSON.parse(this.storage?.getItem(this.storageKey)||'null');}catch{return null;}}
   saveSession(session) {try{this.storage?.setItem(this.storageKey,JSON.stringify(session));}catch{}return session;}
   clearSession() {try{this.storage?.removeItem(this.storageKey);}catch{}}
