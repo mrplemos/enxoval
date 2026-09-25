@@ -18,8 +18,8 @@ const bundle=[
 const faviconUrl=`data:image/svg+xml,${encodeURIComponent(favicon)}`;
 const standalone=html
   .replace('<link rel="icon" href="./favicon.svg" type="image/svg+xml">',`<link rel="icon" href="${faviconUrl}" type="image/svg+xml">`)
-  .replace('<link rel="stylesheet" href="./src/styles.css">',`<style>${css}</style>`)
-  .replace('<script type="module" src="./src/app.js"></script>',`<script>${seed}\n${bundle}</script>`);
+  .replace(/<link rel="stylesheet" href="\.\/src\/styles\.css[^"]*">/,`<style>${css}</style>`)
+  .replace(/<script type="module" src="\.\/src\/app\.js[^"]*"><\/script>/,`<script>${seed}\n${bundle}</script>`);
 await writeFile('enxoval-compartilhar.html',standalone);
 await writeFile('dist/enxoval-compartilhar.html',standalone);
 console.log('Static app built in dist/ and enxoval-compartilhar.html generated for direct sharing.');
