@@ -20,24 +20,24 @@ create policy "public can read inventory" on public.inventory for select to anon
 create policy "public can read benchmarks" on public.benchmarks for select to anon using (true);
 
 create policy "owner can read inventory" on public.inventory for select to authenticated
-  using ((select auth.jwt()->>'email') = 'mrplemos@gmail.com');
+  using (((select auth.jwt())->>'email') = 'mrplemos@gmail.com');
 create policy "owner can insert inventory" on public.inventory for insert to authenticated
-  with check ((select auth.jwt()->>'email') = 'mrplemos@gmail.com');
+  with check (((select auth.jwt())->>'email') = 'mrplemos@gmail.com');
 create policy "owner can update inventory" on public.inventory for update to authenticated
-  using ((select auth.jwt()->>'email') = 'mrplemos@gmail.com')
-  with check ((select auth.jwt()->>'email') = 'mrplemos@gmail.com');
+  using (((select auth.jwt())->>'email') = 'mrplemos@gmail.com')
+  with check (((select auth.jwt())->>'email') = 'mrplemos@gmail.com');
 create policy "owner can delete inventory" on public.inventory for delete to authenticated
-  using ((select auth.jwt()->>'email') = 'mrplemos@gmail.com');
+  using (((select auth.jwt())->>'email') = 'mrplemos@gmail.com');
 
 create policy "owner can read benchmarks" on public.benchmarks for select to authenticated
-  using ((select auth.jwt()->>'email') = 'mrplemos@gmail.com');
+  using (((select auth.jwt())->>'email') = 'mrplemos@gmail.com');
 create policy "owner can insert benchmarks" on public.benchmarks for insert to authenticated
-  with check ((select auth.jwt()->>'email') = 'mrplemos@gmail.com');
+  with check (((select auth.jwt())->>'email') = 'mrplemos@gmail.com');
 create policy "owner can update benchmarks" on public.benchmarks for update to authenticated
-  using ((select auth.jwt()->>'email') = 'mrplemos@gmail.com')
-  with check ((select auth.jwt()->>'email') = 'mrplemos@gmail.com');
+  using (((select auth.jwt())->>'email') = 'mrplemos@gmail.com')
+  with check (((select auth.jwt())->>'email') = 'mrplemos@gmail.com');
 create policy "owner can delete benchmarks" on public.benchmarks for delete to authenticated
-  using ((select auth.jwt()->>'email') = 'mrplemos@gmail.com');
+  using (((select auth.jwt())->>'email') = 'mrplemos@gmail.com');
 
 create or replace function public.replace_enxoval(p_items jsonb, p_benchmarks jsonb)
 returns void language plpgsql security invoker set search_path = '' as $$
