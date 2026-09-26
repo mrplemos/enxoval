@@ -7,6 +7,7 @@ let data, tab='inventory', phase='', query='', category='', timing='Comprar agor
 let canEdit=!!repository.getSignedInUser();
 const channel=typeof BroadcastChannel==='function'?new BroadcastChannel('enxoval-changes'):null;
 const uniq=values=>[...new Set(values.filter(Boolean))];
+const loginHref=location.protocol==='file:'?'https://mrplemos.github.io/enxoval/login.html':'./login.html';
 const options=(values,current='',empty='')=>(empty?`<option value="">${esc(empty)}</option>`:'')+values.map(v=>`<option ${v===current?'selected':''}>${esc(v)}</option>`).join('');
 const route=()=>{const requested=location.hash.slice(1);return requested==='base'&&!canEdit?'dashboard':['dashboard','compras','base'].includes(requested)?requested:'dashboard';};
 function notify(message) {clearTimeout(timer);$('#notice').textContent=message;$('#notice').classList.add('show');timer=setTimeout(()=>$('#notice').classList.remove('show'),6000);}
@@ -23,7 +24,7 @@ function render() {
   const page=route(), rows=calculate(data.items,data.benchmarks), shown=rows.filter(fits);
   document.querySelectorAll('nav a').forEach(a=>{if(a.hash===`#${page}`)a.setAttribute('aria-current','page');else a.removeAttribute('aria-current');});
   updateAccess();
-  let html=`<div class="page-heading"><div><p class="eyebrow">NOSSO ENXOVAL</p><h1>${{dashboard:'Um pequeno passo de cada vez.',compras:'O que ainda falta',base:'Tudo no seu lugar'}[page]}</h1></div>${canEdit?'<button class="primary" data-action="add">+ Adicionar item</button>':'<button data-action="login">Entrar para editar</button>'}</div>`;
+  let html=`<div class="page-heading"><div><p class="eyebrow">NOSSO ENXOVAL</p><h1>${{dashboard:'Um pequeno passo de cada vez.',compras:'O que ainda falta',base:'Tudo no seu lugar'}[page]}</h1></div>${canEdit?'<button class="primary" data-action="add">+ Adicionar item</button>':`<a class="button-link" href="${loginHref}">Entrar para editar</a>`}</div>`;
   if(page==='dashboard') {
     const phases=uniq([...PHASES.filter(p=>rows.some(r=>r.phase===p)),...rows.map(r=>r.phase)]);
     if(!phases.includes(dashboardPhase))dashboardPhase=phases[0]||'RN';
@@ -80,17 +81,10 @@ function confirmAction(heading,message,action,label='Excluir') {
 function updateAccess() {
   const user=repository.getSignedInUser();canEdit=!!user;
   $('#base-link').hidden=!canEdit;$('#backup-actions').hidden=!canEdit;
-  $('#access').innerHTML=canEdit?`<span class="sync-dot">●</span> Sincronizado <button data-action="logout">Sair</button>`:`<span class="sync-dot">●</span> Consulta pública <button data-action="login">Entrar</button>`;
+  $('#access').innerHTML=canEdit?`<span class="sync-dot">●</span> Sincronizado <button data-action="logout">Sair</button>`:`<span class="sync-dot">●</span> Consulta pública <a class="button-link compact" href="${loginHref}">Entrar</a>`;
 }
-function openLogin() {
-  $('#login-file-hint').hidden=location.protocol!=='file:';$('#login-error').textContent='';
-  $('#login').showModal();$('#login-email').focus();
-}
-$('#login-form').onsubmit=async e=>{e.preventDefault();const button=e.submitter;button.disabled=true;try{const values=Object.fromEntries(new FormData(e.target));await repository.signIn(values.email.trim(),values.password);canEdit=true;data=await repository.load();e.target.reset();$('#login').close();render();notify('Modo de edição ativado.');}catch(err){$('#login-error').textContent=err.message;}finally{button.disabled=false;}};
 document.addEventListener('click',e=>{
   const button=e.target.closest('button');if(!button)return;const d=button.dataset;
-  if('loginClose'in d)$('#login').close();
-  if(d.action==='login')openLogin();
   if(d.action==='logout'){repository.signOut().finally(()=>{canEdit=false;if(location.hash==='#base')location.hash='dashboard';render();notify('Você saiu do modo de edição.');});}
   if(!data)return;
   if('close'in d)$('#editor').close();

@@ -1,7 +1,7 @@
 import {mkdir,cp,rm,readFile,writeFile} from 'node:fs/promises';
 await rm('dist',{recursive:true,force:true});
 await mkdir('dist',{recursive:true});
-for(const path of ['index.html','favicon.svg','.nojekyll','src','data']) await cp(path,`dist/${path}`,{recursive:true});
+for(const path of ['index.html','login.html','favicon.svg','.nojekyll','src','data']) await cp(path,`dist/${path}`,{recursive:true});
 
 const [html,css,favicon,inventory,benchmarks,config,domain,repository,app]=await Promise.all([
   readFile('index.html','utf8'),readFile('src/styles.css','utf8'),readFile('favicon.svg','utf8'),
