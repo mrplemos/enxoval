@@ -55,6 +55,8 @@ A versão 0.4.5 adiciona diretivas para impedir que o navegador reutilize um HTM
 
 A versão 0.4.6 usa uma página de login dedicada (`login.html`). O formulário fica visível desde o carregamento e evita incompatibilidades de gerenciadores de senha com diálogos modais dinâmicos.
 
+A versão 0.4.7 corrige o redirecionamento após autenticação: a referência do formulário é preservada antes da operação assíncrona, evitando o erro de `event.currentTarget` nulo.
+
 Para compartilhar sem hospedagem, envie o arquivo `enxoval-compartilhar.html` gerado pelo build. Ele contém interface e dados iniciais em um único arquivo e pode ser aberto diretamente no navegador. Ao abrir por `file://`, usa armazenamento local compatível com arquivos baixados; se o navegador bloquear todo armazenamento local, o dashboard ainda abre em modo temporário. Cada pessoa pode exportar um backup para preservar ou transferir suas alterações.
 
 Os testes cobrem a integridade da fonte, reconciliação das 46 metas com uma extração independente das regras da planilha, limites de contagem e importação/exportação. Não há dependências de produção nem CDN.
