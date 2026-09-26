@@ -1,0 +1,29 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+  <meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate">
+  <meta name="theme-color" content="#243b70">
+  <title>Entrar · Enxoval</title>
+  <link rel="icon" href="./favicon.svg" type="image/svg+xml">
+  <link rel="stylesheet" href="./src/styles.css?v=0.4.6">
+</head>
+<body>
+  <header><a class="brand" href="./"><span class="mark">e</span> enxoval<span class="brand-note">área de edição · v0.4.6</span></a></header>
+  <main class="login-page">
+    <section class="panel login-panel" aria-labelledby="login-title">
+      <div><p class="eyebrow">ÁREA DE EDIÇÃO</p><h1 id="login-title">Entrar na Base</h1></div>
+      <p>Use sua conta de edição. O Dashboard continua disponível para consulta sem login.</p>
+      <form id="login-form" method="post" autocomplete="on">
+        <label for="login-email">E-mail</label>
+        <input id="login-email" name="email" type="email" inputmode="email" autocapitalize="none" spellcheck="false" autocomplete="username" required autofocus>
+        <label for="login-password">Senha</label>
+        <input id="login-password" name="password" type="password" autocomplete="current-password" required>
+        <p id="login-error" role="alert"></p>
+        <div class="dialog-actions"><a class="button-link" href="./">Cancelar</a><button class="primary" type="submit">Entrar e editar</button></div>
+      </form>
+    </section>
+  </main>
+  <script type="module" src="./src/login.js?v=0.4.6"></script>
+</body>
+</html>
