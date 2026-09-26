@@ -83,11 +83,10 @@ function updateAccess() {
   $('#access').innerHTML=canEdit?`<span class="sync-dot">●</span> Sincronizado <button data-action="logout">Sair</button>`:`<span class="sync-dot">●</span> Consulta pública <button data-action="login">Entrar</button>`;
 }
 function openLogin() {
-  const fileHint=location.protocol==='file:'?'<p class="login-hint">O preenchimento automático pode ser bloqueado em arquivos baixados. Para usar seu gerenciador de senhas, abra o endereço hospedado do Dashboard.</p>':'';
-  $('#login').innerHTML=`<form id="login-form" method="post" autocomplete="on"><div class="section-heading"><div><p class="eyebrow">ÁREA DE EDIÇÃO</p><h2 id="login-title">Entrar na Base</h2></div><button type="button" data-login-close aria-label="Fechar">✕</button></div><p>O Dashboard continua disponível para consulta sem login.</p>${fileHint}<label for="login-email">E-mail</label><input id="login-email" name="email" type="email" inputmode="email" autocapitalize="none" spellcheck="false" autocomplete="username" required><label for="login-password">Senha</label><input id="login-password" name="password" type="password" autocomplete="current-password" required><p id="login-error" role="alert"></p><div class="dialog-actions"><button type="button" data-login-close>Cancelar</button><button class="primary" type="submit">Entrar e editar</button></div></form>`;
+  $('#login-file-hint').hidden=location.protocol!=='file:';$('#login-error').textContent='';
   $('#login').showModal();$('#login-email').focus();
-  $('#login-form').onsubmit=async e=>{e.preventDefault();const button=e.submitter;button.disabled=true;try{const values=Object.fromEntries(new FormData(e.target));await repository.signIn(values.email.trim(),values.password);canEdit=true;data=await repository.load();$('#login').close();render();notify('Modo de edição ativado.');}catch(err){$('#login-error').textContent=err.message;}finally{button.disabled=false;}};
 }
+$('#login-form').onsubmit=async e=>{e.preventDefault();const button=e.submitter;button.disabled=true;try{const values=Object.fromEntries(new FormData(e.target));await repository.signIn(values.email.trim(),values.password);canEdit=true;data=await repository.load();e.target.reset();$('#login').close();render();notify('Modo de edição ativado.');}catch(err){$('#login-error').textContent=err.message;}finally{button.disabled=false;}};
 document.addEventListener('click',e=>{
   const button=e.target.closest('button');if(!button)return;const d=button.dataset;
   if('loginClose'in d)$('#login').close();
