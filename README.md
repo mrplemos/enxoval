@@ -47,6 +47,8 @@ A sessão de edição fica em `sessionStorage`: recarregar a mesma aba mantém o
 
 No cadastro, Categoria N1 e Tipo N2 são listas controladas. Os tipos exibidos dependem da categoria selecionada, reduzindo erros de classificação que afetariam a comparação com o benchmark.
 
+O login usa campos estáveis com `autocomplete="username"` e `autocomplete="current-password"`. Gerenciadores de senha devem ser usados na versão hospedada; páginas abertas por `file://` não têm um domínio confiável para associação de credenciais e podem bloquear o preenchimento.
+
 Para compartilhar sem hospedagem, envie o arquivo `enxoval-compartilhar.html` gerado pelo build. Ele contém interface e dados iniciais em um único arquivo e pode ser aberto diretamente no navegador. Ao abrir por `file://`, usa armazenamento local compatível com arquivos baixados; se o navegador bloquear todo armazenamento local, o dashboard ainda abre em modo temporário. Cada pessoa pode exportar um backup para preservar ou transferir suas alterações.
 
 Os testes cobrem a integridade da fonte, reconciliação das 46 metas com uma extração independente das regras da planilha, limites de contagem e importação/exportação. Não há dependências de produção nem CDN.
