@@ -51,6 +51,8 @@ O login usa campos estáveis com `autocomplete="username"` e `autocomplete="curr
 
 Desde a versão 0.4.4, o formulário existe no documento desde o carregamento da página, em vez de ser criado somente ao abrir a janela. Isso permite que extensões como Bitwarden detectem os campos antes da interação do usuário.
 
+A versão 0.4.5 adiciona diretivas para impedir que o navegador reutilize um HTML antigo após novas publicações. Os arquivos JavaScript e CSS também carregam o número da versão na URL.
+
 Para compartilhar sem hospedagem, envie o arquivo `enxoval-compartilhar.html` gerado pelo build. Ele contém interface e dados iniciais em um único arquivo e pode ser aberto diretamente no navegador. Ao abrir por `file://`, usa armazenamento local compatível com arquivos baixados; se o navegador bloquear todo armazenamento local, o dashboard ainda abre em modo temporário. Cada pessoa pode exportar um backup para preservar ou transferir suas alterações.
 
 Os testes cobrem a integridade da fonte, reconciliação das 46 metas com uma extração independente das regras da planilha, limites de contagem e importação/exportação. Não há dependências de produção nem CDN.
