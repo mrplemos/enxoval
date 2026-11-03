@@ -4,6 +4,9 @@ on:
     branches:
       - feature/netlify-cutover-ready
   workflow_dispatch:
+  pull_request:
+    branches:
+      - feature/netlify-blobs-staging
 
 jobs:
   validate:
