@@ -21,9 +21,10 @@ export default async function handler(req) {
     const current=await store.getWithMetadata(KEY,{consistency:'strong',type:'json'});
     const data=current?.data??emptySnapshot();
     const version=current?.etag??null;
-    if(req.method==='GET')return json({
-      data:editor?data:publicSnapshot(data),version,initialized:!!current
-    });
+    if(req.method==='GET'){
+      if(!current&&!editor)return json({error:'O inventário ainda não foi importado.'},503);
+      return json({data:editor?data:publicSnapshot(data),version,initialized:!!current});
+    }
     const raw=await req.text();
     if(raw.length>4_000_000)return json({error:'Arquivo muito grande para importar.'},413);
     let command;
@@ -38,7 +39,8 @@ export default async function handler(req) {
     const result=await store.setJSON(KEY,next,current?{onlyIfMatch:version}:{onlyIfNew:true});
     if(!result.modified)
       return json({error:'Conflito de edição. Recarregue os dados antes de tentar novamente.'},409);
-    return json({data:next,version:result.etag});
+    const saved=await store.getWithMetadata(KEY,{consistency:'strong',type:'json'});
+    return json({data:next,version:saved?.etag??null});
   }catch(error){
     console.error('enxoval-data:',error);
     return json({error:'Serviço de dados indisponível. Tente novamente.'},503);
