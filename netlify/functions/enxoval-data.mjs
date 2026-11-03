@@ -32,6 +32,8 @@ export default async function handler(req) {
     try {command=JSON.parse(raw);}catch{return json({error:'JSON inválido.'},400);}
     if(!command||!Object.hasOwn(command,'expectedVersion'))
       return json({error:'Atualize os dados antes de editar.'},428);
+    if(!current&&command.action!=='replaceAll')
+      return json({error:'Importe primeiro um backup válido na área administrativa.'},409);
     if(command.expectedVersion!==version)
       return json({error:'Os dados foram alterados em outra sessão. Recarregue antes de salvar.'},409);
     let next;
