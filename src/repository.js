@@ -1,5 +1,5 @@
 import { validateData } from './domain.js';
-import {SUPABASE_URL,SUPABASE_PUBLISHABLE_KEY} from './supabase-config.js';
+import {NetlifyRepository} from './netlify-repository.js';
 /** Storage contract used by the UI: load(), saveItem(item), deleteItem(id),
  * saveBenchmark(benchmark), deleteBenchmark(id), replaceAll(data).
  * All return promises. Mutations resolve only after durable commit.
@@ -110,4 +110,4 @@ export class SupabaseRepository {
   async replaceAll(data) {const valid=validateData(data);await this.request('rpc/replace_enxoval',{method:'POST',body:{p_items:valid.items,p_benchmarks:valid.benchmarks},authRequired:true});return this.load();}
 }
 
-export const repository=new SupabaseRepository(SUPABASE_URL,SUPABASE_PUBLISHABLE_KEY);
+export const repository=new NetlifyRepository();
