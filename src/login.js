@@ -1,6 +1,14 @@
 import {repository} from './repository.js';
 
-if(repository.getSignedInUser())location.replace('./#base');
+async function checkSession() {
+  try {
+    const state=await repository.request('/api/enxoval-auth');
+    if(state.editor) location.replace('./#base');
+  } catch {
+    // Leave the form usable if a session lookup fails temporarily.
+  }
+}
+checkSession();
 
 document.querySelector('#login-form').addEventListener('submit',async event=>{
   event.preventDefault();
