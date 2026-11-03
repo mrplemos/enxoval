@@ -6,16 +6,17 @@ const STORE='enxoval-private', KEY='current';
 const json=(data,status=200)=>Response.json(data,{
   status,headers:{'Cache-Control':'no-store','X-Content-Type-Options':'nosniff'}
 });
-const isEditor=async()=>{
-  try {const user=await getUser();return !!user?.roles?.includes('enxoval-admin');}
-  catch {return false;}
+const editorInfo=async()=>{
+  const user=await getUser();
+  return user?.roles?.includes('enxoval-admin')?{email:user.email}:null;
 };
 
 export default async function handler(req) {
   if(!['GET','POST'].includes(req.method))return json({error:'Método não permitido.'},405);
   try {
     if(req.method==='POST') verifyRequestOrigin(req);
-    const editor=await isEditor();
+    const user=await editorInfo();
+    const editor=!!user;
     if(req.method==='POST'&&!editor)return json({error:'Acesso de edição não autorizado.'},403);
     const store=getStore(STORE);
     const current=await store.getWithMetadata(KEY,{consistency:'strong',type:'json'});
@@ -23,7 +24,7 @@ export default async function handler(req) {
     const version=current?.etag??null;
     if(req.method==='GET'){
       if(!current&&!editor)return json({error:'O inventário ainda não foi importado.'},503);
-      return json({data:editor?data:publicSnapshot(data),version,initialized:!!current});
+      return json({data:editor?data:publicSnapshot(data),version,initialized:!!current,editor,user});
     }
     const raw=await req.text();
     if(raw.length>4_000_000)return json({error:'Arquivo muito grande para importar.'},413);
