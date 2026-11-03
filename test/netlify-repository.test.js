@@ -35,3 +35,23 @@ test('não mascara conflitos de edições concorrentes',async()=>{
   }});
   await assert.rejects(()=>repository.replaceAll(empty),error=>error.status===409);
 });
+
+test('usa fetch nativo vinculado ao contexto global',async()=>{
+  const descriptor=Object.getOwnPropertyDescriptor(globalThis,'fetch');
+  const native=globalThis.fetch;
+  let invoked=false;
+  try {
+    globalThis.fetch=function(path,options){
+      assert.equal(this,globalThis);
+      assert.equal(path,'/api/enxoval-data');
+      invoked=true;
+      return Promise.resolve(reply({data:empty,version:'v1',initialized:true,editor:false,user:null}));
+    };
+    const repository=new NetlifyRepository();
+    await repository.load();
+    assert.equal(invoked,true);
+  } finally {
+    if(descriptor) Object.defineProperty(globalThis,'fetch',descriptor);
+    else globalThis.fetch=native;
+  }
+});
