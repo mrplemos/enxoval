@@ -3,8 +3,10 @@ import {validateData} from './domain.js';
 // Client adapter for Netlify Functions + Blobs. This module does not contain
 // credentials or access the Blob store directly: the server checks permissions.
 export class NetlifyRepository {
-  constructor({fetchImpl=globalThis.fetch}={}) {
-    this.fetchImpl=fetchImpl;
+  constructor({fetchImpl}={}) {
+    // Browser Window.fetch requires the Window as its receiver (Safari in particular).
+    // Bind the native method before storing it on this repository instance.
+    this.fetchImpl=fetchImpl??globalThis.fetch.bind(globalThis);
     this.version=null;
     this.user=null;
     this.initialized=false;
