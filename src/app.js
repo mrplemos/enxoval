@@ -24,6 +24,14 @@ function render() {
   const page=route(), rows=calculate(data.items,data.benchmarks), shown=rows.filter(fits);
   document.querySelectorAll('nav a').forEach(a=>{if(a.hash===`#${page}`)a.setAttribute('aria-current','page');else a.removeAttribute('aria-current');});
   updateAccess();
+  if(repository.initialized===false) {
+    $('#content').innerHTML=canEdit
+      ? `<section class="panel"><h1>Preparar inventário</h1><p>O armazenamento Netlify Blobs está vazio. Use o backup JSON para importar os itens e metas do enxoval.</p><button class="primary" id="start-import" type="button">Restaurar backup JSON</button></section>`
+      : `<section class="panel"><h1>Inventário aguardando importação</h1><p>Os dados ainda não foram importados para o Netlify Blobs. Um administrador precisa fazer login para restaurar o backup.</p><a class="button-link" href="${loginHref}">Entrar como administrador</a></section>`;
+    const importButton=$('#start-import');
+    if(importButton) importButton.onclick=()=>$('#backup-file').click();
+    return;
+  }
   let html=`<div class="page-heading"><div><p class="eyebrow">NOSSO ENXOVAL</p><h1>${{dashboard:'Um pequeno passo de cada vez.',compras:'O que ainda falta',base:'Tudo no seu lugar'}[page]}</h1></div>${canEdit?'<button class="primary" data-action="add">+ Adicionar item</button>':`<a class="button-link" href="${loginHref}">Entrar para editar</a>`}</div>`;
   if(page==='dashboard') {
     const phases=uniq([...PHASES.filter(p=>rows.some(r=>r.phase===p)),...rows.map(r=>r.phase)]);
@@ -109,6 +117,6 @@ document.addEventListener('visibilitychange',async()=>{if(!document.hidden&&data
 async function boot() {
   try {
     data=await repository.initialize();render();
-  } catch(e) {$('#content').innerHTML=`<section class="panel"><h1>Não foi possível abrir o enxoval</h1><p>${esc(e.message)}</p><p>Verifique sua conexão e tente novamente.</p><button id="retry">Tentar novamente</button></section>`;$('#retry').onclick=boot;}
+  } catch(e) {updateAccess();$('#content').innerHTML=`<section class="panel"><h1>Não foi possível abrir o enxoval</h1><p>${esc(e.message)}</p><p>Verifique sua conexão e tente novamente.</p><a class="button-link" href="${loginHref}">Entrar como administrador</a> <button id="retry">Tentar novamente</button></section>`;$('#retry').onclick=boot;}
 }
 boot();
