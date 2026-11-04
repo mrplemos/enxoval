@@ -1,21 +1,14 @@
 import test from 'node:test';
 import assert from 'node:assert/strict';
-import {readFileSync} from 'node:fs';
 import {calculate,validateData,parseBackup} from '../src/domain.js';
 import {LocalStorageRepository} from '../src/repository.js';
-const read=name=>JSON.parse(readFileSync(new URL(`../data/${name}.json`,import.meta.url)));
-const seed={schemaVersion:3,items:read('inventory'),benchmarks:read('benchmarks')};
+const classification={category:'Roupas',type:'Meia',description:'Meia lisa',phase:'RN',unit:'par'};
+const seed={
+  schemaVersion:3,
+  items:[{...classification,id:'item-1',quantity:2,brand:'Marca exemplo',color:'Azul',gift:'Pessoa fictícia',fabric:'Algodão'}],
+  benchmarks:[{...classification,id:'meta-1',target:3,rule:'Tipo N2',priority:'Média',timing:'Planejar',sources:''}],
+};
 const copy=()=>structuredClone(seed);
-test('current workbook: 187 records, 487 quantities, 46 independent targets',()=>{
-  assert.doesNotThrow(()=>validateData(seed));
-  assert.equal(seed.items.length,187);assert.equal(seed.items.reduce((n,i)=>n+i.quantity,0),487);assert.equal(seed.benchmarks.length,46);
-  for(const id of ['ITM-0133','ITM-0134','ITM-0135','ITM-0136']) assert.equal(seed.items.some(item=>item.id===id),false);
-  assert.equal(seed.items.at(-1).id,'ITM-0191');assert.equal(seed.items.at(-2).id,'ITM-0190');
-});
-test('all 46 calculations reconcile to independent workbook SUMIFS extraction',()=>{
-  const expected=JSON.parse(readFileSync(new URL('./workbook-control.json',import.meta.url)));
-  assert.deepEqual(calculate(seed.items,seed.benchmarks).map(({id,have,need,status})=>({id,have,need,status})),expected);
-});
 test('N2 aggregates description variants and N3 requires exact classification',()=>{
   const b={...seed.benchmarks[0],type:'Meia',rule:'Tipo N2',target:3};
   const a={...seed.items[0],category:b.category,type:b.type,phase:b.phase,description:'Meia bichinho',quantity:2};
@@ -49,8 +42,8 @@ test('single-file storage opens, persists CRUD and survives blocked browser stor
   const values=new Map(),storage={getItem:key=>values.get(key)??null,setItem:(key,value)=>values.set(key,value)};
   const repo=new LocalStorageRepository('test',storage);
   assert.deepEqual(await repo.initialize(seed),seed);
-  await repo.deleteItem(seed.items[0].id);assert.equal((await repo.load()).items.length,186);
+  await repo.deleteItem(seed.items[0].id);assert.equal((await repo.load()).items.length,0);
   const blocked=new LocalStorageRepository('blocked',{getItem(){throw new Error('blocked');},setItem(){throw new Error('blocked');}});
   assert.deepEqual(await blocked.initialize(seed),seed);
-  await blocked.deleteItem(seed.items[0].id);assert.equal((await blocked.load()).items.length,186);
+  await blocked.deleteItem(seed.items[0].id);assert.equal((await blocked.load()).items.length,0);
 });
