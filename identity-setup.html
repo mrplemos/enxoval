@@ -1,0 +1,36 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+<meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<meta http-equiv="Cache-Control" content="no-store">
+<meta name="referrer" content="no-referrer">
+<title>Configurar acesso · Enxoval</title>
+<link rel="stylesheet" href="./src/styles.css">
+<style>
+.access-wrap{max-width:32rem;margin:3rem auto;padding:0 1rem}
+.access-wrap .panel{padding:2rem}
+.access-wrap label{display:block;margin:1rem 0}
+.access-wrap input{display:block;width:100%;box-sizing:border-box;margin-top:.4rem}
+#setup-form[hidden],#setup-result[hidden]{display:none}
+#setup-status{min-height:2rem}
+#setup-status.error{color:#a12e40}
+</style>
+</head>
+<body>
+<header><a class="brand" href="./"><span class="mark">e</span> enxoval</a></header>
+<main class="access-wrap">
+<section class="panel">
+<p class="eyebrow">ÁREA DE EDIÇÃO</p>
+<h1 id="setup-title">Preparando acesso</h1>
+<p id="setup-status" role="status" aria-live="polite">Validando o link seguro do Netlify Identity…</p>
+<form id="setup-form" hidden>
+<label for="setup-password">Nova senha
+<input id="setup-password" type="password" autocomplete="new-password" minlength="12" maxlength="128" required></label>
+<label for="setup-confirm">Confirmar nova senha
+<input id="setup-confirm" type="password" autocomplete="new-password" minlength="12" maxlength="128" required></label>
+<div class="dialog-actions"><button class="primary" type="submit">Salvar senha</button></div>
+</form>
+<p id="setup-result" hidden><a href="./login.html">Ir para o login do Enxoval</a></p>
+</section></main>
+<script type="module" src="./identity-setup.js"></script>
+</body></html>
