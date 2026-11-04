@@ -19,6 +19,50 @@ const badge=r=>`<span class="badge ${r.need===0?'complete':r.have?'partial':'mis
 const fits=r=>(!phase||r.phase===phase)&&(!category||r.category===category)&&(!query||[r.description,r.type,r.brand,r.color,r.gift].join(' ').toLocaleLowerCase('pt-BR').includes(query.toLocaleLowerCase('pt-BR')));
 
 function filters() {return `<div class="filters"><label>Buscar<input id="search" type="search" value="${esc(query)}" placeholder="Item, marca, presente…"></label><label>Fase<select id="phase">${options(uniq([...PHASES,...data.items.map(i=>i.phase),...data.benchmarks.map(b=>b.phase)]),phase,'Todas as fases')}</select></label><label>Categoria<select id="category">${options(uniq([...data.items,...data.benchmarks].map(i=>i.category)),category,'Todas as categorias')}</select></label></div>`;}
+function countingRule(row) {
+  const scope=row.rule==='Tipo N2'
+    ? `Todos os itens do tipo “${row.type}”, independentemente da descrição.`
+    : `Apenas itens com a descrição “${row.description}”.`;
+  return `${scope} Categoria ${row.category} · Fase ${row.phase}.`;
+}
+function ownedDetails(row) {
+  const items=row.included.map(id=>data.items.find(item=>item.id===id));
+  return `<details class="owned-details"><summary>Ver itens possuídos (${items.length})</summary>
+    <p class="hint">${esc(countingRule(row))}</p>
+    ${items.length?`<ul>${items.map(item=>{
+      const attributes=[
+        ['Categoria',item.category],
+        ['Tipo',item.type],
+        ['Fase',item.phase],
+        ['Loja / marca',item.brand],
+        ['Cor / descrição',item.color],
+        ['Fecho / tecido',item.fabric],
+        ['Presente de',canEdit?item.gift:''],
+      ];
+      return `<li><div><strong>${item.quantity} × ${esc(item.description)} · ${esc(item.unit)}</strong>
+        ${attributes.filter(([,value])=>value.trim()).map(([label,value])=>`<small>${label}: ${esc(value)}</small>`).join('')}
+        </div>${canEdit?`<button data-edit="${esc(item.id)}">Editar</button>`:''}</li>`;
+    }).join('')}</ul>`:'<p>Nenhum item correspondente nesta fase.</p>'}
+    </details>`;
+}
+function shoppingList(rows) {
+  if(!rows.length)return '<p class="hint">Nenhuma pendência para esta seleção.</p>';
+  const priority=['Alta','Média','Baixa'];
+  const ordered=[...rows].sort((a,b)=>TIMINGS.indexOf(a.timing)-TIMINGS.indexOf(b.timing)
+    || priority.indexOf(a.priority)-priority.indexOf(b.priority));
+  return uniq(ordered.map(r=>r.category)).map(category=>`<section class="shopping-group">
+    <h3>${esc(category)}</h3>
+    ${ordered.filter(r=>r.category===category).map(r=>`<article class="layette-item">
+      <div class="item-line">
+        <div class="item-name"><h4>${esc(title(r))}</h4><span>${esc(r.phase)} · Prioridade ${esc(r.priority.toLowerCase())}</span>
+          <span class="badge purchase-timing" data-timing-label="${esc(r.timing)}">${r.timing==='Planejar'?'Planejar compra':esc(r.timing)}</span></div>
+        <div class="item-status"><strong>${r.need===1?'Falta':'Faltam'} ${r.need}</strong> <span>${esc(r.unit)}</span><small>Temos ${r.have} de ${r.target}</small></div>
+        ${canEdit?`<button data-register="${esc(r.id)}">Registrar compra</button>`:''}
+      </div>
+      ${ownedDetails(r)}
+    </article>`).join('')}
+  </section>`).join('');
+}
 function render() {
   if(!data)return;
   const page=route(), rows=calculate(data.items,data.benchmarks), shown=rows.filter(fits);
@@ -41,10 +85,12 @@ function render() {
     html+=`<div class="phase-tabs" aria-label="Fase do enxoval">${phases.map(p=>`<button data-dashboard-phase="${esc(p)}" aria-pressed="${p===dashboardPhase}">${esc(p)}</button>`).join('')}</div>
       <div class="section-heading phase-title"><h2>${esc(dashboardPhase)}</h2><span>${phaseRows.length} itens de referência</span></div>
       <div class="status-cards" aria-label="Filtrar por situação">${[['Completo','complete','✓','Tudo pronto'],['Parcial','partial','◐','Já começamos'],['Falta','missing','○','Ainda precisamos']].map(([status,cls,icon,label])=>`<button class="status-card ${cls}" data-dashboard-status="${status}" aria-pressed="${dashboardStatus===status}"><span class="status-icon" aria-hidden="true">${icon}</span><span>${status}<small>${label}</small></span><strong>${phaseRows.filter(r=>r.status===status).length}</strong></button>`).join('')}</div>
+      <section class="panel"><div class="section-heading"><h2>Pendente</h2><button data-shop-phase="${esc(dashboardPhase)}">Ver lista de compras</button></div>
+      ${shoppingList(phaseRows.filter(r=>r.need))}</section>
       <section class="panel phase-list"><div class="section-heading"><h2>${dashboardStatus||'Todos os itens'}</h2>${dashboardStatus?'<button data-dashboard-status="">Ver todos</button>':'<span>Temos / recomendado</span>'}</div>
-      ${visible.length?visible.map(r=>`<article class="layette-item"><div class="item-line"><div class="item-name"><h3>${esc(title(r))}</h3><span>${esc(r.category)} · ${esc(r.unit)}</span></div><div class="item-progress"><span><strong>${r.have}</strong> / ${r.target}</span><progress value="${Math.min(r.have,r.target)}" max="${r.target||1}" aria-label="${esc(title(r))}: temos ${r.have} de ${r.target}"></progress></div><div class="item-status">${badge(r)}<small>${r.need?`Faltam ${r.need} · ${esc(r.timing)}`:r.surplus?`${r.surplus} acima da referência`:'Quantidade atendida'}</small></div>${r.need&&canEdit?`<button data-register="${esc(r.id)}">+ Registrar item</button>`:''}</div><details class="owned-details"><summary>Ver itens possuídos (${r.included.length})</summary>${r.included.length?`<ul>${r.included.map(id=>{const i=data.items.find(i=>i.id===id);return `<li><span><strong>${i.quantity} × ${esc(i.description)}</strong><small>${esc([i.brand,i.color,i.gift&&'Presente de '+i.gift].filter(Boolean).join(' · '))}</small></span>${canEdit?`<button data-edit="${esc(i.id)}">Editar</button>`:''}</li>`;}).join('')}</ul>`:'<p>Nenhum item correspondente nesta fase.</p>'}</details></article>`).join(''):'<div class="empty"><h3>Nenhum item nesta situação</h3><p>Selecione outro status ou veja todos os itens da fase.</p></div>'}</section>`;
+      ${visible.length?visible.map(r=>`<article class="layette-item"><div class="item-line"><div class="item-name"><h3>${esc(title(r))}</h3><span>${esc(r.category)} · ${esc(r.unit)}</span></div><div class="item-progress"><span><strong>${r.have}</strong> / ${r.target}</span><progress value="${Math.min(r.have,r.target)}" max="${r.target||1}" aria-label="${esc(title(r))}: temos ${r.have} de ${r.target}"></progress></div><div class="item-status">${badge(r)}<small>${r.need?`Faltam ${r.need} · ${esc(r.timing)}`:r.surplus?`${r.surplus} acima da referência`:'Quantidade atendida'}</small></div>${r.need&&canEdit?`<button data-register="${esc(r.id)}">Registrar compra</button>`:''}</div>${ownedDetails(r)}</article>`).join(''):'<div class="empty"><h3>Nenhum item nesta situação</h3><p>Selecione outro status ou veja todos os itens da fase.</p></div>'}</section>`;
   } else if(page==='compras') {
-    html+=`<p class="intro">As necessidades acompanham a base automaticamente. Registre o que ganhou ou comprou para atualizar esta lista.</p><div class="segments" aria-label="Momento da compra">${TIMINGS.map(t=>`<button data-timing="${t}" aria-pressed="${timing===t}">${t} <span>${rows.filter(r=>r.need&&r.timing===t).length}</span></button>`).join('')}</div><section class="panel">${filters()}${benchmarkTable(shown.filter(r=>r.need&&r.timing===timing),false,true)}</section>`;
+    html+=`<p class="intro">As necessidades acompanham a base automaticamente. Registre o que ganhou ou comprou para atualizar esta lista.</p><div class="segments" aria-label="Momento da compra">${TIMINGS.map(t=>`<button data-timing="${t}" aria-pressed="${timing===t}">${t} <span>${rows.filter(r=>r.need&&r.timing===t).length}</span></button>`).join('')}</div><section class="panel">${filters()}${shoppingList(shown.filter(r=>r.need&&r.timing===timing))}</section>`;
   } else {
     html+=`<div class="segments"><button data-tab="inventory" aria-pressed="${tab==='inventory'}">Inventário <span>${data.items.length}</span></button><button data-tab="benchmark" aria-pressed="${tab==='benchmark'}">Benchmark <span>${rows.length}</span></button></div><section class="panel">${tab==='benchmark'?'<div class="section-heading"><p>Metas independentes do inventário. Ajuste a referência sem alterar o que vocês têm.</p><button data-action="add-benchmark">+ Adicionar meta</button></div>':''}${filters()}${tab==='inventory'?inventoryTable(data.items.filter(fits)):benchmarkTable(shown,true)}</section>`;
   }
@@ -53,9 +99,9 @@ function render() {
   if($('#category')) $('#category').onchange=e=>{category=e.target.value;render();};
   if($('#search')) $('#search').oninput=e=>{const pos=e.target.selectionStart;query=e.target.value;render();$('#search').focus();$('#search').setSelectionRange(pos,pos);};
 }
-function benchmarkTable(rows,edit=false,buy=false) {
+function benchmarkTable(rows,edit=false) {
   if(!rows.length)return '<div class="empty"><h3>Nenhuma pendência por aqui.</h3><p>Não há metas para estes filtros, ou todas já foram atendidas.</p></div>';
-  return `<div class="table-scroll"><table><caption class="sr-only">Comparação do inventário com as metas</caption><thead><tr><th>Item de referência</th><th>Fase</th><th>Meta</th><th>Temos</th><th>Falta</th><th>Situação</th><th>${edit?'Gerenciar':'Próximo passo'}</th></tr></thead><tbody>${rows.map(r=>`<tr><td><details><summary><strong>${esc(title(r))}</strong><small>${esc(r.category)} · ${esc(r.unit)}</small></summary><div class="detail"><p>Contagem: ${esc(r.rule)} · Prioridade ${esc(r.priority)}</p><p>Incluídos: ${r.included.length?r.included.map(id=>{const i=data.items.find(i=>i.id===id);return `${i.quantity} × ${esc(i.description)} (${esc(i.phase)})`;}).join('; '):'nenhum item correspondente'}</p>${r.sources.split(' | ').filter(s=>/^https?:\/\//.test(s)).map((s,n)=>`<a href="${esc(s)}" target="_blank" rel="noopener noreferrer">Fonte ${n+1}</a>`).join(' · ')}</div></details></td><td>${esc(r.phase)}</td><td>${r.target}</td><td>${r.have}</td><td><strong>${r.need}</strong></td><td>${badge(r)}</td><td>${edit?`<div class="row-actions"><button data-edit-benchmark="${esc(r.id)}">Editar</button><button class="danger" data-delete-benchmark="${esc(r.id)}" aria-label="Excluir meta ${esc(title(r))}">Excluir</button></div>`:buy&&canEdit?`<button data-register="${esc(r.id)}">Registrar item</button>`:esc(r.action)}</td></tr>`).join('')}</tbody></table></div>`;
+  return `<div class="table-scroll"><table><caption class="sr-only">Comparação do inventário com as metas</caption><thead><tr><th>Item de referência</th><th>Fase</th><th>Meta</th><th>Temos</th><th>Falta</th><th>Situação</th><th>${edit?'Gerenciar':'Próximo passo'}</th></tr></thead><tbody>${rows.map(r=>`<tr><td><details><summary><strong>${esc(title(r))}</strong><small>${esc(r.category)} · ${esc(r.unit)}</small></summary><div class="detail"><p>Contagem: ${esc(r.rule)} · Prioridade ${esc(r.priority)}</p><p>Incluídos: ${r.included.length?r.included.map(id=>{const i=data.items.find(i=>i.id===id);return `${i.quantity} × ${esc(i.description)} (${esc(i.phase)})`;}).join('; '):'nenhum item correspondente'}</p>${r.sources.split(' | ').filter(s=>/^https?:\/\//.test(s)).map((s,n)=>`<a href="${esc(s)}" target="_blank" rel="noopener noreferrer">Fonte ${n+1}</a>`).join(' · ')}</div></details></td><td>${esc(r.phase)}</td><td>${r.target}</td><td>${r.have}</td><td><strong>${r.need}</strong></td><td>${badge(r)}</td><td>${edit?`<div class="row-actions"><button data-edit-benchmark="${esc(r.id)}">Editar</button><button class="danger" data-delete-benchmark="${esc(r.id)}" aria-label="Excluir meta ${esc(title(r))}">Excluir</button></div>`:esc(r.action)}</td></tr>`).join('')}</tbody></table></div>`;
 }
 function inventoryTable(items) {
   if(!items.length)return '<div class="empty"><h3>Nenhum item encontrado</h3><p>Altere os filtros ou adicione um item à base.</p></div>';
@@ -66,7 +112,7 @@ const select=(key,label,values,value)=>`<label>${label}<select name="${key}">${o
 function openEditor(id,kind='item',benchmarkId) {
   const isBench=kind==='benchmark', collection=isBench?data.benchmarks:data.items;
   const existing=collection.find(i=>i.id===id), b=data.benchmarks.find(i=>i.id===benchmarkId);
-  const item=existing|| (isBench?{category:'Roupas',type:'',description:'',phase:'RN',target:1,unit:'peça',rule:'Descrição N3',priority:'Alta',timing:'Comprar agora',sources:''}:{category:b?.category||'Roupas',type:b?.type||'',description:b?(b.rule==='Tipo N2'?b.type:b.description):'',quantity:b?calculate(data.items,[b])[0].need:1,unit:b?.unit||'peça',phase:b?.phase||'RN',brand:'',color:'',gift:'',fabric:''});
+  const item=existing|| (isBench?{category:'Roupas',type:'',description:'',phase:'RN',target:1,unit:'peça',rule:'Descrição N3',priority:'Alta',timing:'Comprar agora',sources:''}:{category:b?.category||'Roupas',type:b?.type||'',description:b?(b.rule==='Tipo N2'?b.type:b.description):'',quantity:1,unit:b?.unit||'peça',phase:b?.phase||'RN',brand:'',color:'',gift:'',fabric:''});
   const records=[...data.items,...data.benchmarks], categories=uniq(records.map(i=>i.category));
   const typesFor=category=>uniq(records.filter(i=>i.category===category).map(i=>i.type));
   const lists=['description','unit'].map(key=>`<datalist id="list-${key}">${options(uniq(records.map(i=>i[key])))}</datalist>`).join('');
@@ -100,11 +146,12 @@ document.addEventListener('click',e=>{
   if(d.action==='add-benchmark')openEditor(null,'benchmark');
   if(d.edit)openEditor(d.edit);
   if(d.editBenchmark)openEditor(d.editBenchmark,'benchmark');
-  if(d.register)openEditor(null,'item',d.register);
+  if(d.register&&canEdit)openEditor(null,'item',d.register);
   if('dashboardPhase' in d){dashboardPhase=d.dashboardPhase;dashboardStatus='';render();}
   if('dashboardStatus' in d){dashboardStatus=dashboardStatus===d.dashboardStatus?'':d.dashboardStatus;render();}
   if(d.tab){tab=d.tab;render();}
   if(d.timing){timing=d.timing;render();}
+  if(d.shopPhase){phase=d.shopPhase;category='';query='';timing='Comprar agora';location.hash='compras';render();}
   if(d.phase){phase=d.phase;timing=data.benchmarks.find(b=>b.phase===phase)?.timing||'Comprar agora';location.hash='compras';render();}
   if(d.delete||d.deleteBenchmark){const isBench=!!d.deleteBenchmark,id=d.deleteBenchmark||d.delete,item=(isBench?data.benchmarks:data.items).find(i=>i.id===id);confirmAction(`Excluir ${isBench?'meta':'item'}?`,`${item.description} será removido. Os totais serão recalculados.`,()=>update(()=>isBench?repository.deleteBenchmark(id):repository.deleteItem(id),'Registro excluído.'));}
 });

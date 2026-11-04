@@ -10,3 +10,12 @@
 
 /* Hidden is a security-sensitive presentation state for editor controls. */
 [hidden] { display: none !important; }
+
+.shopping-group + .shopping-group{margin-top:18px}
+.shopping-group h3{font-size:1rem;margin:0 0 10px}
+.shopping-group .item-name h4{font-size:1rem;margin:0 0 7px}
+.shopping-group .layette-item{padding:16px 0}
+.shopping-group .purchase-timing{margin-left:8px;font-size:.75rem}
+.purchase-timing[data-timing-label="Comprar agora"]{background:#fff0cf;color:#7c520a}
+.purchase-timing[data-timing-label="Planejar"]{background:#e8eefb;color:#314e88}
+.purchase-timing[data-timing-label="Aguardar"]{background:#eef0f4;color:#495570}
