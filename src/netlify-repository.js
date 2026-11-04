@@ -29,16 +29,23 @@ export class NetlifyRepository {
     return result;
   }
 
+  identity() {
+    const client=globalThis.__enxovalIdentity;
+    if(!client)throw new Error('O módulo de login ainda não foi carregado. Atualize a página e tente novamente.');
+    return client;
+  }
+
   async signIn(email,password) {
-    await this.request('/api/enxoval-auth',{
-      method:'POST',
-      headers:{'Content-Type':'application/json'},
-      body:JSON.stringify({action:'login',email,password})
-    });
-    const status=await this.request('/api/enxoval-auth');
-    if(!status.editor) {
-      await this.signOut();
-      throw new Error('Esta conta não tem permissão para editar o enxoval.');
+    // Auth mutations run in the browser, matching invitation and recovery flows.
+    // The Identity library owns session cookies and token refresh state.
+    await this.identity().login(email,password);
+    let status;
+    try {
+      status=await this.request('/api/enxoval-auth');
+      if(!status.editor)throw new Error('Esta conta não tem permissão para editar o enxoval.');
+    } catch(error) {
+      await this.identity().logout().catch(()=>{});
+      throw error;
     }
     this.user=status.user;
     return status;
@@ -46,11 +53,7 @@ export class NetlifyRepository {
 
   async signOut() {
     try {
-      await this.request('/api/enxoval-auth',{
-        method:'POST',
-        headers:{'Content-Type':'application/json'},
-        body:JSON.stringify({action:'logout'})
-      });
+      await this.identity().logout();
     } finally {
       this.user=null;
       this.version=null;
