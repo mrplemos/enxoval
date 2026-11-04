@@ -55,3 +55,51 @@ test('usa fetch nativo vinculado ao contexto global',async()=>{
     else globalThis.fetch=native;
   }
 });
+
+test('login, logout e novo login utilizam a mesma sessão do navegador',async()=>{
+  const original=globalThis.__enxovalIdentity;
+  let authenticated=false,loginCount=0,logoutCount=0;
+  globalThis.__enxovalIdentity={
+    login:async(email,password)=>{
+      assert.equal(email,'editor@example.test');
+      assert.equal(password,'correct-password');
+      authenticated=true;loginCount++;
+    },
+    logout:async()=>{authenticated=false;logoutCount++;},
+    getUser:async()=>authenticated?{email:'editor@example.test'}:null
+  };
+  try {
+    const repository=new NetlifyRepository({fetchImpl:async(path)=>{
+      assert.equal(path,'/api/enxoval-auth');
+      return reply({editor:authenticated,user:authenticated?{email:'editor@example.test'}:null});
+    }});
+    await repository.signIn('editor@example.test','correct-password');
+    assert.ok(repository.getSignedInUser());
+    await repository.signOut();
+    assert.equal(repository.getSignedInUser(),null);
+    await repository.signIn('editor@example.test','correct-password');
+    assert.ok(repository.getSignedInUser());
+    assert.equal(loginCount,2);
+    assert.equal(logoutCount,1);
+  }finally{
+    if(original===undefined)delete globalThis.__enxovalIdentity;
+    else globalThis.__enxovalIdentity=original;
+  }
+});
+test('sem papel de editor, a nova sessão é encerrada',async()=>{
+  const original=globalThis.__enxovalIdentity;
+  let logoutCount=0;
+  globalThis.__enxovalIdentity={
+    login:async()=>({}),
+    logout:async()=>{logoutCount++;},
+    getUser:async()=>null
+  };
+  try{
+    const repository=new NetlifyRepository({fetchImpl:async()=>reply({editor:false,user:null})});
+    await assert.rejects(()=>repository.signIn('any@example.test','password'),/permissão/);
+    assert.equal(logoutCount,1);
+  }finally{
+    if(original===undefined)delete globalThis.__enxovalIdentity;
+    else globalThis.__enxovalIdentity=original;
+  }
+});
