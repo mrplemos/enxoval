@@ -23,7 +23,6 @@ export default async function handler(req) {
     const data=current?.data??emptySnapshot();
     const version=current?.etag??null;
     if(req.method==='GET'){
-      if(!current&&!editor)return json({error:'O inventário ainda não foi importado.'},503);
       return json({data:editor?data:publicSnapshot(data),version,initialized:!!current,editor,user});
     }
     const raw=await req.text();
