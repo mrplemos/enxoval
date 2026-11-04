@@ -1,7 +1,8 @@
 import {mkdir,cp,rm,readFile,writeFile} from 'node:fs/promises';
+import {build} from 'esbuild';
 await rm('dist',{recursive:true,force:true});
 await mkdir('dist',{recursive:true});
-for(const path of ['index.html','login.html','favicon.svg','.nojekyll','src','data']) await cp(path,`dist/${path}`,{recursive:true});
+for(const path of ['index.html','login.html','identity-setup.html','favicon.svg','.nojekyll','src','data']) await cp(path,`dist/${path}`,{recursive:true});
 
 const [html,css,favicon,inventory,benchmarks,config,domain,repository,app]=await Promise.all([
   readFile('index.html','utf8'),readFile('src/styles.css','utf8'),readFile('favicon.svg','utf8'),
@@ -22,4 +23,5 @@ const standalone=html
   .replace(/<script type="module" src="\.\/src\/app\.js[^"]*"><\/script>/,`<script>${seed}\n${bundle}</script>`);
 await writeFile('enxoval-compartilhar.html',standalone);
 await writeFile('dist/enxoval-compartilhar.html',standalone);
-console.log('Static app built in dist/ and enxoval-compartilhar.html generated for direct sharing.');
+await build({entryPoints:['src/identity-setup.js'],bundle:true,platform:'browser',format:'iife',target:['es2020'],outfile:'dist/identity-setup.js',minify:true,legalComments:'none'});
+console.log('Static app and bundled Identity recovery page built in dist/.');
