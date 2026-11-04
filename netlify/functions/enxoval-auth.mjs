@@ -14,6 +14,7 @@ export default async function handler(req) {
   try {
     verifyRequestOrigin(req);
     const body=await req.json();
+    if(!body||typeof body!=='object')return json({error:'Requisição inválida.'},400);
     if(body.action==='login'){
       if(typeof body.email!=='string'||typeof body.password!=='string'||!body.email.trim()||!body.password)
         return json({error:'Informe e-mail e senha.'},400);
