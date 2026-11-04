@@ -11,7 +11,7 @@
 .access-wrap .panel{padding:2rem}
 .access-wrap label{display:block;margin:1rem 0}
 .access-wrap input{display:block;width:100%;box-sizing:border-box;margin-top:.4rem}
-#setup-form[hidden],#setup-result[hidden]{display:none}
+#setup-form[hidden],#recovery-form[hidden],#setup-result[hidden]{display:none}
 #setup-status{min-height:2rem}
 #setup-status.error{color:#a12e40}
 </style>
@@ -29,6 +29,11 @@
 <label for="setup-confirm">Confirmar nova senha
 <input id="setup-confirm" type="password" autocomplete="new-password" minlength="12" maxlength="128" required></label>
 <div class="dialog-actions"><button class="primary" type="submit">Salvar senha</button></div>
+</form>
+<form id="recovery-form" hidden>
+<label for="recovery-email">E-mail da conta cadastrada no Netlify Identity
+<input id="recovery-email" type="email" autocomplete="email" autocapitalize="none" required></label>
+<div class="dialog-actions"><button class="primary" type="submit">Enviar link de recuperação</button></div>
 </form>
 <p id="setup-result" hidden><a href="./login.html">Ir para o login do Enxoval</a></p>
 </section></main>
